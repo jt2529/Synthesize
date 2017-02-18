@@ -4,25 +4,31 @@ using System.Collections;
 public class Level1Music : MonoBehaviour {
 
     public enum Key { major, minor };
-    Key songKey;
-    int startingNote;
+    public Key songKey;
+    public int noteKey;
+
+    //Use this to set variable values
+    private void Awake()
+    {
+        songKey = Key.major;
+        noteKey = 5;
+    }
 
 	// Use this for initialization
 	void Start () {
-        songKey = Key.major;
-        startingNote = 5;
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    
+
 	}
 
     public Key getSongKey() {
         return songKey;
     }
 
-    public int getStartingNote() {
-        return startingNote;
+    public int getNoteKey() {
+        return noteKey;
     }
 }
