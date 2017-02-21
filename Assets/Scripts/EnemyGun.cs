@@ -8,7 +8,7 @@ public class EnemyGun : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Invoke("FireBullet", 1f);
+        InvokeRepeating("FireBullet", 1f, 2f);
     }
 	
 	// Update is called once per frame
@@ -24,7 +24,7 @@ public class EnemyGun : MonoBehaviour {
 
             bullet.transform.position = transform.position;
             Vector2 direction = player.transform.position - transform.position;
-            bullet.GetComponent<EnemyBullet>().SetDirection(direction);
+            bullet.GetComponent<BulletPhysics>().SetDirection(direction);
         }
     }
 }

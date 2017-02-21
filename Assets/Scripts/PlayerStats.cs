@@ -13,7 +13,9 @@ public class PlayerStats : MonoBehaviour {
     private float maxJumpHeight;
     private float timeToJumpApex;
     private float moveSpeed;
-    private bool playerDirection; 
+    private bool playerDirection;
+    private bool playerInvulnerable;
+    private bool playerAlive;
 
     private float damageMultiplier;
 
@@ -27,6 +29,8 @@ public class PlayerStats : MonoBehaviour {
         timeToJumpApex = .3f;
         moveSpeed = 2.5f;
         playerDirection = true;
+        playerInvulnerable = false;
+        playerAlive = true;
     }
 
     // Use this for initialization
@@ -45,7 +49,36 @@ public class PlayerStats : MonoBehaviour {
     }
 
     public void ChangeHealth(int changeAmount) {
-        health = health + changeAmount;
+
+        if (health + changeAmount >= maxHealth)
+        {
+            health = maxHealth;
+        }
+        else {
+            if (changeAmount > 0) {
+                health = health + changeAmount;
+            }
+            else 
+            if (!playerInvulnerable) { 
+                Debug.Log("Modifying health by " + changeAmount);
+                health = health + changeAmount;
+
+                if (health < 1)
+                {
+                    Destroy(gameObject);
+                }
+                if (changeAmount < 0)
+                {
+                    playerInvulnerable = true;
+
+                    // Set this back equal to false in 3 seconds.
+                    Invoke("SetPlayerVulnerable", 3);
+                }
+            }
+            
+        }
+        
+        
     }
 
     public void SetNumberOfJumps(int jumps) {
@@ -64,6 +97,10 @@ public class PlayerStats : MonoBehaviour {
     public void SetPlayerDirection(bool direction)
     {
         playerDirection = direction;
+    }
+
+    public void SetPlayerVulnerable() {
+        playerInvulnerable = false;
     }
 
     public int GetMaxHealth() {
@@ -99,5 +136,9 @@ public class PlayerStats : MonoBehaviour {
 
     public bool GetPlayerDirection() {
         return playerDirection;
+    }
+
+    public bool GetPlayerInvulnerable() {
+        return playerInvulnerable;
     }
 }

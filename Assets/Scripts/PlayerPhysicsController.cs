@@ -60,7 +60,7 @@ public class PlayerPhysicsController : MonoBehaviour {
         }
 
         float targetVelocityX = input.x * stats.GetMoveSpeed();
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below)? accelerationTimeGrounded : accelerationTimeAirborne);
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
         physics.Move(velocity * Time.deltaTime);
 	}
