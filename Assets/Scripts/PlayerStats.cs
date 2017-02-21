@@ -39,65 +39,65 @@ public class PlayerStats : MonoBehaviour {
 
     }
 
-    public void SetMaxHealth(int newMaxHealth)
+    public void setMaxHealth(int newMaxHealth)
     {
         maxHealth = newMaxHealth;
     }
 
-    public void ChangeHealth(int changeAmount) {
+    public void changeHealth(int changeAmount) {
         health = health + changeAmount;
     }
 
-    public void SetNumberOfJumps(int jumps) {
+    public void setNumberOfJumps(int jumps) {
         numberOfJumps = jumps;
     }
 
-    public void SetJumpHeight(int jumpHeight) {
+    public void setJumpHeight(int jumpHeight) {
         maxJumpHeight = jumpHeight;
         minJumpHeight = jumpHeight / 4f;
     }
 
-    public void SetMoveSpeed(int newMoveSpeed) {
+    public void setMoveSpeed(int newMoveSpeed) {
         moveSpeed = newMoveSpeed;
     }
 
-    public void SetPlayerDirection(bool direction)
+    public void setPlayerDirection(bool direction)
     {
         playerDirection = direction;
     }
 
-    public int GetMaxHealth() {
+    public int getMaxHealth() {
         return maxHealth;
     }
 
-    public int GetHealth() {
+    public int getHealth() {
         return health;
     }
 
-    public int GetNumberOfJumps() {
+    public int getNumberOfJumps() {
         return numberOfJumps;
     }
 
-    public float GetMaxJumpHeight()
+    public float getMaxJumpHeight()
     {
         return maxJumpHeight;
     }
 
-    public float GetMinJumpHeight()
+    public float getMinJumpHeight()
     {
         return minJumpHeight;
     }
 
-    public float GetTimeToJumpApex()
+    public float getTimeToJumpApex()
     {
         return timeToJumpApex;
     }
 
-    public float GetMoveSpeed() {
+    public float getMoveSpeed() {
         return moveSpeed;
     }
 
-    public bool GetPlayerDirection() {
+    public bool getPlayerDirection() {
         return playerDirection;
     }
 }

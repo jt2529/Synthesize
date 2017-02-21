@@ -22,9 +22,9 @@ public class PlayerPhysicsController : MonoBehaviour {
 	void Start () {
         physics = GetComponent<PlayerPhysics>();
         stats = GetComponent<PlayerStats>();
-        gravity = -(2 * stats.GetMaxJumpHeight()) / Mathf.Pow(stats.GetTimeToJumpApex(), 2);
-        maxJumpVelocity = Mathf.Abs(gravity) * stats.GetTimeToJumpApex();
-        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.GetMinJumpHeight());
+        gravity = -(2 * stats.getMaxJumpHeight()) / Mathf.Pow(stats.getTimeToJumpApex(), 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * stats.getTimeToJumpApex();
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.getMinJumpHeight());
         sprite = GetComponent<SpriteRenderer>();
 
 	}
@@ -40,12 +40,12 @@ public class PlayerPhysicsController : MonoBehaviour {
 
         //Set the player's direction (true for right, false for left)
         if (input.x > 0) {
-            stats.SetPlayerDirection(true);
+            stats.setPlayerDirection(true);
             sprite.flipX = false;
         }
 
         if (input.x < 0) {
-            stats.SetPlayerDirection(false);
+            stats.setPlayerDirection(false);
             sprite.flipX = true;
         }
 
@@ -59,7 +59,7 @@ public class PlayerPhysicsController : MonoBehaviour {
             }
         }
 
-        float targetVelocityX = input.x * stats.GetMoveSpeed();
+        float targetVelocityX = input.x * stats.getMoveSpeed();
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below)? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
         physics.Move(velocity * Time.deltaTime);

@@ -11,7 +11,7 @@ public class KeyQueue {
         currentSize = 0;
     }
 
-    public void NewNotePlayed(int newNote) {
+    public void newNotePlayed(int newNote) {
         if (currentSize > 2)
         {
             lastKeys.Dequeue();
@@ -22,11 +22,11 @@ public class KeyQueue {
         Debug.Log(currentSize);
     }
 
-    public void ClearQueue() {
+    public void clearQueue() {
         lastKeys.Clear();
     }
 
-    public int[] GetNotes() {
+    public int[] getNotes() {
 
         int[] notesArray = new int[3];
         for (int i = 0; i < currentSize; i++) {
@@ -61,12 +61,12 @@ public class PlayerAbilitiesController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.U))
         {
             notes[startingNote].Play();
-            keyQueue.NewNotePlayed(startingNote);
+            keyQueue.newNotePlayed(startingNote);
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
             notes[startingNote+2].Play();
-            keyQueue.NewNotePlayed(startingNote+2);
+            keyQueue.newNotePlayed(startingNote+2);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -74,24 +74,24 @@ public class PlayerAbilitiesController : MonoBehaviour {
             if (songKey == Level1Music.Key.major)
             {
                 notes[startingNote+4].Play();
-                keyQueue.NewNotePlayed(startingNote + 4);
+                keyQueue.newNotePlayed(startingNote + 4);
             }
             //For Minor keys play 3th note
             if (songKey == Level1Music.Key.minor)
             {
                 notes[startingNote+3].Play();
-                keyQueue.NewNotePlayed(startingNote + 3);
+                keyQueue.newNotePlayed(startingNote + 3);
             }
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
             notes[startingNote+5].Play();
-            keyQueue.NewNotePlayed(startingNote + 5);
+            keyQueue.newNotePlayed(startingNote + 5);
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
             notes[startingNote+7].Play();
-            keyQueue.NewNotePlayed(startingNote + 7);
+            keyQueue.newNotePlayed(startingNote + 7);
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -99,13 +99,13 @@ public class PlayerAbilitiesController : MonoBehaviour {
             if (songKey == Level1Music.Key.major)
             {
                 notes[startingNote + 9].Play();
-                keyQueue.NewNotePlayed(startingNote + 9);
+                keyQueue.newNotePlayed(startingNote + 9);
             }
             //For Minor keys play 8th note
             if (songKey == Level1Music.Key.minor)
             {
                 notes[startingNote + 8].Play();
-                keyQueue.NewNotePlayed(startingNote + 8);
+                keyQueue.newNotePlayed(startingNote + 8);
             }
         }
         if (Input.GetKeyDown(KeyCode.L))
@@ -114,24 +114,24 @@ public class PlayerAbilitiesController : MonoBehaviour {
             if (songKey == Level1Music.Key.major)
             {
                 notes[startingNote + 11].Play();
-                keyQueue.NewNotePlayed(startingNote + 11);
+                keyQueue.newNotePlayed(startingNote + 11);
             }
             //For Minor keys play 10th note
             if (songKey == Level1Music.Key.minor)
             {
                 notes[startingNote + 10].Play();
-                keyQueue.NewNotePlayed(startingNote + 10);
+                keyQueue.newNotePlayed(startingNote + 10);
             }
         }
         if (Input.GetKeyDown(KeyCode.Semicolon))
         {
             notes[startingNote + 12].Play();
-            keyQueue.NewNotePlayed(startingNote + 12);
+            keyQueue.newNotePlayed(startingNote + 12);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            lastThreeNotes = keyQueue.GetNotes();
+            lastThreeNotes = keyQueue.getNotes();
         }
     }  
     
