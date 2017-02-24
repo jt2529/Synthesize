@@ -75,8 +75,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\EnemyBullet.cs" />
+    <Compile Include="Assets\Scripts\BulletPhysics.cs" />
+    <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\EnemyGun.cs" />
+    <Compile Include="Assets\Scripts\HarmfulObject.cs" />
     <Compile Include="Assets\Scripts\Level1Music.cs" />
     <Compile Include="Assets\Scripts\NPCPhysics.cs" />
     <Compile Include="Assets\Scripts\PlayerAbilitiesController.cs" />
