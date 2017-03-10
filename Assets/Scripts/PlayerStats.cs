@@ -24,10 +24,10 @@ public class PlayerStats : MonoBehaviour {
         maxHealth = 100;
         health = maxHealth;
         numberOfJumps = 1;
-        maxJumpHeight = .8f;
+        maxJumpHeight = .6f;
         minJumpHeight = maxJumpHeight / 4f;
         timeToJumpApex = .3f;
-        moveSpeed = 2.5f;
+        moveSpeed = 2.0f;
         playerDirection = true;
         playerInvulnerable = false;
         playerAlive = true;

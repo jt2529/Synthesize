@@ -26,7 +26,7 @@ public class BulletPhysics : MonoBehaviour
     // Use this for setting variable values
     private void Awake()
     {
-        speed = .07f;
+        speed = .055f;
         isReady = false;
     }
 
