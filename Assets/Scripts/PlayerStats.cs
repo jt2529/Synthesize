@@ -6,6 +6,7 @@ public class PlayerStats : MonoBehaviour {
 
     // These will all be modifiable by the player's active chord modifiers
 
+    public Vector2 aimingDirection;
     private int maxHealth;
     private int health;
     private int numberOfJumps;
@@ -13,14 +14,14 @@ public class PlayerStats : MonoBehaviour {
     private float maxJumpHeight;
     private float timeToJumpApex;
     private float moveSpeed;
-    private bool playerDirection;
     private bool playerInvulnerable;
     private bool playerAlive;
-
     private float damageMultiplier;
 
     //Set variable values here
     private void Awake() {
+        aimingDirection.x = 1;
+        aimingDirection.y = 0;
         maxHealth = 100;
         health = maxHealth;
         numberOfJumps = 1;
@@ -28,7 +29,6 @@ public class PlayerStats : MonoBehaviour {
         minJumpHeight = maxJumpHeight / 4f;
         timeToJumpApex = .3f;
         moveSpeed = 2.0f;
-        playerDirection = true;
         playerInvulnerable = false;
         playerAlive = true;
     }
@@ -65,7 +65,7 @@ public class PlayerStats : MonoBehaviour {
 
                 if (health < 1)
                 {
-                    Destroy(gameObject);
+                    playerAlive = false;
                 }
                 if (changeAmount < 0)
                 {
@@ -92,11 +92,6 @@ public class PlayerStats : MonoBehaviour {
 
     public void SetMoveSpeed(int newMoveSpeed) {
         moveSpeed = newMoveSpeed;
-    }
-
-    public void SetPlayerDirection(bool direction)
-    {
-        playerDirection = direction;
     }
 
     public void SetPlayerVulnerable() {
@@ -130,15 +125,20 @@ public class PlayerStats : MonoBehaviour {
         return timeToJumpApex;
     }
 
+    public Vector2 GetAimingDirection()
+    {
+        return aimingDirection;
+    }
+
     public float GetMoveSpeed() {
         return moveSpeed;
     }
 
-    public bool GetPlayerDirection() {
-        return playerDirection;
-    }
-
     public bool GetPlayerInvulnerable() {
         return playerInvulnerable;
+    }
+
+    public bool GetPlayerAlive() {
+        return playerAlive;
     }
 }

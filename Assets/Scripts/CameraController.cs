@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraController : MonoBehaviour
 {
 
-    public float dampTime = 0.15f;
+    public float dampTime;
     private Vector3 velocity = Vector3.zero;
     public Transform target;
     private Camera cam;
@@ -16,8 +16,8 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         cam = GetComponent<Camera>();
-        defaultUp = .5f;
-        defaultRight = .7f;
+        defaultUp = .4f;
+        defaultRight = .6f;
     }
 
     // Update is called once per frame
@@ -29,12 +29,17 @@ public class CameraController : MonoBehaviour
 
         if (input.y > 0)
         {
-            defaultUp = .7f;
+            defaultUp = .9f;
+        }
+
+        if (input.y == 0)
+        {
+            defaultUp = .4f;
         }
 
         if (input.y < 0)
         {
-            defaultUp = -.2f;
+            defaultUp = -.1f;
         }
 
         if (input.x > 0)

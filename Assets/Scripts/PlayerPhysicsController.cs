@@ -16,11 +16,11 @@ public class PlayerPhysicsController : MonoBehaviour {
 
     float velocityXSmoothing;
 
-    PlayerPhysics physics;
+    MovementPhysics physics;
 
 	// Use this for initialization
 	void Start () {
-        physics = GetComponent<PlayerPhysics>();
+        physics = GetComponent<MovementPhysics>();
         stats = GetComponent<PlayerStats>();
         gravity = -(2 * stats.GetMaxJumpHeight()) / Mathf.Pow(stats.GetTimeToJumpApex(), 2);
         maxJumpVelocity = Mathf.Abs(gravity) * stats.GetTimeToJumpApex();
@@ -28,9 +28,12 @@ public class PlayerPhysicsController : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
+        if (stats.GetPlayerAlive() != true) {
+            return;
+        }
 
         if (physics.collisions.above || physics.collisions.below) {
             velocity.y = 0;
@@ -38,15 +41,30 @@ public class PlayerPhysicsController : MonoBehaviour {
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        //Set the player's direction (true for right, false for left)
-        if (input.x > 0) {
-            stats.SetPlayerDirection(true);
-            sprite.flipX = false;
+        if (input.x == 0 && input.y == 0)
+        {
+            stats.aimingDirection.y = 0;
+            if (sprite.flipX == true)
+            {
+                stats.aimingDirection.x = -1;
+            }
+            else
+            {
+                stats.aimingDirection.x = 1;
+            }
         }
+        else {
+            stats.aimingDirection.x = input.x;
+            stats.aimingDirection.y = input.y / 2;
 
-        if (input.x < 0) {
-            stats.SetPlayerDirection(false);
-            sprite.flipX = true;
+            if (input.x > 0)
+            {
+                sprite.flipX = false;
+            }
+            if (input.x < 0)
+            {
+                sprite.flipX = true;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && physics.collisions.below) {
@@ -62,6 +80,9 @@ public class PlayerPhysicsController : MonoBehaviour {
         float targetVelocityX = input.x * stats.GetMoveSpeed();
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
+        if (velocity.y < gravity) {
+            velocity.y = gravity;
+        }
         physics.Move(velocity * Time.deltaTime);
 	}
 }

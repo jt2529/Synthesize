@@ -1,46 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class BulletPhysics : MonoBehaviour
 {
 
-    public LayerMask playerMask;
-    public LayerMask obstacleMask;
     const float skinWidth = .015f;
     RaycastOrigins raycastOrigins;
     HarmfulObject harmfulObject;
+    public LayerMask playerMask;
+    public LayerMask enemyMask;
+    public LayerMask obstacleMask;
 
     public int horizontalRayCount = 2;
     public int verticalRayCount = 2;
+    public bool playerBullet;
     float horizontalRaySpacing;
     float verticalRaySpacing;
-    PlayerStats playerStats;
 
     BoxCollider2D collider;
     public CollisionInfo collisions;
-    float speed;
+    public float speed;
     Vector2 direction;
     bool isReady;
+    
 
     // Use this for setting variable values
     private void Awake()
     {
-        speed = .055f;
         isReady = false;
+        playerMask = LayerMask.GetMask("Player");
+        enemyMask = LayerMask.GetMask("Enemy");
+        obstacleMask = LayerMask.GetMask("Obstacles");
     }
 
     // Use this for initialization
     void Start()
     {
-        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
-
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        playerMask = LayerMask.GetMask("Player");
-        obstacleMask = LayerMask.GetMask("Obstacles");
         harmfulObject = GetComponent<HarmfulObject>();
-        
     }
 
     void Update() {
@@ -89,11 +89,11 @@ public class BulletPhysics : MonoBehaviour
         {
             HorizontalCollisions(velocity);
         }
+
         if (velocity.y != 0)
         {
             VerticalCollisions(velocity);
         }
-
         transform.Translate(velocity);
     }
 
@@ -106,25 +106,26 @@ public class BulletPhysics : MonoBehaviour
         {
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, obstacleMask);
-
-            Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
-
             if (hit)
             {
-                Destroy(gameObject);
+                harmfulObject.tryDestroy();
             }
 
-            hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, playerMask);
-
+            if (playerBullet) {
+                hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, enemyMask);
+            }
+            else
+            {
+                hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, playerMask);
+            }
             if (hit)
             {
-                playerStats.ChangeHealth(-harmfulObject.damage);
-                Destroy(gameObject);
+                BulletHit(hit);
             }
         }
     }
-
 
     void VerticalCollisions(Vector2 velocity)
     {
@@ -135,20 +136,46 @@ public class BulletPhysics : MonoBehaviour
         {
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
+
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, obstacleMask);
-
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
-
             if (hit)
             {
-                Destroy(gameObject);
+                harmfulObject.tryDestroy();
             }
 
-            hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, playerMask);
+            if (playerBullet)
+            {
+                hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, enemyMask);
+            }
+            else
+            {
+                hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, playerMask);
+            }
             if (hit)
             {
+                BulletHit(hit);
+            }
+        }
+    }
+
+    private void BulletHit(RaycastHit2D hit)
+    {
+        if (playerBullet)
+        {
+            EnemyStats enemyStats = hit.collider.gameObject.GetComponent<EnemyStats>();
+            if (enemyStats != null)
+            {
+                enemyStats.ChangeHealth(-harmfulObject.damage);
+                harmfulObject.tryDestroy();
+            }
+        }
+        else
+        {
+            PlayerStats playerStats = hit.collider.gameObject.GetComponent<PlayerStats>();
+            if (playerStats != null)
+            {
                 playerStats.ChangeHealth(-harmfulObject.damage);
-                Destroy(gameObject);
+                harmfulObject.tryDestroy();
             }
         }
     }

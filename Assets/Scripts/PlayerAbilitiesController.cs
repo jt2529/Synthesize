@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Level1Music))]
+[RequireComponent(typeof(Music))]
 public class KeyQueue {
     Queue lastKeys;
     int currentSize;
@@ -40,24 +40,33 @@ public class KeyQueue {
 
 public class PlayerAbilitiesController : MonoBehaviour {
 
+    PlayerGun gun;
+    PlayerStats stats;
     KeyQueue keyQueue;
     AudioSource[] notes;
-    Level1Music music;
-    Level1Music.Key songKey;
+    Music music;
+    Music.Key songKey;
     int startingNote;
     int[] lastThreeNotes;
 
     // Use this for initialization
     void Start () {
+        gun = GetComponent<PlayerGun>();
         keyQueue = new KeyQueue();
         notes = GameObject.FindGameObjectWithTag("Keytar").GetComponents<AudioSource>();
-        music = GameObject.FindGameObjectWithTag("Music").GetComponent<Level1Music>();
+        music = GameObject.FindGameObjectWithTag("Music").GetComponent<Music>();
         songKey = music.getSongKey();
         startingNote = music.getNoteKey();
+        stats = GetComponent<PlayerStats>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (stats.GetPlayerAlive() != true)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.U))
         {
             notes[startingNote].Play();
@@ -71,13 +80,13 @@ public class PlayerAbilitiesController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.O))
         {
             //For Major keys play 4th note
-            if (songKey == Level1Music.Key.major)
+            if (songKey == Music.Key.major)
             {
                 notes[startingNote+4].Play();
                 keyQueue.NewNotePlayed(startingNote + 4);
             }
             //For Minor keys play 3th note
-            if (songKey == Level1Music.Key.minor)
+            if (songKey == Music.Key.minor)
             {
                 notes[startingNote+3].Play();
                 keyQueue.NewNotePlayed(startingNote + 3);
@@ -96,13 +105,13 @@ public class PlayerAbilitiesController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.K))
         {
             //For Major keys play 9thth note
-            if (songKey == Level1Music.Key.major)
+            if (songKey == Music.Key.major)
             {
                 notes[startingNote + 9].Play();
                 keyQueue.NewNotePlayed(startingNote + 9);
             }
             //For Minor keys play 8th note
-            if (songKey == Level1Music.Key.minor)
+            if (songKey == Music.Key.minor)
             {
                 notes[startingNote + 8].Play();
                 keyQueue.NewNotePlayed(startingNote + 8);
@@ -111,13 +120,13 @@ public class PlayerAbilitiesController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.L))
         {
             //For Major keys play 11th note
-            if (songKey == Level1Music.Key.major)
+            if (songKey == Music.Key.major)
             {
                 notes[startingNote + 11].Play();
                 keyQueue.NewNotePlayed(startingNote + 11);
             }
             //For Minor keys play 10th note
-            if (songKey == Level1Music.Key.minor)
+            if (songKey == Music.Key.minor)
             {
                 notes[startingNote + 10].Play();
                 keyQueue.NewNotePlayed(startingNote + 10);

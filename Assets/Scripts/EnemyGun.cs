@@ -15,7 +15,7 @@ public class EnemyGun : MonoBehaviour {
 	void Update () {
     }
 
-    void FireBullet() {
+    public void FireBullet() {
         GameObject player = GameObject.Find("Player");
 
         if (player != null) {
