@@ -48,6 +48,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
     Music.Key songKey;
     int startingNote;
     int[] lastThreeNotes;
+    float pitchScalar;
 
     // Use this for initialization
     void Start () {
@@ -58,6 +59,51 @@ public class PlayerAbilitiesController : MonoBehaviour {
         songKey = music.getSongKey();
         startingNote = music.getNoteKey();
         stats = GetComponent<PlayerStats>();
+
+        pitchScalar = Mathf.Pow(1.05946f, startingNote);
+        notes[0].pitch = pitchScalar;
+
+        pitchScalar = Mathf.Pow(1.05946f, startingNote + 2);
+        notes[1].pitch = pitchScalar;
+
+        if (songKey == Music.Key.major)
+        {
+            pitchScalar = Mathf.Pow(1.05946f, startingNote + 4);
+        }
+        else
+        {
+            pitchScalar = Mathf.Pow(1.05946f, startingNote + 3);
+        }
+        notes[2].pitch = pitchScalar;
+
+        pitchScalar = Mathf.Pow(1.05946f, startingNote + 5);
+        notes[3].pitch = pitchScalar;
+
+        pitchScalar = Mathf.Pow(1.05946f, startingNote + 7);
+        notes[4].pitch = pitchScalar;
+
+        if (songKey == Music.Key.major)
+        {
+            pitchScalar = Mathf.Pow(1.05946f, startingNote + 9);
+        }
+        else
+        {
+            pitchScalar = Mathf.Pow(1.05946f, startingNote + 8);
+        }
+        notes[5].pitch = pitchScalar;
+
+        if (songKey == Music.Key.major)
+        {
+            pitchScalar = Mathf.Pow(1.05946f, startingNote + 11);
+        }
+        else
+        {
+            pitchScalar = Mathf.Pow(1.05946f, startingNote + 10);
+        }
+        notes[6].pitch = pitchScalar;
+
+        pitchScalar = Mathf.Pow(1.05946f, startingNote + 12);
+        notes[7].pitch = pitchScalar;
     }
 	
 	// Update is called once per frame
@@ -69,73 +115,90 @@ public class PlayerAbilitiesController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            notes[startingNote].Play();
+            notes[0].loop = true;
+            notes[0].Play();
             keyQueue.NewNotePlayed(startingNote);
         }
+        else if (Input.GetKeyUp(KeyCode.U))
+        {
+            notes[0].loop = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.I))
         {
-            notes[startingNote+2].Play();
-            keyQueue.NewNotePlayed(startingNote+2);
+            notes[1].loop = true;
+            notes[1].Play();
+            keyQueue.NewNotePlayed(startingNote);
         }
+        else if (Input.GetKeyUp(KeyCode.I))
+        {
+            notes[1].loop = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.O))
         {
-            //For Major keys play 4th note
-            if (songKey == Music.Key.major)
-            {
-                notes[startingNote+4].Play();
-                keyQueue.NewNotePlayed(startingNote + 4);
-            }
-            //For Minor keys play 3th note
-            if (songKey == Music.Key.minor)
-            {
-                notes[startingNote+3].Play();
-                keyQueue.NewNotePlayed(startingNote + 3);
-            }
+            notes[2].loop = true;
+            notes[2].Play();
+            keyQueue.NewNotePlayed(startingNote);
         }
+        else if (Input.GetKeyUp(KeyCode.O))
+        {
+            notes[2].loop = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
-            notes[startingNote+5].Play();
-            keyQueue.NewNotePlayed(startingNote + 5);
+            notes[3].loop = true;
+            notes[3].Play();
+            keyQueue.NewNotePlayed(startingNote);
         }
+        else if (Input.GetKeyUp(KeyCode.P))
+        {
+            notes[3].loop = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.J))
         {
-            notes[startingNote+7].Play();
-            keyQueue.NewNotePlayed(startingNote + 7);
+            notes[4].loop = true;
+            notes[4].Play();
+            keyQueue.NewNotePlayed(startingNote);
         }
+        else if (Input.GetKeyUp(KeyCode.J))
+        {
+            notes[4].loop = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.K))
         {
-            //For Major keys play 9thth note
-            if (songKey == Music.Key.major)
-            {
-                notes[startingNote + 9].Play();
-                keyQueue.NewNotePlayed(startingNote + 9);
-            }
-            //For Minor keys play 8th note
-            if (songKey == Music.Key.minor)
-            {
-                notes[startingNote + 8].Play();
-                keyQueue.NewNotePlayed(startingNote + 8);
-            }
+            notes[5].loop = true;
+            notes[5].Play();
+            keyQueue.NewNotePlayed(startingNote);
         }
+        else if (Input.GetKeyUp(KeyCode.K))
+        {
+            notes[5].loop = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.L))
         {
-            //For Major keys play 11th note
-            if (songKey == Music.Key.major)
-            {
-                notes[startingNote + 11].Play();
-                keyQueue.NewNotePlayed(startingNote + 11);
-            }
-            //For Minor keys play 10th note
-            if (songKey == Music.Key.minor)
-            {
-                notes[startingNote + 10].Play();
-                keyQueue.NewNotePlayed(startingNote + 10);
-            }
+            notes[6].loop = true;
+            notes[6].Play();
+            keyQueue.NewNotePlayed(startingNote);
         }
+        else if (Input.GetKeyUp(KeyCode.L))
+        {
+            notes[6].loop = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.Semicolon))
         {
-            notes[startingNote + 12].Play();
-            keyQueue.NewNotePlayed(startingNote + 12);
+            notes[7].loop = true;
+            notes[7].Play();
+            keyQueue.NewNotePlayed(startingNote);
+        }
+        else if (Input.GetKeyUp(KeyCode.Semicolon))
+        {
+            notes[7].loop = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
