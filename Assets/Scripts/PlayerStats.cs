@@ -7,8 +7,8 @@ public class PlayerStats : MonoBehaviour {
     // These will all be modifiable by the player's active chord modifiers
 
     public Vector2 aimingDirection;
-    public float maxHealth;
-    public float health;
+    private int maxHealth;
+    private int health;
     private int numberOfJumps;
     private float minJumpHeight;
     private float maxJumpHeight;
@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour {
     private void Awake() {
         aimingDirection.x = 1;
         aimingDirection.y = 0;
-        maxHealth = 400;
+        maxHealth = 100;
         health = maxHealth;
         numberOfJumps = 1;
         maxJumpHeight = .6f;
@@ -40,10 +40,7 @@ public class PlayerStats : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            ChangeHealth(-50);
-        }
+
     }
 
     public void SetMaxHealth(int newMaxHealth)
@@ -75,7 +72,7 @@ public class PlayerStats : MonoBehaviour {
                     playerInvulnerable = true;
 
                     // Set this back equal to false in 3 seconds.
-                    Invoke("SetPlayerVulnerable", .75f);
+                    Invoke("SetPlayerVulnerable", 3);
                 }
             }
             
@@ -101,11 +98,11 @@ public class PlayerStats : MonoBehaviour {
         playerInvulnerable = false;
     }
 
-    public float GetMaxHealth() {
+    public int GetMaxHealth() {
         return maxHealth;
     }
 
-    public float GetHealth() {
+    public int GetHealth() {
         return health;
     }
 

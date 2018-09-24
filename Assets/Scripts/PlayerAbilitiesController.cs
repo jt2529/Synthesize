@@ -41,7 +41,7 @@ public class KeyQueue {
 public class PlayerAbilitiesController : MonoBehaviour {
 
     PlayerGun gun;
-    public PlayerStats stats;
+    PlayerStats stats;
     KeyQueue keyQueue;
     AudioSource[] notes;
     Music music;
@@ -69,15 +69,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            if(Input.GetKey(KeyCode.Space))
-            {
-                notes[startingNote].pitch = notes[startingNote].pitch / 6;
-                notes[startingNote].Play();
-            }else
-            {
-                notes[startingNote].Play();
-            }
-            
+            notes[startingNote].Play();
             keyQueue.NewNotePlayed(startingNote);
         }
         if (Input.GetKeyDown(KeyCode.I))
