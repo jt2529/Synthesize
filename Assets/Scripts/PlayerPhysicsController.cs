@@ -7,11 +7,13 @@ public class PlayerPhysicsController : MonoBehaviour {
     PlayerStats stats;
     public float accelerationTimeAirborne = .1f;
     public float accelerationTimeGrounded = .05f;
+    public float fallModifier = 1.5f;
+    public float verticalVelocity;
 
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
-    Vector3 velocity;
+    Vector2 velocity;
     SpriteRenderer sprite;
 
     float velocityXSmoothing;
@@ -30,7 +32,10 @@ public class PlayerPhysicsController : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
+
+        Debug.DrawRay(transform.position, Vector3.down, Color.red, .5f);
+
         if (stats.GetPlayerAlive() != true) {
             return;
         }
@@ -81,7 +86,9 @@ public class PlayerPhysicsController : MonoBehaviour {
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
         if (velocity.y < gravity) {
+            //velocity.y = Physics2D.gravity.y;
             velocity.y = gravity;
+            Debug.Log(gravity);
         }
         physics.Move(velocity * Time.deltaTime);
 	}
