@@ -17,12 +17,13 @@ public class PlayerGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            Vector2 direction = stats.GetAimingDirection();
-            Debug.Log(direction.y);
-            FireBullet(direction);
-        }
+
+    }
+
+    public void FireBullet() {
+        Vector2 direction = stats.aimingDirection;
+        Debug.Log(direction.y);
+        FireBullet(direction);
     }
 
     public void FireBullet(Vector2 direction)

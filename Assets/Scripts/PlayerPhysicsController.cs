@@ -4,34 +4,30 @@ using System.Collections;
 [RequireComponent (typeof(PlayerPhysicsController))]
 public class PlayerPhysicsController : MonoBehaviour {
 
-    PlayerStats stats;
+    public PlayerStats stats;
+    public SpriteRenderer sprite;
+    public MovementPhysics physics;
+
     public float accelerationTimeAirborne = .1f;
     public float accelerationTimeGrounded = .05f;
 
-    float gravity;
-    float maxJumpVelocity;
-    float minJumpVelocity;
-    Vector3 velocity;
-    SpriteRenderer sprite;
-
-    float velocityXSmoothing;
-
-    MovementPhysics physics;
+    public float gravity;
+    public float maxJumpVelocity;
+    public float minJumpVelocity;
+    public Vector3 velocity;
+    public float velocityXSmoothing;
 
 	// Use this for initialization
 	void Start () {
-        physics = GetComponent<MovementPhysics>();
-        stats = GetComponent<PlayerStats>();
-        gravity = -(2 * stats.GetMaxJumpHeight()) / Mathf.Pow(stats.GetTimeToJumpApex(), 2);
-        maxJumpVelocity = Mathf.Abs(gravity) * stats.GetTimeToJumpApex();
-        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.GetMinJumpHeight());
-        sprite = GetComponent<SpriteRenderer>();
+        gravity = -(2 * stats.maxJumpHeight) / Mathf.Pow(stats.timeToJumpApex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * stats.timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.minJumpHeight);
 
 	}
 
     // Update is called once per frame
     void Update() {
-        if (stats.GetPlayerAlive() != true) {
+        if (stats.playerAlive != true) {
             return;
         }
 
@@ -77,7 +73,7 @@ public class PlayerPhysicsController : MonoBehaviour {
             }
         }
 
-        float targetVelocityX = input.x * stats.GetMoveSpeed();
+        float targetVelocityX = input.x * stats.moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
         if (velocity.y < gravity) {

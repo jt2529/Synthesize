@@ -6,7 +6,7 @@ public class EnemyStats : MonoBehaviour {
 
     public int maxHealth;
     public float moveSpeed;
-    private int health;
+    public int health;
 
     //Set variable values here
     private void Awake()

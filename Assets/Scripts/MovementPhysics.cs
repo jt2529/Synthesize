@@ -7,23 +7,21 @@ public class MovementPhysics : MonoBehaviour {
     public LayerMask collisionMask;
     const float skinWidth = .015f;
     RaycastOrigins raycastOrigins;
-
-    public int horizontalRayCount = 5;
-    public int verticalRayCount = 5;
     float horizontalRaySpacing;
     float verticalRaySpacing;
 
+    public int horizontalRayCount = 5;
+    public int verticalRayCount = 5;
+    
     public float maxClimbAngle = 60;
     public float maxDescendAngle = 75;
 
-    BoxCollider2D collider;
+    public BoxCollider2D collider;
     public CollisionInfo collisions;
 
     // Use this for initialization
     void Start() {
-        collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        collisionMask = LayerMask.GetMask("Obstacles");
     }
 
 
