@@ -8,7 +8,10 @@ public class BulletPhysics : MonoBehaviour
 
     const float skinWidth = .015f;
     RaycastOrigins raycastOrigins;
-    HarmfulObject harmfulObject;
+    float horizontalRaySpacing;
+    float verticalRaySpacing;
+
+    public HarmfulObject harmfulObject;
     public LayerMask playerMask;
     public LayerMask enemyMask;
     public LayerMask obstacleMask;
@@ -16,31 +19,24 @@ public class BulletPhysics : MonoBehaviour
     public int horizontalRayCount = 2;
     public int verticalRayCount = 2;
     public bool playerBullet;
-    float horizontalRaySpacing;
-    float verticalRaySpacing;
 
-    BoxCollider2D collider;
+    public BoxCollider2D collider;
     public CollisionInfo collisions;
     public float speed;
-    Vector2 direction;
-    bool isReady;
+    public Vector2 direction;
+    public bool isReady;
     
 
     // Use this for setting variable values
     private void Awake()
     {
         isReady = false;
-        playerMask = LayerMask.GetMask("Player");
-        enemyMask = LayerMask.GetMask("Enemy");
-        obstacleMask = LayerMask.GetMask("Obstacles");
     }
 
     // Use this for initialization
     void Start()
     {
-        collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        harmfulObject = GetComponent<HarmfulObject>();
     }
 
     void Update() {

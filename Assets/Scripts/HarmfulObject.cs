@@ -5,11 +5,10 @@ using UnityEngine;
 public class HarmfulObject : MonoBehaviour {
 
     public int damage;
-    BoxCollider2D objectHitBox;
+    public BoxCollider2D objectHitBox;
     public bool destructable;
 
     void Awake() {
-        objectHitBox = GetComponent<BoxCollider2D>();
     }
 
 	// Use this for initialization

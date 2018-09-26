@@ -7,30 +7,21 @@ public class PlayerStats : MonoBehaviour {
     // These will all be modifiable by the player's active chord modifiers
 
     public Vector2 aimingDirection;
-    private int maxHealth;
-    private int health;
-    private int numberOfJumps;
-    private float minJumpHeight;
-    private float maxJumpHeight;
-    private float timeToJumpApex;
-    private float moveSpeed;
-    private bool playerInvulnerable;
-    private bool playerAlive;
-    private float damageMultiplier;
+    public int maxHealth;
+    public int health;
+    public int numberOfJumps;
+    public float minJumpHeight;
+    public float maxJumpHeight;
+    public float timeToJumpApex;
+    public float moveSpeed;
+    public float invulnerabilityTime;
+    public bool playerInvulnerable;
+    public bool playerAlive;
+    public float damageMultiplier;
 
     //Set variable values here
     private void Awake() {
-        aimingDirection.x = 1;
-        aimingDirection.y = 0;
-        maxHealth = 100;
-        health = maxHealth;
-        numberOfJumps = 1;
-        maxJumpHeight = .6f;
-        minJumpHeight = maxJumpHeight / 4f;
-        timeToJumpApex = .3f;
-        moveSpeed = 2.0f;
-        playerInvulnerable = false;
-        playerAlive = true;
+
     }
 
     // Use this for initialization
@@ -43,19 +34,16 @@ public class PlayerStats : MonoBehaviour {
 
     }
 
-    public void SetMaxHealth(int newMaxHealth)
-    {
-        maxHealth = newMaxHealth;
-    }
-
     public void ChangeHealth(int changeAmount) {
 
         if (health + changeAmount >= maxHealth)
         {
             health = maxHealth;
         }
-        else {
-            if (changeAmount > 0) {
+        else
+        {
+            if (changeAmount > 0)
+            {
                 health = health + changeAmount;
             }
             else 
@@ -72,17 +60,11 @@ public class PlayerStats : MonoBehaviour {
                     playerInvulnerable = true;
 
                     // Set this back equal to false in 3 seconds.
-                    Invoke("SetPlayerVulnerable", 3);
+                    Invoke("SetPlayerVulnerable", invulnerabilityTime);
                 }
             }
             
         }
-        
-        
-    }
-
-    public void SetNumberOfJumps(int jumps) {
-        numberOfJumps = jumps;
     }
 
     public void SetJumpHeight(int jumpHeight) {
@@ -90,55 +72,7 @@ public class PlayerStats : MonoBehaviour {
         minJumpHeight = jumpHeight / 4f;
     }
 
-    public void SetMoveSpeed(int newMoveSpeed) {
-        moveSpeed = newMoveSpeed;
-    }
-
     public void SetPlayerVulnerable() {
         playerInvulnerable = false;
-    }
-
-    public int GetMaxHealth() {
-        return maxHealth;
-    }
-
-    public int GetHealth() {
-        return health;
-    }
-
-    public int GetNumberOfJumps() {
-        return numberOfJumps;
-    }
-
-    public float GetMaxJumpHeight()
-    {
-        return maxJumpHeight;
-    }
-
-    public float GetMinJumpHeight()
-    {
-        return minJumpHeight;
-    }
-
-    public float GetTimeToJumpApex()
-    {
-        return timeToJumpApex;
-    }
-
-    public Vector2 GetAimingDirection()
-    {
-        return aimingDirection;
-    }
-
-    public float GetMoveSpeed() {
-        return moveSpeed;
-    }
-
-    public bool GetPlayerInvulnerable() {
-        return playerInvulnerable;
-    }
-
-    public bool GetPlayerAlive() {
-        return playerAlive;
     }
 }

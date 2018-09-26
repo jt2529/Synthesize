@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     public float dampTime;
     private Vector3 velocity = Vector3.zero;
     public Transform target;
-    private Camera cam;
+    public Camera cam;
     public float offsetUp;
     public float offsetRight;
     public float defaultUp;
@@ -15,7 +15,6 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        cam = GetComponent<Camera>();
         defaultUp = .4f;
         defaultRight = .6f;
     }
