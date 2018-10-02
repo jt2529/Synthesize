@@ -65,7 +65,9 @@
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\EnemyGun.cs" />
     <Compile Include="Assets\Scripts\EnemyStats.cs" />
+    <Compile Include="Assets\Scripts\EscapeMenu.cs" />
     <Compile Include="Assets\Scripts\HarmfulObject.cs" />
+    <Compile Include="Assets\Scripts\InstrumentList.cs" />
     <Compile Include="Assets\Scripts\Keytar.cs" />
     <Compile Include="Assets\Scripts\MovementPhysics.cs" />
     <Compile Include="Assets\Scripts\Music.cs" />
