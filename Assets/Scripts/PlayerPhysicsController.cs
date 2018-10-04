@@ -44,6 +44,7 @@ public class PlayerPhysicsController : MonoBehaviour
         
         if (stats.GetPlayerAlive() != true)
         {
+            animator.SetBool("isAlive", false);
             return;
         }
 
@@ -125,6 +126,15 @@ public class PlayerPhysicsController : MonoBehaviour
     {
         animator.SetBool("isRunning", isRunning);
         animator.SetBool("isGrounded", isGrounded);
+        animator.SetBool("isAlive", stats.isPlayerAlive());
+        
+        if(stats.isPlayerAlive())
+        {
+            Debug.Log("Player is alive");
+        }else
+        {
+            Debug.Log("Player is dead");
+        }
     }
 
     void updatePlayerPhysics()

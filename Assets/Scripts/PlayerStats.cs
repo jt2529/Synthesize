@@ -19,6 +19,8 @@ public class PlayerStats : MonoBehaviour
     private float timeToJumpApex;
     public float moveSpeed = 2.0f;
     private bool playerInvulnerable;
+
+    [SerializeField]
     public bool playerAlive;
     private float damageMultiplier;
 
@@ -44,7 +46,7 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public bool isPlayerAlive()
