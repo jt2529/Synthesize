@@ -22,7 +22,6 @@ public class PlayerGun : MonoBehaviour
 
     public void FireBullet() {
         Vector2 direction = stats.aimingDirection;
-        Debug.Log(direction.y);
         FireBullet(direction);
     }
 
@@ -30,6 +29,9 @@ public class PlayerGun : MonoBehaviour
     {
         GameObject bullet = (GameObject)Instantiate(PlayerBullet);
         bullet.transform.position = transform.position;
-        bullet.GetComponent<BulletPhysics>().SetDirection(direction);
+
+        BulletPhysics bulletPhysics = bullet.GetComponent<BulletPhysics>();
+        bulletPhysics.playerSpeed = stats.currentSpeed;
+        bulletPhysics.SetDirection(direction);
     }
 }

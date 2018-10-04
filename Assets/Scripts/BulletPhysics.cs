@@ -22,6 +22,7 @@ public class BulletPhysics : MonoBehaviour
 
     public BoxCollider2D collider;
     public CollisionInfo collisions;
+    public Vector2 playerSpeed;
     public float speed;
     public Vector2 direction;
     public bool isReady;
@@ -46,11 +47,9 @@ public class BulletPhysics : MonoBehaviour
         {
             Vector2 velocity = transform.position;
 
-            velocity.x = direction.x * speed;
-            velocity.y = direction.y * speed;
+            velocity.x = direction.x * (speed * Time.deltaTime + playerSpeed.x);
+            velocity.y = direction.y * (speed * Time.deltaTime + playerSpeed.y);
 
-            
-            velocity += speed * direction * Time.deltaTime;
             Move(velocity);
         }
 
