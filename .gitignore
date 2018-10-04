@@ -9,6 +9,9 @@
 *.userosscache
 *.sln.docstates
 
+# Unity Files
+[Ll]ibrary/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
