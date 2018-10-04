@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< Updated upstream
 - path: Assets/Scenes/Synthesize testing.unity
+=======
+- path: Assets/Scenes/GroundPlay.unity
+>>>>>>> Stashed changes
   isLoaded: 1
   isActive: 1

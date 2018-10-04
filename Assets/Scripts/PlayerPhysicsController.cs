@@ -24,7 +24,7 @@ public class PlayerPhysicsController : MonoBehaviour
     [SerializeField]
     private bool isRunning;
     private Animator animator;
-
+    private AudioSource sound;
     MovementPhysics physics;
 
     // Use this for initialization
@@ -35,6 +35,7 @@ public class PlayerPhysicsController : MonoBehaviour
         updatePlayerPhysics();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        sound = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -105,6 +106,7 @@ public class PlayerPhysicsController : MonoBehaviour
         if (Input.GetButton("Jump") && physics.collisions.below)
         {
             velocity.y = maxJumpVelocity;
+            sound.Play();
             isGrounded = false;
         }
 
