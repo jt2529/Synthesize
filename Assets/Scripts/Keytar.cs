@@ -31,6 +31,7 @@ public class Keytar : MonoBehaviour {
     public void Play(int note) {
         notes[note].loop = true;
         notes[note].Play();
+        Debug.Log(note);
 
         if (currentQueueSize > 2)
         {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class PlayerAbilitiesController : MonoBehaviour {
 
-    public EscapeMenu escMenu;
     public Dictionary<int, KeyCode> noteMap;
     public PlayerGun gun;
     public PlayerStats stats;
@@ -27,14 +26,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        //use the p button to pause and unpause the game
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            escMenu.menuControl();
-        }
-
-        if (stats.playerAlive != true || Time.timeScale == 0)
+        if (stats.playerAlive != true)
         {
             return;
         }
