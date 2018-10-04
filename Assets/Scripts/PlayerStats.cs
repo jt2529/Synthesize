@@ -16,13 +16,16 @@ public class PlayerStats : MonoBehaviour
     private int numberOfJumps;
     private float minJumpHeight;
     public float maxJumpHeight = .6f;
-    private float timeToJumpApex;
+    public float timeToJumpApex;
     public float moveSpeed = 2.0f;
     private bool playerInvulnerable;
 
     [SerializeField]
     public bool playerAlive;
     private float damageMultiplier;
+    private Transform currentTransform;
+    private Vector3 oldPosition;
+    public Vector2 currentSpeed;
 
     //Set variable values here
     private void Awake()
@@ -32,7 +35,6 @@ public class PlayerStats : MonoBehaviour
         health = maxHealth;
         numberOfJumps = 1;
         minJumpHeight = maxJumpHeight / 4f;
-        timeToJumpApex = .3f;
         playerInvulnerable = false;
         playerAlive = true;
     }
@@ -40,13 +42,23 @@ public class PlayerStats : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        currentTransform = GetComponent<Transform>();
+        oldPosition = currentTransform.position;
+        currentSpeed.x = 0;
+        currentSpeed.y = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void FixedUpdate()
+    {
+        currentSpeed.x = Mathf.Abs(currentTransform.position.x - oldPosition.x);
+        currentSpeed.y = Mathf.Abs(currentTransform.position.x - oldPosition.x);
+        oldPosition = currentTransform.position;
     }
 
     public bool isPlayerAlive()

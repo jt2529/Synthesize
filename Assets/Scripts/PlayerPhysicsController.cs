@@ -36,9 +36,14 @@ public class PlayerPhysicsController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
     }
-
     // Update is called once per frame
     void Update()
+    {
+
+    }
+    
+
+    void FixedUpdate()
     {
 
         
@@ -58,21 +63,28 @@ public class PlayerPhysicsController : MonoBehaviour
         }
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        
 
         if (hInput == 0)
         {
-            stats.aimingDirection.y = 0;
-            if (sprite.flipX == true)
+            if (input.y != 0)
             {
-                stats.aimingDirection.x = -1;
+                stats.aimingDirection.x = 0;
+                stats.aimingDirection.y = input.y;
             }
             else
             {
-                stats.aimingDirection.x = 1;
+                stats.aimingDirection.y = 0;
+                if (sprite.flipX == true)
+                {
+                    stats.aimingDirection.x = -1;
+                }
+                else
+                {
+                    stats.aimingDirection.x = 1;
+                }
             }
-
             isRunning = false;
-            
         }
         else
         {
@@ -80,7 +92,6 @@ public class PlayerPhysicsController : MonoBehaviour
 
             stats.aimingDirection.x = input.x;
             stats.aimingDirection.y = input.y / 2;
-
             if (hInput > 0)
             {
                 sprite.flipX = false;
