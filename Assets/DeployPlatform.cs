@@ -17,19 +17,23 @@ public class DeployPlatform : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            if (!deployed)
-            {
-                deployed = true;
-                edge.enabled = true;
-            }
-            else
-            {
-                deployed = false;
-                edge.enabled = false;
-            }
-
-            animator.SetBool("deployed", deployed);
-
+            togglePlatform();
         }
 	}
+
+    public void togglePlatform()
+    {
+        if (!deployed)
+        {
+            deployed = true;
+            edge.enabled = true;
+        }
+        else
+        {
+            deployed = false;
+            edge.enabled = false;
+        }
+
+        animator.SetBool("deployed", deployed);
+    }
 }
