@@ -47,6 +47,11 @@ public class PlayerStats : MonoBehaviour
 
     }
 
+    public bool isPlayerAlive()
+    {
+        return playerAlive;
+    }
+
     public void SetMaxHealth(int newMaxHealth)
     {
         maxHealth = newMaxHealth;

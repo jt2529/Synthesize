@@ -26,7 +26,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (stats.playerAlive != true)
+        if (!stats.isPlayerAlive())
         {
             return;
         }

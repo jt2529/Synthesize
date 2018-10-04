@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Synthesize testing.unity
+- path: Assets/Scenes/GroundPlay.unity
   isLoaded: 1
   isActive: 1
