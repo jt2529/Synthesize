@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyGun : MonoBehaviour {
 
     public GameObject EnemyBullet;
-
-	// Use this for initialization
-	void Start () {
+    public GameObject aimAtObject;
+    // Use this for initialization
+    void Start () {
         InvokeRepeating("FireBullet", 1f, 2f);
     }
 	
@@ -16,14 +16,13 @@ public class EnemyGun : MonoBehaviour {
     }
 
     public void FireBullet() {
-        GameObject player = GameObject.Find("Player");
 
-        if (player != null) {
+        if (aimAtObject != null) {
 
             GameObject bullet = (GameObject)Instantiate(EnemyBullet);
 
             bullet.transform.position = transform.position;
-            Vector2 direction = player.transform.position - transform.position;
+            Vector2 direction = aimAtObject.transform.position - transform.position;
             bullet.GetComponent<BulletPhysics>().SetDirection(direction);
         }
     }
