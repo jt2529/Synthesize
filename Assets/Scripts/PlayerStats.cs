@@ -16,11 +16,7 @@ public class PlayerStats : MonoBehaviour
     private int numberOfJumps;
     private float minJumpHeight;
     public float maxJumpHeight = .6f;
-<<<<<<< Updated upstream
-    public float timeToJumpApex;
-=======
     public float timeToJumpApex = .3f;
->>>>>>> Stashed changes
     public float moveSpeed = 2.0f;
     private bool playerInvulnerable;
 
