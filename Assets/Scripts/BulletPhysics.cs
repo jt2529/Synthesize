@@ -26,7 +26,8 @@ public class BulletPhysics : MonoBehaviour
     public float speed;
     public Vector2 direction;
     public bool isReady;
-    
+
+    public GameObject onDestroy;
 
     // Use this for setting variable values
     private void Awake()
@@ -38,6 +39,7 @@ public class BulletPhysics : MonoBehaviour
     void Start()
     {
         CalculateRaySpacing();
+        
     }
 
     void Update() {
@@ -59,6 +61,7 @@ public class BulletPhysics : MonoBehaviour
 
         if ((transform.position.x < min.x) || (transform.position.x > max.x) || (transform.position.y < min.y) || (transform.position.y > max.y))
         {
+            Instantiate(onDestroy, transform);
             Destroy(gameObject);
         }
     }

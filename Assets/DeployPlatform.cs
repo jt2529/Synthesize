@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeployPlatform : MonoBehaviour {
+public class DeployPlatform : MonoBehaviour, IToggleable {
 
     private Animator animator;
     public bool deployed = false;
@@ -15,13 +15,15 @@ public class DeployPlatform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            togglePlatform();
-        }
+
 	}
 
     public void togglePlatform()
+    {
+
+    }
+
+    public void toggle()
     {
         if (!deployed)
         {
