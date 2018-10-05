@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeployPlatform : MonoBehaviour, IToggleable {
+public class DeployPlatform : Toggler {
 
     private Animator animator;
     public bool deployed = false;
@@ -18,12 +18,7 @@ public class DeployPlatform : MonoBehaviour, IToggleable {
 
 	}
 
-    public void togglePlatform()
-    {
-
-    }
-
-    public void toggle()
+    public override void toggle()
     {
         if (!deployed)
         {

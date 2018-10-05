@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TriggerSwitch : MonoBehaviour {
 
-    public DeployPlatform target;
+    public Toggler target;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class OrbSwitch : MonoBehaviour
 {
 
-    public DeployPlatform target;
+    public Toggler target;
     private bool active = false;
     private Animator animator;
 
