@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbSwitch : MonoBehaviour
+// Atatch script to a GameObject and then connect an object extending Toggler to target.
+// Entering the switch's trigger will toggle the connected object, On to Off or Off To On.
+
+// See Orb Switch prefab for example.
+
+public class ActiveSwitch : MonoBehaviour
 {
 
     public Toggler target;
