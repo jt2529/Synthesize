@@ -9,8 +9,8 @@ using UnityEngine;
 
 public class ActiveSwitch : MonoBehaviour
 {
-
-    public Toggler target;
+    [SerializeField]
+    public Toggler[] targets;
     private bool active = false;
     private Animator animator;
 
@@ -21,8 +21,13 @@ public class ActiveSwitch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Switch toggled");
-        target.toggle();
+        
+        foreach (Toggler t in targets)
+        {
+            t.toggle();
+        }
+
+        
 
         if (active)
         {
