@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114266031523760972}
   - component: {fileID: 114675180714981404}
   - component: {fileID: 95100780553203618}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: PlayerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1137612094752080}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.155, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -67,7 +67,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.5, y: 0.25}
   m_EdgeRadius: 0
 --- !u!95 &95100780553203618
 Animator:
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  objectHitBox: {fileID: 0}
+  objectHitBox: {fileID: 61475930546555174}
   destructable: 1
 --- !u!114 &114675180714981404
 MonoBehaviour:
@@ -115,7 +115,7 @@ MonoBehaviour:
   harmfulObject: {fileID: 114266031523760972}
   playerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 256
   enemyMask:
     serializedVersion: 2
     m_Bits: 4096
@@ -127,7 +127,7 @@ MonoBehaviour:
   playerBullet: 1
   collider: {fileID: 61475930546555174}
   playerSpeed: {x: 0, y: 0}
-  speed: 5
+  speed: 7
   direction: {x: 0, y: 0}
   isReady: 0
   onDestroy: {fileID: 1460710244819518, guid: f3eb857ad5ae9624da24a6e001174a5d, type: 2}

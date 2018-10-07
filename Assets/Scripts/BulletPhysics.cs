@@ -82,7 +82,6 @@ public class BulletPhysics : MonoBehaviour
     {
         UpdateRaycastOrigins();
         collisions.Reset();
-
         if (velocity.x != 0)
         {
             HorizontalCollisions(velocity);

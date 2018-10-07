@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61475930546555174}
   - component: {fileID: 114137350974258684}
   - component: {fileID: 114675180714981404}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1137612094752080}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.155, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -59,14 +59,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.5, y: 0.25}
   m_EdgeRadius: 0
 --- !u!114 &114137350974258684
 MonoBehaviour:
@@ -99,10 +99,10 @@ MonoBehaviour:
     m_Bits: 256
   enemyMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 4096
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 65536
   horizontalRayCount: 2
   verticalRayCount: 2
   playerBullet: 0
@@ -111,6 +111,7 @@ MonoBehaviour:
   speed: 5
   direction: {x: 0, y: 0}
   isReady: 0
+  onDestroy: {fileID: 1460710244819518, guid: f3eb857ad5ae9624da24a6e001174a5d, type: 2}
 --- !u!212 &212546560818474596
 SpriteRenderer:
   m_ObjectHideFlags: 1

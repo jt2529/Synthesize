@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4753568949111252}
   - component: {fileID: 114210003757030844}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: EnemyGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114013179333681600}
   - component: {fileID: 61412962689542428}
   - component: {fileID: 114128748669739088}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: EnemyCop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,8 +66,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1470505938157168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.026, y: -0.242, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.89, y: -0.88, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4753568949111252}
   m_Father: {fileID: 0}
@@ -96,7 +96,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.3, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &114013179333681600
 MonoBehaviour:
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   moveSpeed: 0.5
-  health: 0
+  health: 100
 --- !u!114 &114210003757030844
 MonoBehaviour:
   m_ObjectHideFlags: 1

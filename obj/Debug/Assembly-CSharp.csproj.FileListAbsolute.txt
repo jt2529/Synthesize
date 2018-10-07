@@ -166,3 +166,5 @@ C:\Users\domin\Git\Synthesize\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs
 C:\Users\domin\Git\Synthesize\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\domin\Git\Synthesize\obj\Debug\Assembly-CSharp.dll
 C:\Users\domin\Git\Synthesize\obj\Debug\Assembly-CSharp.pdb
+C:\Users\domin\Git\Synthesize\Temp\bin\Debug\Cinemachine.dll
+C:\Users\domin\Git\Synthesize\Temp\bin\Debug\com.unity.cinemachine.editor.dll
