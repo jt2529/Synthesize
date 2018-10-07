@@ -185,6 +185,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 31009946}
   m_Script: {fileID: 11500000, guid: ddd6c08c9b580d049b35c65edb5ed66a, type: 3}
+--- !u!114 &101637961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114180803724910350, guid: 30fa16948a08f104b888cc2df00e9582,
+    type: 2}
+  m_PrefabInternal: {fileID: 1579202870}
+  m_Script: {fileID: 11500000, guid: ddd6c08c9b580d049b35c65edb5ed66a, type: 3}
 --- !u!1001 &176147614
 Prefab:
   m_ObjectHideFlags: 0
@@ -1222,7 +1228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1820a35bb159ed247a0f312f7921cb15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
+  targets:
+  - {fileID: 101637961}
 --- !u!50 &774094079
 Rigidbody2D:
   serializedVersion: 4
