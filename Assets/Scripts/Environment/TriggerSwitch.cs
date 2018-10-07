@@ -22,13 +22,20 @@ public class TriggerSwitch : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         target.toggle();
+        if(animator != null)
+        {
             animator.SetBool("toggle", true);
+        }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         target.toggle();
+        if (animator != null)
+        {
             animator.SetBool("toggle", false);
+        }
     }
 
 }
