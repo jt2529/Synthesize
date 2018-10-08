@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\BulletPhysics.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyGun.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyPhysicsController.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\Enemy\HarmfulObject.cs" />
     <Compile Include="Assets\Scripts\Environment\ActiveSwitch.cs" />

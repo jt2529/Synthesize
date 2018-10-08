@@ -7,6 +7,8 @@ public class EnemyStats : MonoBehaviour {
     public int maxHealth;
     public float moveSpeed;
     public int health;
+    public float jumpHeight;
+    public float timeToJumpApex;
 
     //Set variable values here
     private void Awake()
