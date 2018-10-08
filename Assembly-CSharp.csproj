@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\DeployPlatform.cs" />
+    <Compile Include="Assets\DoorController.cs" />
     <Compile Include="Assets\Scripts\BulletPhysics.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyGun.cs" />
