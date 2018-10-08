@@ -18,35 +18,35 @@ public class DoorController : Toggler {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (animator != null && toggled)
+        {
+            animator.SetBool("toggle", toggled);
+
+            if (col != null)
+            {
+                col.enabled = false;
+            }
+        }
+
+        if (animator != null && !toggled)
+        {
+            animator.SetBool("toggle", toggled);
+
+            if (col != null)
+            {
+                col.enabled = true;
+            }
+        }
+    }
 
     public override void toggle()
     {
         if (!toggled)
         {
             toggled = true;
-
-            if (col != null)
-            {
-                col.enabled = false;
-            }
-            if(animator != null)
-            {
-                animator.SetBool("toggle", toggled);
-            }
         }else
         {
             toggled = false;
-
-            if (col != null)
-            {
-                col.enabled = true;
-            }
-            if (animator != null)
-            {
-                animator.SetBool("toggle", toggled);
-            }
         }
         
     }
