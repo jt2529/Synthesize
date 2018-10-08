@@ -78,7 +78,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.06}
   serializedVersion: 2
-  m_Radius: 0.22
+  m_Radius: 0.35
 --- !u!95 &95979418374882548
 Animator:
   serializedVersion: 3
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 879feb23117a5fd49a61c8395b3075e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  targets: []
 --- !u!212 &212829282981695308
 SpriteRenderer:
   m_ObjectHideFlags: 1

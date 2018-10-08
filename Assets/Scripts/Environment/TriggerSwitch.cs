@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class TriggerSwitch : MonoBehaviour {
 
-    public Toggler target;
+    public Toggler[] targets;
     private Animator animator;
 
     private void Awake()
@@ -21,14 +21,29 @@ public class TriggerSwitch : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        target.toggle();
+        foreach(Toggler t in targets)
+        {
+            t.toggle();
+        }
+        
+        if(animator != null)
+        {
             animator.SetBool("toggle", true);
+        }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        target.toggle();
+        foreach (Toggler t in targets)
+        {
+            t.toggle();
+        }
+
+        if (animator != null)
+        {
             animator.SetBool("toggle", false);
+        }
     }
 
 }
