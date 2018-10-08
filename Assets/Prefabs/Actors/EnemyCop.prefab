@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 114013179333681600}
   - component: {fileID: 61412962689542428}
   - component: {fileID: 114128748669739088}
+  - component: {fileID: 114556929225613742}
+  - component: {fileID: 114917998337652904}
   m_Layer: 12
   m_Name: EnemyCop
   m_TagString: Untagged
@@ -140,6 +142,35 @@ MonoBehaviour:
   EnemyBullet: {fileID: 1137612094752080, guid: c26a7a5cd5a8980499ccd84add211718,
     type: 2}
   aimAtObject: {fileID: 0}
+--- !u!114 &114556929225613742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1470505938157168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 068e2871ffc5cb6468a7057dca8345d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 65536
+  horizontalRayCount: 5
+  verticalRayCount: 5
+  maxClimbAngle: 60
+  maxDescendAngle: 75
+--- !u!114 &114917998337652904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1470505938157168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4033ab372e12f6498ae61a2b9ed5fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212192038685080882
 SpriteRenderer:
   m_ObjectHideFlags: 1

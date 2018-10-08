@@ -1718,6 +1718,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &556688652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114128748669739088, guid: fc9e84b7363dda0449440fc241b247ab,
+    type: 2}
+  m_PrefabInternal: {fileID: 1650471649}
+  m_Script: {fileID: 11500000, guid: 0c703d28d1da72545b83d92dac3826a2, type: 3}
 --- !u!114 &618397085 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114871890128274876, guid: faf09e7f5eef703409f35463ca782e6d,
@@ -4477,8 +4483,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1516391926}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.008, y: -1.169, z: 40}
-  m_LocalScale: {x: 0.9131587, y: 1.0553105, z: 0.2}
+  m_LocalPosition: {x: 0.019, y: -1.169, z: 40}
+  m_LocalScale: {x: 1.0000513, y: 1.0553105, z: 0.2}
   m_Children: []
   m_Father: {fileID: 909666661}
   m_RootOrder: 0
@@ -5187,6 +5193,51 @@ Prefab:
       propertyPath: aimAtObject
       value: 
       objectReference: {fileID: 1093690071}
+    - target: {fileID: 114917998337652904, guid: fc9e84b7363dda0449440fc241b247ab,
+        type: 2}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 556688652}
+    - target: {fileID: 114917998337652904, guid: fc9e84b7363dda0449440fc241b247ab,
+        type: 2}
+      propertyPath: moveTowardsObject
+      value: 
+      objectReference: {fileID: 1093690071}
+    - target: {fileID: 114917998337652904, guid: fc9e84b7363dda0449440fc241b247ab,
+        type: 2}
+      propertyPath: canJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114917998337652904, guid: fc9e84b7363dda0449440fc241b247ab,
+        type: 2}
+      propertyPath: accelerationTimeGrounded
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114917998337652904, guid: fc9e84b7363dda0449440fc241b247ab,
+        type: 2}
+      propertyPath: xDistanceFromObject
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114917998337652904, guid: fc9e84b7363dda0449440fc241b247ab,
+        type: 2}
+      propertyPath: yDistanceFromObject
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114917998337652904, guid: fc9e84b7363dda0449440fc241b247ab,
+        type: 2}
+      propertyPath: jumpInterval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114128748669739088, guid: fc9e84b7363dda0449440fc241b247ab,
+        type: 2}
+      propertyPath: jumpHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114128748669739088, guid: fc9e84b7363dda0449440fc241b247ab,
+        type: 2}
+      propertyPath: timeToJumpApex
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc9e84b7363dda0449440fc241b247ab, type: 2}
   m_IsPrefabAsset: 0
