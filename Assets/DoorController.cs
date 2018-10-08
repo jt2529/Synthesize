@@ -25,8 +25,6 @@ public class DoorController : Toggler {
     {
         if (!toggled)
         {
-            Debug.Log("Door opened.");
-
             toggled = true;
 
             if (col != null)
@@ -39,7 +37,6 @@ public class DoorController : Toggler {
             }
         }else
         {
-            Debug.Log("Door closed.");
             toggled = false;
 
             if (col != null)

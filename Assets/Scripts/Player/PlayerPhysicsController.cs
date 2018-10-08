@@ -121,10 +121,13 @@ public class PlayerPhysicsController : MonoBehaviour
         float targetVelocityX = input.x * stats.GetMoveSpeed();
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
+
+        // Player cannot fall faster than our gravity
         if (velocity.y < gravity)
         {
             velocity.y = gravity;
         }
+
         physics.Move(velocity * Time.deltaTime);
 
         if(physics.collisions.below)
