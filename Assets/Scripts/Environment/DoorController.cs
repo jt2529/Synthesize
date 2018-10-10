@@ -50,4 +50,9 @@ public class DoorController : Toggler {
         }
         
     }
+
+    public override bool isToggled()
+    {
+        return toggled;
+    }
 }

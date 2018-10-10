@@ -19,6 +19,15 @@ public class ActiveSwitch : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if (targets.Length == 1)
+        {
+            active = targets[0].isToggled();
+            animator.SetBool("active", active);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
@@ -27,15 +36,16 @@ public class ActiveSwitch : MonoBehaviour
             t.toggle();
         }
 
+            if (active)
+            {
+                active = false;
+            }
+            else
+            {
+                active = true;
+            }
         
 
-        if (active)
-        {
-            active = false;
-        } else
-        {
-            active = true;
-        }
 
         animator.SetBool("active", active);
     }

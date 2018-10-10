@@ -5,4 +5,5 @@ using UnityEngine;
 public abstract class Toggler : MonoBehaviour
 {
     public abstract void toggle();
+    public abstract bool isToggled();
 }

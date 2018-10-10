@@ -33,4 +33,9 @@ public class DeployPlatform : Toggler {
 
         animator.SetBool("deployed", deployed);
     }
+
+    public override bool isToggled()
+    {
+        return deployed;
+    }
 }
