@@ -15,7 +15,8 @@ public class DeployPlatform : Toggler {
 	
 	// Update is called once per frame
 	void Update () {
-
+        edge.enabled = deployed;
+        animator.SetBool("deployed", deployed);
 	}
 
     public override void toggle()

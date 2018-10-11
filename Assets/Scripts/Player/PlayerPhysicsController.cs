@@ -9,6 +9,7 @@ public class PlayerPhysicsController : MonoBehaviour
     public float accelerationTimeAirborne = .1f;
     public float accelerationTimeGrounded = .05f;
 
+    [SerializeField]
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
