@@ -9,6 +9,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
     public PlayerStats stats;
     public Keytar keytar;
     public int[] lastThreeNotes;
+    public EscapeMenu menu;
 
     // Use this for initialization
     void Start () {
@@ -29,6 +30,11 @@ public class PlayerAbilitiesController : MonoBehaviour {
         if (!stats.isPlayerAlive())
         {
             return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menu.MenuControl();
         }
 
         for (int i = 0; i < noteMap.Count; i++)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EscapeMenu : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class EscapeMenu : MonoBehaviour
     }
 
     //controls the pausing of the scene
-    public void menuControl()
+    public void MenuControl()
     {
         if (isOpen)
         {
@@ -53,5 +54,11 @@ public class EscapeMenu : MonoBehaviour
         {
             g.SetActive(false);
         }
+    }
+
+    public void ReloadScene()
+    {
+        Scene scene =SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }

@@ -61,8 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DeployPlatform.cs" />
-    <Compile Include="Assets\DoorController.cs" />
     <Compile Include="Assets\Scripts\BulletPhysics.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyGun.cs" />
@@ -70,6 +68,8 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyStats.cs" />
     <Compile Include="Assets\Scripts\Enemy\HarmfulObject.cs" />
     <Compile Include="Assets\Scripts\Environment\ActiveSwitch.cs" />
+    <Compile Include="Assets\Scripts\Environment\DeployPlatform.cs" />
+    <Compile Include="Assets\Scripts\Environment\DoorController.cs" />
     <Compile Include="Assets\Scripts\Environment\TriggerSwitch.cs" />
     <Compile Include="Assets\Scripts\EscapeMenu.cs" />
     <Compile Include="Assets\Scripts\InstrumentList.cs" />
@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerGun.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerPhysicsController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
+    <Compile Include="Assets\SpringboxController.cs" />
     <None Include="Assets\Pixel Font - Tripfive\_README.txt" />
     <Reference Include="Cinemachine">
       <HintPath>C:/Users/domin/Git/Synthesize/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
