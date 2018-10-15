@@ -1560,11 +1560,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4064167875138028, guid: 7746bcbc52c13394ab1699591a789bda, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -7.43
+      value: -1.72
       objectReference: {fileID: 0}
     - target: {fileID: 4064167875138028, guid: 7746bcbc52c13394ab1699591a789bda, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.98
+      value: 1.89
       objectReference: {fileID: 0}
     - target: {fileID: 4064167875138028, guid: 7746bcbc52c13394ab1699591a789bda, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1590,7 +1590,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 50554899469490940, guid: 7746bcbc52c13394ab1699591a789bda,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114817115726393708, guid: 7746bcbc52c13394ab1699591a789bda, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 7746bcbc52c13394ab1699591a789bda, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &953750912
@@ -2072,9 +2078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f3281bdaf6a1b4cb36f241801dd3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {fileID: 1600511750}
-  pointB: {fileID: 1800268154}
-  target: {fileID: 0}
 --- !u!68 &1538220356
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -2421,9 +2424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0871a821d185014f9a695a1f1645104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dampTime: 0.3
+  dampTime: 0
   target: {fileID: 0}
-  cam: {fileID: 1675912099}
+  cam: {fileID: 0}
   offsetUp: 0
   offsetRight: 0
   defaultUp: 0
@@ -6775,6 +6778,11 @@ Prefab:
         type: 2}
       propertyPath: m_SortingLayer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180803724910350, guid: 30fa16948a08f104b888cc2df00e9582,
+        type: 2}
+      propertyPath: deployed
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30fa16948a08f104b888cc2df00e9582, type: 2}
