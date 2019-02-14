@@ -13,6 +13,8 @@ public class Slimer : MonoBehaviour {
     public float accelerationTimeAirborne = .1f;
     public float accelerationTimeGrounded = .05f;
 
+    private float direction = 1.0f;
+
     Vector3 velocity;
 
     // Use this for initialization
@@ -28,12 +30,19 @@ public class Slimer : MonoBehaviour {
     private void FixedUpdate()
     {
 
-
-
-        if (!controller.collisions.right)
+        if(controller.collisions.right)
         {
-            Debug.Log(velocity.x);
+            direction = -1.0f;
         }
+
+        if (controller.collisions.left)
+        {
+            direction = 1.0f;
+        }
+
+        velocity.x = Mathf.SmoothDamp(velocity.x, 3.0f * direction, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
 
     }
 }
