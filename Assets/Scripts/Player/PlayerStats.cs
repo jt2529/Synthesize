@@ -93,6 +93,7 @@ public class PlayerStats : MonoBehaviour
                 if (health < 1)
                 {
                     playerAlive = false;
+                    Debug.Log("Player Died");
                 }
                 if (changeAmount < 0)
                 {
@@ -177,5 +178,15 @@ public class PlayerStats : MonoBehaviour
     public bool GetPlayerAlive()
     {
         return playerAlive;
+    }
+
+    public void hurt(int dmg)
+    {
+        ChangeHealth(-dmg);
+    }
+
+    public void kill()
+    {
+        ChangeHealth(-this.health);
     }
 }

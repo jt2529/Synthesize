@@ -11,8 +11,14 @@ public class PlayerAbilitiesController : MonoBehaviour {
     public int[] lastThreeNotes;
     public EscapeMenu menu;
 
+    private Animator state;
+    private MovementPhysics controller;
+
     // Use this for initialization
     void Start () {
+
+        controller = GetComponent<MovementPhysics>();
+        state = GetComponent<Animator>();
         noteMap = new Dictionary<int, KeyCode>() {
             { 0, KeyCode.U },
             { 1, KeyCode.I },
@@ -37,26 +43,36 @@ public class PlayerAbilitiesController : MonoBehaviour {
             menu.MenuControl();
         }
 
-        for (int i = 0; i < noteMap.Count; i++)
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            if (Input.GetKeyDown(noteMap[i])) {
-                keytar.Play(i);
-            }
-            else if (Input.GetKeyUp(noteMap[i]))
+            if(controller.collisions.below)
             {
-                keytar.Release(i);
+                attack();
+            } else
+            {
+                jumpAttack();
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            lastThreeNotes = keytar.GetLastPlayed();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            gun.FireBullet();
         }
     }  
+
+    void attack()
+    {
+        state.SetBool("Attack", true);
+    }
+
+    public void endAttack()
+    {
+        state.SetBool("Attack", false);
+    }
+
+    void jumpAttack()
+    {
+        state.SetBool("JumpAttack", true);
+    }
+
+    public void endJumpAttack()
+    {
+        state.SetBool("JumpAttack", false);
+    }
     
 }
