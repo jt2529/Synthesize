@@ -14,12 +14,14 @@ public class Slimer : MonoBehaviour {
     public float accelerationTimeGrounded = .05f;
 
     private float direction = 1.0f;
+    private SpriteRenderer sprite;
 
     Vector3 velocity;
 
     // Use this for initialization
     void Start () {
         controller = GetComponent<MovementPhysics>();
+        sprite = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -33,11 +35,13 @@ public class Slimer : MonoBehaviour {
         if(controller.collisions.right)
         {
             direction = -1.0f;
+            sprite.flipX = true;
         }
 
         if (controller.collisions.left)
         {
             direction = 1.0f;
+            sprite.flipX = false;
         }
 
         velocity.x = Mathf.SmoothDamp(velocity.x, speed * direction, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
