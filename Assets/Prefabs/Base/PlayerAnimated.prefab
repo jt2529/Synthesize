@@ -128,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1879330043376860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08, y: 0.87, z: 0}
+  m_LocalPosition: {x: 11.192634, y: 3.4344447, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4842195968015354}
@@ -157,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1423994312007416}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -1.5067501, y: 1.4751084, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4937615995126942}
@@ -1133,14 +1133,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329276134a4b4774ea445ca488d23a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimingDirection: {x: 1, y: 0}
+  aimingDirection: {x: -1, y: 0}
   maxHealth: 100
   health: 100
   maxJumpHeight: 2.5
   timeToJumpApex: 0.6
   moveSpeed: 5
   playerAlive: 1
-  currentSpeed: {x: 0, y: 0}
+  currentSpeed: {x: 0.04059887, y: 0.04059887}
 --- !u!114 &114458309758543022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1154,7 +1154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationTimeAirborne: 0.1
   accelerationTimeGrounded: 0.05
-  gravity: 0
+  gravity: -13.888888
   isGrounded: 1
   isRunning: 0
 --- !u!114 &114576367221081344
@@ -1168,14 +1168,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LookaheadTime: 0.75
-  m_LookaheadSmoothing: 15
+  m_LookaheadTime: 0.6
+  m_LookaheadSmoothing: 16
   m_LookaheadIgnoreY: 1
   m_XDamping: 1
-  m_YDamping: 1
+  m_YDamping: 1.15
   m_ZDamping: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.575
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.1
   m_DeadZoneHeight: 0.1
@@ -1259,7 +1259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 196608
+    m_Bits: 65536
   horizontalRayCount: 5
   verticalRayCount: 5
   maxClimbAngle: 60
@@ -1322,9 +1322,9 @@ SpriteRenderer:
   m_SortingLayerID: -242815975
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f662ee2a00cb84907a2aa3b5cfcda24e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44ca5abb50b6f4c0d8f9334df533c2ad, type: 3}
   m_Color: {r: 0.8537736, g: 0.9415094, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
