@@ -14,9 +14,12 @@ public class TriggerSwitch : MonoBehaviour {
     public Toggler[] targets;
     private Animator animator;
 
+    private bool isOccupied;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        isOccupied = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +36,7 @@ public class TriggerSwitch : MonoBehaviour {
         
     }
 
+    
     private void OnTriggerExit2D(Collider2D collision)
     {
         foreach (Toggler t in targets)

@@ -8,7 +8,7 @@ public class Slimer : MonoBehaviour {
     private bool right;
     public float speed;
     float velocityXSmoothing;
-    float gravity;
+    public float gravity;
 
     public float accelerationTimeAirborne = .1f;
     public float accelerationTimeGrounded = .05f;
@@ -46,6 +46,10 @@ public class Slimer : MonoBehaviour {
 
         velocity.x = Mathf.SmoothDamp(velocity.x, speed * direction, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
+        if (velocity.y < gravity)
+        {
+            velocity.y = gravity;
+        }
         controller.Move(velocity * Time.deltaTime);
 
     }
