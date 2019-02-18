@@ -27,7 +27,7 @@ TagManager:
   - Obstacles
   - 
   - 
-  - 
+  - Backsplash
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Backsplash
+    uniqueID: 1330105611
     locked: 0
   - name: Background
     uniqueID: 4040415781
