@@ -104,7 +104,7 @@ public class PlayerPhysicsController : MonoBehaviour
             }
         }
 
-        if (Input.GetButton("Jump") && physics.collisions.below)
+        if (Input.GetButtonDown("Jump") && physics.collisions.below)
         {
             velocity.y = maxJumpVelocity;
             sound.Play();

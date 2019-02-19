@@ -21,8 +21,7 @@ GameObject:
   - component: {fileID: 4263450286987568}
   - component: {fileID: 20253476206277720}
   - component: {fileID: 81955737568274084}
-  - component: {fileID: 114623195460799192}
-  - component: {fileID: 114904948955192112}
+  - component: {fileID: 114370635749476694}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -36,8 +35,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1820932145664470}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5279772, y: 1.365, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -67,7 +66,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 3.5
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -90,25 +89,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1820932145664470}
   m_Enabled: 1
---- !u!114 &114623195460799192
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1820932145664470}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0871a821d185014f9a695a1f1645104, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dampTime: 0
-  target: {fileID: 0}
-  cam: {fileID: 0}
-  offsetUp: 0
-  offsetRight: 0
-  defaultUp: 0.4
-  defaultRight: 0.6
---- !u!114 &114904948955192112
+--- !u!114 &114370635749476694
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,31 +97,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1820932145664470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a1b0909c394fb2459080f61adb3de48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 0
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Cinemachine.CinemachineBrain+BrainEvent, Cinemachine, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  virtualCamera: {fileID: 20253476206277720}
+  virtualScreenQuad: {fileID: 0}
+  defaultTexture: {fileID: 0}

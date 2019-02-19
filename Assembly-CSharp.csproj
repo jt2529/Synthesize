@@ -61,10 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MainCameraLR.cs" />
     <Compile Include="Assets\PushableBoxController.cs" />
     <Compile Include="Assets\SceneReset.cs" />
     <Compile Include="Assets\Scripts\BulletPhysics.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\DSPixelPerfectCamera.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyGun.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyPhysicsController.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyStats.cs" />
