@@ -70,7 +70,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Run
-  m_Speed: 0.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101105538899861306}
@@ -86,7 +86,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 193ed12c3e1c44b09b07a1b0cfae19b3, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2c979be52e102426f9b0b180ea43a761, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -99,7 +99,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Jump
-  m_Speed: 0.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101164649942179186}
@@ -115,7 +115,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e468b59a1945042e08f555eab1fd6ebe, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5cbf0b4d428ef49d299a22203db99f01, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -128,7 +128,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Idle
-  m_Speed: 0.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101987771795882850}
@@ -143,7 +143,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8cc429adaa816466ea60d4e13fc78a3d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3dc14673484784dc2bf10a1c1d1dee9f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -168,7 +168,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: fd5bff8db77864b91bf0c69de1856667, type: 2}
+  m_Motion: {fileID: 7400000, guid: e5830c164205a4d9082958516b4ec2f0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -190,13 +190,13 @@ AnimatorStateMachine:
     m_Position: {x: 204, y: 204, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110259466}
-    m_Position: {x: 360, y: -336, z: 0}
+    m_Position: {x: 372, y: -72, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110200664}
     m_Position: {x: 804, y: 168, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102764427521187604}
-    m_Position: {x: 348, y: -492, z: 0}
+    m_Position: {x: 336, y: -252, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102443589455652422}
     m_Position: {x: 480, y: 468, z: 0}
@@ -619,7 +619,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Sword_Wallrun
+  m_Name: Wallride
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -633,7 +633,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 70784b27557d04ee58e6e2c71c4d7867, type: 2}
+  m_Motion: {fileID: 7400000, guid: b013eecd2c79c4a05b2cf7dd03f466d8, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
