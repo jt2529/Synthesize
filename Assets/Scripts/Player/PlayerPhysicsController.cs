@@ -24,6 +24,7 @@ public class PlayerPhysicsController : MonoBehaviour
     private bool isGrounded;
     [SerializeField]
     private bool isRunning;
+    private bool jumpBuffered = false;
     private Animator animator;
     private AudioSource sound;
     MovementPhysics physics;
@@ -41,7 +42,13 @@ public class PlayerPhysicsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      
+        if (Input.GetButtonDown("Jump"))
+        {
 
+            jumpBuffered = true;
+            StartCoroutine(JumpBufferExpire(0.10f));
+        }
     }
     
 
@@ -104,11 +111,12 @@ public class PlayerPhysicsController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Jump") && physics.collisions.below)
+        if (jumpBuffered && physics.collisions.below)
         {
             velocity.y = maxJumpVelocity;
             sound.Play();
             isGrounded = false;
+            jumpBuffered = false;
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
@@ -151,5 +159,15 @@ public class PlayerPhysicsController : MonoBehaviour
         gravity = -(2 * stats.GetMaxJumpHeight()) / Mathf.Pow(stats.GetTimeToJumpApex(), 2);
         maxJumpVelocity = Mathf.Abs(gravity) * stats.GetTimeToJumpApex();
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.GetMinJumpHeight());
+    }
+
+    IEnumerator JumpBufferExpire(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        if(jumpBuffered == true)
+        {
+            jumpBuffered = false;
+        }
     }
 }
