@@ -99,6 +99,9 @@
     <Reference Include="Cinemachine">
       <HintPath>C:/Users/zcuts/OneDrive/Documents/Unity Projects/Synthesize/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.PixelPerfect.Editor">
+      <HintPath>C:/Users/zcuts/OneDrive/Documents/Unity Projects/Synthesize/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/zcuts/OneDrive/Documents/Unity Projects/Synthesize/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -108,17 +111,14 @@
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/zcuts/OneDrive/Documents/Unity Projects/Synthesize/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.PixelPerfect">
+      <HintPath>C:/Users/zcuts/OneDrive/Documents/Unity Projects/Synthesize/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+    </Reference>
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>C:/Users/zcuts/OneDrive/Documents/Unity Projects/Synthesize/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/zcuts/OneDrive/Documents/Unity Projects/Synthesize/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>C:/Users/zcuts/OneDrive/Documents/Unity Projects/Synthesize/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>C:/Users/zcuts/OneDrive/Documents/Unity Projects/Synthesize/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
