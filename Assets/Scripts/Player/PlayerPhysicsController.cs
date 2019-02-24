@@ -19,6 +19,7 @@ public class PlayerPhysicsController : MonoBehaviour
     float velocityXSmoothing;
 
     private float hInput;
+    private float vInput;
 
     [SerializeField]
     private bool isGrounded;
@@ -46,19 +47,41 @@ public class PlayerPhysicsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        // Here we will check for play input and flag that input has been recieved. We check for these flags
+        // in fixedUpdate. Getting input here feels more responsive to the player.
         if (Input.GetButtonDown("Jump"))
         {
 
             jumpBuffered = true;
             StartCoroutine(JumpBufferExpire(0.10f));
         }
-
         if (Input.GetButtonUp("Jump"))
         {
             jumpReleaseBuffered = true;
             StartCoroutine(JumpReleaseBufferExpire(0.10f));
         }
+
+        hInput = Input.GetAxisRaw("Horizontal");
+
+        if(hInput != 0)
+        {
+            hInputBuffered = true;
+        } else
+        {
+            hInputBuffered = false;
+        }
+
+       vInput = Input.GetAxisRaw("Horizontal");
+
+        if (vInput != 0)
+        {
+            vInputBuffered = true;
+        }
+        else
+        {
+            vInputBuffered = false;
+        }
+
     }
     
 
@@ -81,12 +104,12 @@ public class PlayerPhysicsController : MonoBehaviour
             velocity.y = 0;
         }
 
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 input = new Vector2(hInput, Input.GetAxisRaw("Vertical"));
         
-
-        if (hInput == 0)
+        // hInput is NOT buffered
+        if (!hInputBuffered)
         {
-            if (input.y != 0)
+            if (vInput != 0)
             {
                 stats.aimingDirection.x = 0;
                 stats.aimingDirection.y = input.y;
@@ -105,7 +128,7 @@ public class PlayerPhysicsController : MonoBehaviour
             }
             isRunning = false;
         }
-        else
+        else //hInput is buffered
         {
             isRunning = true;
 
