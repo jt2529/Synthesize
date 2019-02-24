@@ -24,10 +24,14 @@ public class PlayerPhysicsController : MonoBehaviour
     private bool isGrounded;
     [SerializeField]
     private bool isRunning;
-    private bool jumpBuffered = false;
     private Animator animator;
     private AudioSource sound;
     MovementPhysics physics;
+
+    private bool jumpBuffered = false;
+    private bool jumpReleaseBuffered = false;
+    private bool hInputBuffered = false;
+    private bool vInputBuffered = false;
 
     // Use this for initialization
     void Start()
@@ -48,6 +52,12 @@ public class PlayerPhysicsController : MonoBehaviour
 
             jumpBuffered = true;
             StartCoroutine(JumpBufferExpire(0.10f));
+        }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            jumpReleaseBuffered = true;
+            StartCoroutine(JumpReleaseBufferExpire(0.10f));
         }
     }
     
@@ -119,11 +129,12 @@ public class PlayerPhysicsController : MonoBehaviour
             jumpBuffered = false;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (jumpReleaseBuffered)
         {
             if (velocity.y > minJumpVelocity)
             {
                 velocity.y = minJumpVelocity;
+                jumpReleaseBuffered = false;
             }
         }
 
@@ -168,6 +179,16 @@ public class PlayerPhysicsController : MonoBehaviour
         if(jumpBuffered == true)
         {
             jumpBuffered = false;
+        }
+    }
+
+    IEnumerator JumpReleaseBufferExpire(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        if (jumpReleaseBuffered == true)
+        {
+            jumpReleaseBuffered = false;
         }
     }
 }

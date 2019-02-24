@@ -1,26 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
 
     public float dampTime;
     private Vector3 velocity = Vector3.zero;
-    private Camera cam;
+    public CinemachineVirtualCamera cam;
     public Transform target;
     private MovementPhysics targetPhysics;
-
     public float lerpTime = 1f;
     float currentLerpTime;
 
     public float yOffset;
     public float orthographicOffset;
-    [SerializeField]
-    private float yZone;
 
     private void Start()
     {
-        cam = GetComponent<Camera>();
         targetPhysics = target.GetComponent<MovementPhysics>();
     }
 
@@ -41,7 +38,7 @@ public class CameraController : MonoBehaviour
 
         float perc = currentLerpTime / lerpTime;
         
-        float yPos = Mathf.Floor((Mathf.Round(target.transform.position.y * 2) / 2 + cam.orthographicSize) / 8.75f) * 8.75f;
+        float yPos = Mathf.Floor((Mathf.Round(target.transform.position.y * 2) / 2 + cam.m_Lens.OrthographicSize) / orthographicOffset) * orthographicOffset;
 
         float xPos = target.transform.position.x;
 
