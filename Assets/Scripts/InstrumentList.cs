@@ -23,7 +23,7 @@ public class InstrumentList : MonoBehaviour {
 
         // Construct the system path of the asset folder 
         dataPath = Application.dataPath;
-        string folderPath = dataPath + "/Audio/synths";
+        string folderPath = dataPath + "/Resources";
         // get the system file paths of all the files in the asset folder
         string[] allFilePaths = Directory.GetFiles(folderPath);
         // enumerate through the list of files loading the assets they represent and getting their type
@@ -41,19 +41,13 @@ public class InstrumentList : MonoBehaviour {
 
     public void LoadInstrument()
     {
-        string filePath = filePaths[instruments.value];
-        string assetPath = filePath.Substring(dataPath.Length - 6);
-        Object objAsset = GetObjAsset(assetPath);
+        string selectedSynth = listOfFiles[instruments.value].Substring(0, listOfFiles[instruments.value].Length - 4);
         foreach (AudioSource audioSource in audioSources)
+        
         {
-            audioSource.clip = (AudioClip)objAsset;
+            audioSource.clip = (AudioClip) Resources.Load(selectedSynth);
         }
 
-    }
-
-    private static Object GetObjAsset(string assetPath)
-    {
-        return Resources.Load(assetPath);
     }
 
     // Update is called once per frame

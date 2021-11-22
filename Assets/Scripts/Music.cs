@@ -12,13 +12,13 @@ public class Music : MonoBehaviour {
     //Use this to set variable values
     private void Awake()
     {
-        keytar.ChangeKey(noteKey, songKey);
+        
     }
 
 	// Use this for initialization
 	void Start () {
-        
-	}
+        keytar.ChangeKey(noteKey, songKey);
+    }
 	
 	// Update is called once per frame
 	void Update () {
