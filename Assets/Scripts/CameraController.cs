@@ -1,65 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
 
     public float dampTime;
     private Vector3 velocity = Vector3.zero;
+    public CinemachineVirtualCamera cam;
     public Transform target;
-    public Camera cam;
-    public float offsetUp;
-    public float offsetRight;
-    public float defaultUp;
-    public float defaultRight;
+    private MovementPhysics targetPhysics;
+    public float lerpTime = 1f;
+    float currentLerpTime;
 
-    private void Awake()
+    public float yOffset;
+    public float orthographicOffset;
+
+    private void Start()
     {
-        defaultUp = .4f;
-        defaultRight = .6f;
+        targetPhysics = target.GetComponent<MovementPhysics>();
+    }
+
+    private void FixedUpdate()
+    {
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        offsetUp = defaultUp;
-        offsetRight = defaultRight;
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        if (input.y > 0)
+        currentLerpTime += Time.deltaTime;
+        if (currentLerpTime > lerpTime)
         {
-            defaultUp = .9f;
+            currentLerpTime = lerpTime;
         }
 
-        if (input.y == 0)
-        {
-            defaultUp = .4f;
-        }
+        float perc = currentLerpTime / lerpTime;
+        
+        float yPos = Mathf.Floor((Mathf.Round(target.transform.position.y * 2) / 2 + cam.m_Lens.OrthographicSize) / orthographicOffset) * orthographicOffset;
 
-        if (input.y < 0)
-        {
-            defaultUp = -.1f;
-        }
+        float xPos = target.transform.position.x;
 
-        if (input.x > 0)
-        {
-            defaultRight = .9f;
-        }
 
-        if (input.x < 0)
-        {
-            defaultRight = -.2f;
-        }
-
-        if (target)
-        {
-            Vector3 point = cam.WorldToViewportPoint(target.position);
-            Vector3 delta = target.position - cam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z)); //(new Vector3(0.5, 0.5, point.z));
-            delta.x = delta.x + offsetRight;
-            delta.y = delta.y + offsetUp;
-            Vector3 destination = transform.position + delta;
-            transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
-        }
+        transform.position = new Vector3(target.transform.position.x, Mathf.Lerp(transform.position.y, yPos, perc) - yOffset, -10);
 
     }
 }
