@@ -1,16 +1,30 @@
 fileFormatVersion: 2
 guid: 9ab42785391489c4dac9cd8a4b78ae62
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: explosion-1_0
-    21300002: explosion-1_1
-    21300004: explosion-1_2
-    21300006: explosion-1_3
-    21300008: explosion-1_4
-    21300010: explosion-1_5
-    21300012: explosion-1_6
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: explosion-1_0
+  - first:
+      213: 21300002
+    second: explosion-1_1
+  - first:
+      213: 21300004
+    second: explosion-1_2
+  - first:
+      213: 21300006
+    second: explosion-1_3
+  - first:
+      213: 21300008
+    second: explosion-1_4
+  - first:
+      213: 21300010
+    second: explosion-1_5
+  - first:
+      213: 21300012
+    second: explosion-1_6
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -30,6 +44,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -39,8 +55,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -61,11 +77,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -76,7 +96,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -87,6 +108,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -106,6 +128,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e21e8d557ccaef44aa8cd051fd3c6b2c
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -126,6 +149,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 6b90670dcb112404fb21516e338b9f6e
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -146,6 +170,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: a3d596f8d8838a94f8f17bf18d73d1f9
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -166,6 +191,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 05dfcbf81f4bb5e419a7dd16c911a5c3
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -186,6 +212,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 536f4efb8fa88924cb7351c5b6d41ce9
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -206,6 +233,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: a4209ce794b73cd459894629f4377ccf
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -226,6 +254,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 922e62f930d45e94ca54363670874678
+      internalID: 21300012
       vertices: []
       indices: 
       edges: []
@@ -234,10 +263,20 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: bbc9456b206fb1a408a7e3a6b9fe7dd3
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      explosion-1_4: 21300008
+      explosion-1_2: 21300004
+      explosion-1_1: 21300002
+      explosion-1_0: 21300000
+      explosion-1_6: 21300012
+      explosion-1_3: 21300006
+      explosion-1_5: 21300010
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

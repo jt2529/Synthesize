@@ -1,15 +1,27 @@
 fileFormatVersion: 2
 guid: 9904c1a15e3714fb3bb3a215c229905f
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Plain_Crouch_Walk_0
-    21300002: Plain_Crouch_Walk_1
-    21300004: Plain_Crouch_Walk_2
-    21300006: Plain_Crouch_Walk_3
-    21300008: Plain_Crouch_Walk_4
-    21300010: Plain_Crouch_Walk_5
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Plain_Crouch_Walk_0
+  - first:
+      213: 21300002
+    second: Plain_Crouch_Walk_1
+  - first:
+      213: 21300004
+    second: Plain_Crouch_Walk_2
+  - first:
+      213: 21300006
+    second: Plain_Crouch_Walk_3
+  - first:
+      213: 21300008
+    second: Plain_Crouch_Walk_4
+  - first:
+      213: 21300010
+    second: Plain_Crouch_Walk_5
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -29,6 +41,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -38,8 +52,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -60,11 +74,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -75,7 +93,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -86,6 +105,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -105,6 +125,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: fd7ef9404d720914b9da7c82602e9a2a
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -125,6 +146,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5a94eb0178c6e4d488a92b5dd5b6f502
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -145,6 +167,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: fc326895b0a844446b6abec9388c623a
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -165,6 +188,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b54918c2caba4c2419b206f64208bed6
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -185,6 +209,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 10a884b8254c1854eb6eafe325ef293a
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -205,6 +230,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: a7bc05fecd7f384498f5ea92c5b2e724
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -213,10 +239,19 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: ab917a92f7d545644a3eeae3610df09f
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Plain_Crouch_Walk_4: 21300008
+      Plain_Crouch_Walk_1: 21300002
+      Plain_Crouch_Walk_5: 21300010
+      Plain_Crouch_Walk_0: 21300000
+      Plain_Crouch_Walk_3: 21300006
+      Plain_Crouch_Walk_2: 21300004
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

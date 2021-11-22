@@ -53,6 +53,28 @@ public class PlayerAbilitiesController : MonoBehaviour {
                 jumpAttack();
             }
         }
+
+        for (int i = 0; i < noteMap.Count; i++)
+        {
+            if (Input.GetKeyDown(noteMap[i]))
+            {
+                keytar.Play(i);
+            }
+            else if (Input.GetKeyUp(noteMap[i]))
+            {
+                keytar.Release(i);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            lastThreeNotes = keytar.GetLastPlayed();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            gun.FireBullet();
+        }
     }  
 
     void attack()

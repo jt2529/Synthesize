@@ -1,11 +1,15 @@
 fileFormatVersion: 2
 guid: 86a500ea38b234a19b0b8c90094162fa
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Sword_Wallrun_0
-    21300002: Sword_Wallrun_1
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Sword_Wallrun_0
+  - first:
+      213: 21300002
+    second: Sword_Wallrun_1
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -25,6 +29,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -34,8 +40,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -56,11 +62,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -71,7 +81,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -82,6 +93,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -101,6 +113,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 514115531283f5349b99d77da8aa074b
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -121,6 +134,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: acf53b473288d75419f91719408b92f4
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -129,10 +143,15 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 3dbf0ae2796c4b9409c4ad884cf56c6d
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Sword_Wallrun_1: 21300002
+      Sword_Wallrun_0: 21300000
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

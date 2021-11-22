@@ -1,15 +1,27 @@
 fileFormatVersion: 2
 guid: 4246e4b1c08604125b8af11b8211da3d
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Sword_Run_0
-    21300002: Sword_Run_1
-    21300004: Sword_Run_2
-    21300006: Sword_Run_3
-    21300008: Sword_Run_4
-    21300010: Sword_Run_5
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Sword_Run_0
+  - first:
+      213: 21300002
+    second: Sword_Run_1
+  - first:
+      213: 21300004
+    second: Sword_Run_2
+  - first:
+      213: 21300006
+    second: Sword_Run_3
+  - first:
+      213: 21300008
+    second: Sword_Run_4
+  - first:
+      213: 21300010
+    second: Sword_Run_5
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -29,6 +41,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -38,8 +52,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -60,11 +74,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -75,7 +93,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -86,6 +105,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -105,6 +125,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 084829dad35847943b7b3bdac36c5af1
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -125,6 +146,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4197357937ee1044a95c191510bf6e4f
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -145,6 +167,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7488a07f0b90e5c4981950d92f6ada75
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -165,6 +188,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 521b4f9b7e365484e8c5fb42d220a21c
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -185,6 +209,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: d479e05fb52111746a78d2dc32aa03f3
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -205,6 +230,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e86db75c9b03a364d8ec601a1f4c2287
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -213,10 +239,19 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 6d0a8261eae89b54c879d470bbaaabb9
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Sword_Run_2: 21300004
+      Sword_Run_0: 21300000
+      Sword_Run_1: 21300002
+      Sword_Run_3: 21300006
+      Sword_Run_4: 21300008
+      Sword_Run_5: 21300010
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,22 +1,48 @@
 fileFormatVersion: 2
 guid: 88bf1e87c577cd0409f9b96a89d5f1fb
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Industrial Checker Comp_0
-    21300002: Industrial Checker Comp_1
-    21300004: Industrial Checker Comp_2
-    21300006: Industrial Checker Comp_3
-    21300008: Industrial Checker Comp_4
-    21300010: Industrial Checker Comp_5
-    21300012: Industrial Checker Comp_6
-    21300014: Industrial Checker Comp_7
-    21300016: Industrial Checker Comp_8
-    21300018: Industrial Checker Comp_9
-    21300020: Industrial Checker Comp_10
-    21300022: Industrial Checker Comp_11
-    21300024: Industrial Checker Comp_12
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Industrial Checker Comp_0
+  - first:
+      213: 21300002
+    second: Industrial Checker Comp_1
+  - first:
+      213: 21300004
+    second: Industrial Checker Comp_2
+  - first:
+      213: 21300006
+    second: Industrial Checker Comp_3
+  - first:
+      213: 21300008
+    second: Industrial Checker Comp_4
+  - first:
+      213: 21300010
+    second: Industrial Checker Comp_5
+  - first:
+      213: 21300012
+    second: Industrial Checker Comp_6
+  - first:
+      213: 21300014
+    second: Industrial Checker Comp_7
+  - first:
+      213: 21300016
+    second: Industrial Checker Comp_8
+  - first:
+      213: 21300018
+    second: Industrial Checker Comp_9
+  - first:
+      213: 21300020
+    second: Industrial Checker Comp_10
+  - first:
+      213: 21300022
+    second: Industrial Checker Comp_11
+  - first:
+      213: 21300024
+    second: Industrial Checker Comp_12
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -36,6 +62,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -45,8 +73,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -67,11 +95,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -82,7 +114,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,6 +126,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -112,6 +146,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c852827e9f8221b48a769ac5daa1d8f0
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -132,6 +167,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e1726edc103592546966644437145c8d
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -152,6 +188,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b75d2a18b0bd0f9428d008f74e9695ee
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -172,6 +209,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: eb4f3b17e99ae2b4f97c36b4beea5e3b
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -192,6 +230,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c4ff2b596d0848549a50892e83d84b5a
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -212,6 +251,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 2be4b347dea47764cabf5f7b2bcbba88
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -232,6 +272,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e2f4e24933cbc45429bc8e3d6820bb8a
+      internalID: 21300012
       vertices: []
       indices: 
       edges: []
@@ -252,6 +293,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 77a87140af47b074d9c6600bbc11815f
+      internalID: 21300014
       vertices: []
       indices: 
       edges: []
@@ -272,6 +314,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b4f3a300912221642acf53d70e4af06d
+      internalID: 21300016
       vertices: []
       indices: 
       edges: []
@@ -292,6 +335,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 77f075982d31f8242938493e6b95db7b
+      internalID: 21300018
       vertices: []
       indices: 
       edges: []
@@ -312,6 +356,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 0c966fb0162be5240b9386dbd3fdda3b
+      internalID: 21300020
       vertices: []
       indices: 
       edges: []
@@ -332,6 +377,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e77c50f308961d547a6c9227561ab96d
+      internalID: 21300022
       vertices: []
       indices: 
       edges: []
@@ -352,6 +398,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 902a5761155794342a843858340369ee
+      internalID: 21300024
       vertices: []
       indices: 
       edges: []
@@ -360,10 +407,26 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 8c9a765fad950dc45b9b2650f4903432
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Industrial Checker Comp_7: 21300014
+      Industrial Checker Comp_11: 21300022
+      Industrial Checker Comp_4: 21300008
+      Industrial Checker Comp_6: 21300012
+      Industrial Checker Comp_10: 21300020
+      Industrial Checker Comp_1: 21300002
+      Industrial Checker Comp_9: 21300018
+      Industrial Checker Comp_12: 21300024
+      Industrial Checker Comp_2: 21300004
+      Industrial Checker Comp_5: 21300010
+      Industrial Checker Comp_8: 21300016
+      Industrial Checker Comp_3: 21300006
+      Industrial Checker Comp_0: 21300000
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

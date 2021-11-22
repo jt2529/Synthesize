@@ -1,19 +1,39 @@
 fileFormatVersion: 2
 guid: 6e856b9c08d04fb4c8b7f755dbb73079
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Thin Grass_0
-    21300002: Thin Grass_1
-    21300004: Thin Grass_2
-    21300006: Thin Grass_3
-    21300008: Thin Grass_4
-    21300010: Thin Grass_5
-    21300012: Thin Grass_6
-    21300014: Thin Grass_7
-    21300016: Thin Grass_8
-    21300018: Thin Grass_9
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Thin Grass_0
+  - first:
+      213: 21300002
+    second: Thin Grass_1
+  - first:
+      213: 21300004
+    second: Thin Grass_2
+  - first:
+      213: 21300006
+    second: Thin Grass_3
+  - first:
+      213: 21300008
+    second: Thin Grass_4
+  - first:
+      213: 21300010
+    second: Thin Grass_5
+  - first:
+      213: 21300012
+    second: Thin Grass_6
+  - first:
+      213: 21300014
+    second: Thin Grass_7
+  - first:
+      213: 21300016
+    second: Thin Grass_8
+  - first:
+      213: 21300018
+    second: Thin Grass_9
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -33,6 +53,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -43,7 +65,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: 0
     aniso: 16
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -64,11 +86,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -79,7 +105,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -90,7 +117,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -101,6 +129,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -120,6 +149,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e9da9745a780ec0478070c90625840bc
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -140,6 +170,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 9accc2ccf74ab6f4a9fc3f0a6eb6163a
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -160,6 +191,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 506815ce3889f7543ac7334f960c31f2
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -180,6 +212,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c5748cd27d47c5a4cb57e6ae31055546
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -200,6 +233,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 889e09b389c541a40a547fe69cdfb114
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -220,6 +254,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5176648d29a3d9247b4492e8474aca6f
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -240,6 +275,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 62408aaf44cc5cf4583951d6e79242d8
+      internalID: 21300012
       vertices: []
       indices: 
       edges: []
@@ -260,6 +296,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: d4a7c3ab670586c43a192623872738ea
+      internalID: 21300014
       vertices: []
       indices: 
       edges: []
@@ -280,6 +317,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5612f33239a9cc844bf14c940313978e
+      internalID: 21300016
       vertices: []
       indices: 
       edges: []
@@ -300,6 +338,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7c8fe924651f7484490fdcee3e03456c
+      internalID: 21300018
       vertices: []
       indices: 
       edges: []
@@ -308,10 +347,23 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Thin Grass_3: 21300006
+      Thin Grass_2: 21300004
+      Thin Grass_5: 21300010
+      Thin Grass_6: 21300012
+      Thin Grass_1: 21300002
+      Thin Grass_8: 21300016
+      Thin Grass_7: 21300014
+      Thin Grass_9: 21300018
+      Thin Grass_4: 21300008
+      Thin Grass_0: 21300000
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

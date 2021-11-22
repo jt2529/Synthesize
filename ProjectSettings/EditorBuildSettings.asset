@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Synthesize testing.unity
+    guid: 40fd5ac3ae1e0d94b82bea2d40f3a41f
   m_configObjects: {}

@@ -1,22 +1,48 @@
 fileFormatVersion: 2
 guid: 5c91d94ad2e834e4baee2a9a04ceca56
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Grass_0
-    21300002: Grass_1
-    21300004: Grass_2
-    21300006: Grass_3
-    21300008: Grass_4
-    21300010: Grass_5
-    21300012: Grass_6
-    21300014: Grass_7
-    21300016: Grass_8
-    21300018: Grass_9
-    21300020: Grass_10
-    21300022: Grass_11
-    21300024: Grass_12
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Grass_0
+  - first:
+      213: 21300002
+    second: Grass_1
+  - first:
+      213: 21300004
+    second: Grass_2
+  - first:
+      213: 21300006
+    second: Grass_3
+  - first:
+      213: 21300008
+    second: Grass_4
+  - first:
+      213: 21300010
+    second: Grass_5
+  - first:
+      213: 21300012
+    second: Grass_6
+  - first:
+      213: 21300014
+    second: Grass_7
+  - first:
+      213: 21300016
+    second: Grass_8
+  - first:
+      213: 21300018
+    second: Grass_9
+  - first:
+      213: 21300020
+    second: Grass_10
+  - first:
+      213: 21300022
+    second: Grass_11
+  - first:
+      213: 21300024
+    second: Grass_12
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -36,6 +62,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -46,7 +74,7 @@ TextureImporter:
     serializedVersion: 2
     filterMode: 0
     aniso: 16
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -67,11 +95,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -82,7 +114,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +126,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -104,6 +138,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -123,6 +158,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: d12b68de8639b9c4b9b57eec922f47f3
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -143,6 +179,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 8819926864e066442b36e2046ea98721
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -163,6 +200,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: a1d81c879318b7f4283986bfe512fb70
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -183,6 +221,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 428a3780ea5bf2a45b8d25d59e47fc7c
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -203,6 +242,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c07916f5d3f54e04a971779e50d61582
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -223,6 +263,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 013fdaeefe206d34d8a8d704926ce734
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -243,6 +284,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7156ca401f5034c46b48d398d2bfb930
+      internalID: 21300012
       vertices: []
       indices: 
       edges: []
@@ -263,6 +305,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5448a5bec9192b344b27b4805507dc68
+      internalID: 21300014
       vertices: []
       indices: 
       edges: []
@@ -283,6 +326,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 96eda3188e06fe342bfcf267bd293ef3
+      internalID: 21300016
       vertices: []
       indices: 
       edges: []
@@ -303,6 +347,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5d470190ad4b9574fb965a2751d2541f
+      internalID: 21300018
       vertices: []
       indices: 
       edges: []
@@ -323,6 +368,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e2c0068c2e69d894e864a17c231ca280
+      internalID: 21300020
       vertices: []
       indices: 
       edges: []
@@ -343,6 +389,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: db24481a339a1b949a1dcadd594e298a
+      internalID: 21300022
       vertices: []
       indices: 
       edges: []
@@ -363,6 +410,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ac9e4915e53136c48819077b038b20ca
+      internalID: 21300024
       vertices: []
       indices: 
       edges: []
@@ -371,10 +419,26 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Grass_5: 21300010
+      Grass_0: 21300000
+      Grass_2: 21300004
+      Grass_1: 21300002
+      Grass_6: 21300012
+      Grass_3: 21300006
+      Grass_7: 21300014
+      Grass_10: 21300020
+      Grass_12: 21300024
+      Grass_11: 21300022
+      Grass_4: 21300008
+      Grass_8: 21300016
+      Grass_9: 21300018
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

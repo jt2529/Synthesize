@@ -43,16 +43,21 @@ public class InstrumentList : MonoBehaviour {
     {
         string filePath = filePaths[instruments.value];
         string assetPath = filePath.Substring(dataPath.Length - 6);
-        Object objAsset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(Object));
+        Object objAsset = GetObjAsset(assetPath);
         foreach (AudioSource audioSource in audioSources)
         {
             audioSource.clip = (AudioClip)objAsset;
         }
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private static Object GetObjAsset(string assetPath)
+    {
+        return Resources.Load(assetPath);
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
