@@ -8,6 +8,7 @@ public class MovingPlatform : MonoBehaviour {
     public bool movingRight;
     public Vector3 velocity;
     public float smoothTime;
+    public float speed;
 
     private float velocityXSmoothing = 0.0f;
     private MovementPhysics controller;
@@ -26,7 +27,7 @@ public class MovingPlatform : MonoBehaviour {
 	void Update () {
         if (movingRight == true)
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, 1, ref velocityXSmoothing, smoothTime);
+            velocity.x = speed;
             if (transform.position.x >= rightTargetNode.transform.position.x)
             {
                 movingRight = false;
@@ -34,12 +35,14 @@ public class MovingPlatform : MonoBehaviour {
         }
         else
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, -1, ref velocityXSmoothing, smoothTime);
+            velocity.x = speed * -1; 
             if (transform.position.x <= leftTargetNode.transform.position.x)
             {
-                movingRight = false;
+                movingRight = true;
             }
         }
-        controller.Move(velocity);
+
+
+        transform.Translate(velocity);
     }
 }

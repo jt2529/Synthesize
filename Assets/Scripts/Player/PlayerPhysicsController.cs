@@ -71,7 +71,7 @@ public class PlayerPhysicsController : MonoBehaviour
             hInputBuffered = false;
         }
 
-       vInput = Input.GetAxisRaw("Horizontal");
+       vInput = Input.GetAxisRaw("Vertical");
 
         if (vInput != 0)
         {
@@ -131,8 +131,10 @@ public class PlayerPhysicsController : MonoBehaviour
         else //hInput is buffered
         {
             isRunning = true;
-
-            stats.aimingDirection.x = input.x;
+            if (input.x != 0)
+            { 
+                stats.aimingDirection.x = input.x; 
+            } 
             stats.aimingDirection.y = input.y / 2;
             if (hInput > 0)
             {

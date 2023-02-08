@@ -44,20 +44,20 @@ public class BulletPhysics : MonoBehaviour
 
     void Update() {
 
-
         if (isReady)
         {
             Vector2 velocity = transform.position;
 
-            velocity.x = direction.x * (speed * Time.deltaTime + playerSpeed.x);
-            velocity.y = direction.y * (speed * Time.deltaTime + playerSpeed.y);
+            velocity.x = direction.x * (speed * Time.deltaTime + playerSpeed.x * Time.deltaTime);
+            velocity.y = direction.y * (speed * Time.deltaTime + playerSpeed.y * Time.deltaTime);
 
             Move(velocity);
-        }
 
+        }
+            
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-        
+
 
         if ((transform.position.x < min.x) || (transform.position.x > max.x) || (transform.position.y < min.y) || (transform.position.y > max.y))
         {

@@ -52,7 +52,12 @@ public class EnemyPhysicsController : MonoBehaviour {
         }
 
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-        velocity.y += gravity * Time.deltaTime;
+
+        if (canFly != true)
+        { 
+            velocity.y += gravity * Time.deltaTime; 
+        }
+        
 
         if (velocity.y < gravity)
         {
