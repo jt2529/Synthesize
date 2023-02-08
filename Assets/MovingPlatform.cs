@@ -5,7 +5,11 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour {
 
     public PlatformNodeManager nodeManager;
+    public bool movingRight;
+    public Vector3 velocity;
+    public float smoothTime;
 
+    private float velocityXSmoothing = 0.0f;
     private MovementPhysics controller;
 
     private GameObject leftTargetNode;
@@ -20,10 +24,22 @@ public class MovingPlatform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        controller.Move(Vector3.Lerp(transform.position, new Vector3(rightTargetNode.transform.position.x, rightTargetNode.transform.position.x, transform.position.z), Time.deltaTime));	
-	}
-
-
-
+        if (movingRight == true)
+        {
+            velocity.x = Mathf.SmoothDamp(velocity.x, 1, ref velocityXSmoothing, smoothTime);
+            if (transform.position.x >= rightTargetNode.transform.position.x)
+            {
+                movingRight = false;
+            }
+        }
+        else
+        {
+            velocity.x = Mathf.SmoothDamp(velocity.x, -1, ref velocityXSmoothing, smoothTime);
+            if (transform.position.x <= leftTargetNode.transform.position.x)
+            {
+                movingRight = false;
+            }
+        }
+        controller.Move(velocity);
+    }
 }
