@@ -35,6 +35,7 @@ MonoBehaviour:
   m_EditorHideFlags: 1
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -52,6 +53,8 @@ MonoBehaviour:
   vertical: 0
   controlID: 84
 =======
+=======
+>>>>>>> 889ce5f0a00a2380ad5e9c3c1f0eb30d499e2ad3
 =======
 >>>>>>> 889ce5f0a00a2380ad5e9c3c1f0eb30d499e2ad3
   m_Script: {fileID: 12008, guid: 0000000000000000e000000000000000, type: 0}
@@ -74,6 +77,9 @@ MonoBehaviour:
   m_UseBottomView: 1
   m_BottomViewHeight: 20
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 889ce5f0a00a2380ad5e9c3c1f0eb30d499e2ad3
+=======
 >>>>>>> 889ce5f0a00a2380ad5e9c3c1f0eb30d499e2ad3
 =======
 >>>>>>> 889ce5f0a00a2380ad5e9c3c1f0eb30d499e2ad3
@@ -88,8 +94,11 @@ MonoBehaviour:
   m_EditorHideFlags: 1
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
 =======
+=======
+>>>>>>> 889ce5f0a00a2380ad5e9c3c1f0eb30d499e2ad3
 =======
 >>>>>>> 889ce5f0a00a2380ad5e9c3c1f0eb30d499e2ad3
   m_Script: {fileID: 12011, guid: 0000000000000000e000000000000000, type: 0}
