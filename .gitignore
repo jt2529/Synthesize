@@ -70,3 +70,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+*.log
+Logs/AssetImportWorker0.log
+Logs/AssetImportWorker1.log
+UserSettings/EditorUserSettings.asset
+UserSettings/Layouts/default-2021.dwlt
