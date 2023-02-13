@@ -91,8 +91,9 @@
     <Compile Include="Assets\Scripts\Toggler.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Environment\TriggerSwitch.cs" />
-    <Compile Include="Assets\MovingPlatform.cs" />
     <Compile Include="Assets\Scripts\Enemy\BreakableStats.cs" />
+    <Compile Include="Assets\MovingPlatform.cs" />
+    <Compile Include="Assets\Scripts\Environment\JumpPad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

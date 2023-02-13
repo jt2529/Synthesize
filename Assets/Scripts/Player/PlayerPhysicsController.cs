@@ -25,6 +25,8 @@ public class PlayerPhysicsController : MonoBehaviour
     private bool isGrounded;
     [SerializeField]
     private bool isRunning;
+    public float forceUpward;
+    
     private Animator animator;
     private AudioSource sound;
     MovementPhysics physics;
@@ -102,6 +104,7 @@ public class PlayerPhysicsController : MonoBehaviour
         if (physics.collisions.above || physics.collisions.below)
         {
             velocity.y = 0;
+            forceUpward = 0;
         }
 
         Vector2 input = new Vector2(hInput, Input.GetAxisRaw("Vertical"));
@@ -152,6 +155,22 @@ public class PlayerPhysicsController : MonoBehaviour
             sound.Play();
             isGrounded = false;
             jumpBuffered = false;
+        }
+
+        if (forceUpward > 0) 
+        {
+            isGrounded = false;
+            velocity.y = forceUpward;
+            forceUpward += gravity * Time.deltaTime;
+            if (forceUpward < 0)
+            {
+                forceUpward = 0;
+            }
+        }
+
+        if (!physics.collisions.below)
+        {
+            isGrounded = false;
         }
 
         if (jumpReleaseBuffered)
@@ -216,4 +235,11 @@ public class PlayerPhysicsController : MonoBehaviour
             jumpReleaseBuffered = false;
         }
     }
+
+    public bool getJumpBuffered()
+    {
+        return jumpBuffered;
+    }
 }
+
+
