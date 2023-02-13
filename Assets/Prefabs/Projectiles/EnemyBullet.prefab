@@ -150,6 +150,9 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 65536
+  breakableMask:
+    serializedVersion: 2
+    m_Bits: 131072
   horizontalRayCount: 2
   verticalRayCount: 2
   playerBullet: 0

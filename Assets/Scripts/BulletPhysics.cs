@@ -15,6 +15,7 @@ public class BulletPhysics : MonoBehaviour
     public LayerMask playerMask;
     public LayerMask enemyMask;
     public LayerMask obstacleMask;
+    public LayerMask breakableMask;
 
     public int horizontalRayCount = 2;
     public int verticalRayCount = 2;
@@ -112,6 +113,10 @@ public class BulletPhysics : MonoBehaviour
 
             if (playerBullet) {
                 hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, enemyMask);
+                if (!hit)
+                {
+                    hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, breakableMask);
+                }
             }
             else
             {
@@ -134,7 +139,7 @@ public class BulletPhysics : MonoBehaviour
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
 
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, obstacleMask);
+           RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, obstacleMask);
             if (hit)
             {
                 harmfulObject.tryDestroy();
@@ -143,24 +148,32 @@ public class BulletPhysics : MonoBehaviour
             if (playerBullet)
             {
                 hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, enemyMask);
+                
             }
             else
             {
                 hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, playerMask);
+
             }
+
+            if (!hit)
+            {
+                hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, breakableMask);
+            }
+
             if (hit)
             {
-                BulletHit(hit);
+               BulletHit(hit);
             }
         }
     }
 
     private void BulletHit(RaycastHit2D hit)
     {
-        if (playerBullet)
-        {
+       if (playerBullet)
+        {   
             EnemyStats enemyStats = hit.collider.gameObject.GetComponent<EnemyStats>();
-            if (enemyStats != null)
+            if (enemyStats != null) 
             {
                 enemyStats.ChangeHealth(-harmfulObject.damage);
                 harmfulObject.tryDestroy();
@@ -174,6 +187,17 @@ public class BulletPhysics : MonoBehaviour
                 playerStats.ChangeHealth(-harmfulObject.damage);
                 harmfulObject.tryDestroy();
             }
+        }
+
+        BreakableStats breakableStats = hit.collider.gameObject.GetComponent<BreakableStats>(); // Destroy enemyh bullets on collision with other enemy
+        if (breakableStats != null)
+        {
+            if (playerBullet) 
+            {
+                breakableStats.ChangeHealth(-harmfulObject.damage);
+            }
+               
+            harmfulObject.tryDestroy();
         }
     }
 

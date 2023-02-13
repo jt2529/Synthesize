@@ -28,11 +28,9 @@ public class PushableBoxController : MonoBehaviour {
             velocity.y = 0;
         }
 
-        velocity.y += 5 * Time.deltaTime;
-        physics.Move(velocity * Time.deltaTime);
         if (physics.collisions.left || physics.collisions.right)
         {
-
+            velocity.x = 0;
         }
     }
 }

@@ -25,7 +25,7 @@ public class MovementPhysics : MonoBehaviour
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        collisionMask = LayerMask.GetMask("Obstacles");
+        collisionMask = LayerMask.GetMask("Breakables", "Obstacles");
     }
 
 
