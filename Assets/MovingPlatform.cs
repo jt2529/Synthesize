@@ -4,45 +4,54 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour {
 
-    public PlatformNodeManager nodeManager;
-    public bool movingRight;
-    public Vector3 velocity;
-    public float smoothTime;
     public float speed;
+    public float pointProximity;
+    public int startingPoint;
+    public bool movesCarriedObjects;
+    public Transform[] points;
+    private MovementPhysics movement;
+    private Vector2 velocity;
 
-    private float velocityXSmoothing = 0.0f;
-    private MovementPhysics controller;
-
-    private GameObject leftTargetNode;
-    private GameObject rightTargetNode;
+    private int i;
 
 	// Use this for initialization
 	void Start () {
-        controller = GetComponent<MovementPhysics>();
-        leftTargetNode = nodeManager.leftNode;
-        rightTargetNode = nodeManager.rightNode;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (movingRight == true)
-        {
-            velocity.x = speed;
-            if (transform.position.x >= rightTargetNode.transform.position.x)
-            {
-                movingRight = false;
-            }
-        }
-        else
-        {
-            velocity.x = speed * -1; 
-            if (transform.position.x <= leftTargetNode.transform.position.x)
-            {
-                movingRight = true;
-            }
-        }
+        movement = GetComponent<MovementPhysics>();
+        transform.position = points[startingPoint].position;
+    }
 
 
-        transform.Translate(velocity);
+
+    // Update is called once per frame
+    void FixedUpdate () {
+        if (Vector2.Distance(transform.position, points[i].position) < pointProximity) 
+        {
+            i++;
+            if (i == points.Length) 
+            {
+                i = 0;
+            }
+            
+        }
+
+        velocity = (points[i].position - transform.position).normalized;
+        velocity *= speed * Time.deltaTime;
+        transform.Translate(velocity); // movement.Move(velocity);
+        if (movesCarriedObjects) 
+        { 
+            movement.currentVelocity = velocity;
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collision2D collision)
+    {
+         collision.transform.SetParent(transform);
+    }
+
+    private void OnTriggerExit2D(Collision2D collision)
+    {
+        collision.transform.SetParent(null);
     }
 }
+

@@ -5,7 +5,7 @@ using System.Collections;
 public class MovementPhysics : MonoBehaviour
 {
 
-    public LayerMask collisionMask;
+    private LayerMask collisionMask;
     const float skinWidth = .015f;
     RaycastOrigins raycastOrigins;
 
@@ -13,6 +13,7 @@ public class MovementPhysics : MonoBehaviour
     public int verticalRayCount = 5;
     float horizontalRaySpacing;
     float verticalRaySpacing;
+    public Vector2 currentVelocity;
 
     public float maxClimbAngle = 60;
     public float maxDescendAngle = 75;
@@ -25,11 +26,11 @@ public class MovementPhysics : MonoBehaviour
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        collisionMask = LayerMask.GetMask("Breakables", "Obstacles");
+        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles" );
     }
 
 
-    public void Move(Vector3 velocity)
+    public void Move(Vector2 velocity)
     {
         UpdateRaycastOrigins();
         collisions.Reset();
@@ -52,7 +53,7 @@ public class MovementPhysics : MonoBehaviour
         transform.Translate(velocity);
     }
 
-    void HorizontalCollisions(ref Vector3 velocity)
+    void HorizontalCollisions(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
         float rayLength = Mathf.Abs(velocity.x) + skinWidth;
@@ -61,7 +62,7 @@ public class MovementPhysics : MonoBehaviour
         {
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask); 
 
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
@@ -107,7 +108,7 @@ public class MovementPhysics : MonoBehaviour
     }
 
 
-    void VerticalCollisions(ref Vector3 velocity)
+    void VerticalCollisions(ref Vector2 velocity)
     {
         float directionY = Mathf.Sign(velocity.y);
         float rayLength = Mathf.Abs(velocity.y) + skinWidth;
@@ -121,7 +122,7 @@ public class MovementPhysics : MonoBehaviour
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             if (hit)
-            {
+            {    
                 velocity.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
 
@@ -130,10 +131,19 @@ public class MovementPhysics : MonoBehaviour
                     velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
                 }
 
-                collisions.below = directionY == -1;
-                collisions.above = directionY == 1;
+                if (directionY == -1) 
+                {
+                    collisions.below = true;
+                    currentVelocity = hit.transform.gameObject.GetComponent<MovementPhysics>().currentVelocity;
+                } 
+                else if (directionY == 1)
+                {
+                    collisions.above = true;
+                }
+                
             }
         }
+        velocity += currentVelocity;
 
         if (collisions.climbingSlope)
         {
@@ -154,7 +164,7 @@ public class MovementPhysics : MonoBehaviour
         }
     }
 
-    void ClimbSlope(ref Vector3 velocity, float slopeAngle)
+    void ClimbSlope(ref Vector2 velocity, float slopeAngle)
     {
         float moveDistance = Mathf.Abs(velocity.x);
         float climbVelocityY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
@@ -169,7 +179,7 @@ public class MovementPhysics : MonoBehaviour
 
     }
 
-    void DescendSlope(ref Vector3 velocity)
+    void DescendSlope(ref Vector2 velocity)
     {
         float directionX = Mathf.Sign(velocity.x);
         Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;

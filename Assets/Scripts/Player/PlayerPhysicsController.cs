@@ -197,6 +197,7 @@ public class PlayerPhysicsController : MonoBehaviour
         if(physics.collisions.below)
         {
             isGrounded = true;
+            
         }
 
         updateAnimationState();
