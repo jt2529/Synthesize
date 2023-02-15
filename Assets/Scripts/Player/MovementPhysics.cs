@@ -6,7 +6,7 @@ public class MovementPhysics : MonoBehaviour
 {
 
     private LayerMask collisionMask;
-    const float skinWidth = .015f;
+    const float skinWidth = .02f;
     RaycastOrigins raycastOrigins;
 
     public int horizontalRayCount = 5;
@@ -19,14 +19,14 @@ public class MovementPhysics : MonoBehaviour
     public float maxDescendAngle = 75;
 
     BoxCollider2D collider;
-    public CollisionInfo collisions;
+    public CollisionInfo collisions; 
 
     // Use this for initialization
     void Start()
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles" );
+        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles" );
     }
 
 
@@ -57,53 +57,65 @@ public class MovementPhysics : MonoBehaviour
     {
         float directionX = Mathf.Sign(velocity.x);
         float rayLength = Mathf.Abs(velocity.x) + skinWidth;
+        PushableBoxController pushableBoxController = new PushableBoxController();
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask); 
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
-
+            
             if (hit)
             {
-                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-
-                if (i == 0 && slopeAngle <= maxClimbAngle)
+                //Check if object is movable, if so, then push it at the user's velocity
+                if ((LayerMask.GetMask("MovableObstacles") & (1 << hit.transform.gameObject.layer)) != 0)
                 {
-
-                    if (collisions.descendingSlope)
-                    {
-                        collisions.descendingSlope = false;
-                        velocity = collisions.velocityOld;
-                    }
-
-                    float distanceToSlopeStart = 0;
-                    if (slopeAngle != collisions.slopeAngleOld)
-                    {
-                        distanceToSlopeStart = hit.distance - skinWidth;
-                        velocity.x -= distanceToSlopeStart * directionX;
-                    }
-                    ClimbSlope(ref velocity, slopeAngle);
-                    velocity.x += distanceToSlopeStart * directionX;
+                    pushableBoxController = hit.transform.gameObject.GetComponent<PushableBoxController>();
                 }
+                else { 
 
-                if (!collisions.climbingSlope || slopeAngle > maxClimbAngle)
-                {
-                    velocity.x = (hit.distance - skinWidth) * directionX;
-                    rayLength = hit.distance;
-                    if (collisions.climbingSlope)
+                    float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+                    if (i == 0 && slopeAngle <= maxClimbAngle)
                     {
-                        velocity.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad * Mathf.Abs(velocity.x));
+
+                        if (collisions.descendingSlope)
+                        {
+                            collisions.descendingSlope = false;
+                            velocity = collisions.velocityOld;
+                        }
+
+                        float distanceToSlopeStart = 0;
+                        if (slopeAngle != collisions.slopeAngleOld)
+                        {
+                            distanceToSlopeStart = hit.distance - skinWidth;
+                            velocity.x -= distanceToSlopeStart * directionX;
+                        }
+                        ClimbSlope(ref velocity, slopeAngle);
+                        velocity.x += distanceToSlopeStart * directionX;
                     }
 
-                    collisions.left = directionX == -1;
-                    collisions.right = directionX == 1;
+                    if (!collisions.climbingSlope || slopeAngle > maxClimbAngle)
+                    {
+                        velocity.x = (hit.distance - skinWidth) * directionX;
+                        rayLength = hit.distance;
+                        if (collisions.climbingSlope)
+                        {
+                            velocity.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad * Mathf.Abs(velocity.x));
+                        }
+
+                        collisions.left = directionX == -1;
+                        collisions.right = directionX == 1;
+                    }
                 }
-
-
             }
+        }
+
+        if (pushableBoxController != null)
+        { 
+            pushableBoxController.Push(velocity);
         }
     }
 
@@ -113,6 +125,7 @@ public class MovementPhysics : MonoBehaviour
         float directionY = Mathf.Sign(velocity.y);
         float rayLength = Mathf.Abs(velocity.y) + skinWidth;
 
+        currentVelocity = new Vector2(0, 0);
         for (int i = 0; i < verticalRayCount; i++)
         {
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
@@ -134,7 +147,11 @@ public class MovementPhysics : MonoBehaviour
                 if (directionY == -1) 
                 {
                     collisions.below = true;
-                    currentVelocity = hit.transform.gameObject.GetComponent<MovementPhysics>().currentVelocity;
+                    if (hit.transform.gameObject.GetComponent<MovementPhysics>() != null)
+                    {
+                        currentVelocity = hit.transform.gameObject.GetComponent<MovementPhysics>().currentVelocity;
+                    }
+                        
                 } 
                 else if (directionY == 1)
                 {

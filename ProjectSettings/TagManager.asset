@@ -27,9 +27,9 @@ TagManager:
   - Obstacles
   - Breakables
   - MovingObstacles
+  - MovableObstacles
+  - 
   - Backsplash
-  - 
-  - 
   - 
   - 
   - 

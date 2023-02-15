@@ -5,7 +5,7 @@ using UnityEngine;
 public class PushableBoxController : MonoBehaviour {
 
     private MovementPhysics physics;
-    private Vector3 velocity;
+    private Vector2 velocity;
 
     [SerializeField]
     float gravity;
@@ -16,11 +16,13 @@ public class PushableBoxController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+        //velocity.x = 0;
+        velocity.y += gravity * Time.deltaTime;
+        physics.Move(velocity);
+    }
 
-	}
-
-    private void FixedUpdate()
+    public void Push(Vector2 velocity)
     {
 
         if (physics.collisions.above || physics.collisions.below)
@@ -28,9 +30,11 @@ public class PushableBoxController : MonoBehaviour {
             velocity.y = 0;
         }
 
-        if (physics.collisions.left || physics.collisions.right)
-        {
-            velocity.x = 0;
-        }
+        //if (physics.collisions.left || physics.collisions.right)
+        //{
+        //    velocity.x = 0;
+        //}
+   
+        physics.Move(velocity);
     }
 }

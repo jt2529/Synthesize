@@ -42,16 +42,5 @@ public class MovingPlatform : MonoBehaviour {
             movement.currentVelocity = velocity;
         }
     }
-
-
-    private void OnTriggerEnter2D(Collision2D collision)
-    {
-         collision.transform.SetParent(transform);
-    }
-
-    private void OnTriggerExit2D(Collision2D collision)
-    {
-        collision.transform.SetParent(null);
-    }
 }
 
