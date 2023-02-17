@@ -6,7 +6,7 @@ public class MovementPhysics : MonoBehaviour
 {
 
     private LayerMask collisionMask;
-    const float skinWidth = .02f;
+    const float skinWidth = .023f;
     RaycastOrigins raycastOrigins;
 
     public int horizontalRayCount = 5;

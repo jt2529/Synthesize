@@ -16,6 +16,7 @@ public class BulletPhysics : MonoBehaviour
     public LayerMask enemyMask;
     public LayerMask obstacleMask;
     public LayerMask breakableMask;
+    public LayerMask shootableMask;
 
     public int horizontalRayCount = 2;
     public int verticalRayCount = 2;
@@ -107,11 +108,16 @@ public class BulletPhysics : MonoBehaviour
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
 
             RaycastHit2D hit;
-            if (playerBullet) {
+            if (playerBullet)
+            {
                 hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, enemyMask);
                 if (!hit)
                 {
                     hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, breakableMask);
+                }
+                if (!hit)
+                {
+                    hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, shootableMask);
                 }
             }
             else
@@ -121,6 +127,7 @@ public class BulletPhysics : MonoBehaviour
             if (hit)
             {
                 BulletHit(hit);
+                i = horizontalRayCount;
             }
 
             hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, obstacleMask);
@@ -145,22 +152,28 @@ public class BulletPhysics : MonoBehaviour
             if (playerBullet)
             {
                 hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, enemyMask);
-                
+                if (!hit)
+                {
+                    hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, breakableMask);
+                }
+
+                if (!hit)
+                {
+                    hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, shootableMask);
+                }
+
             }
             else
             {
                 hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, playerMask);
 
             }
-
-            if (!hit)
-            {
-                hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, breakableMask);
-            }
+         
 
             if (hit)
             {
                BulletHit(hit);
+                i = verticalRayCount;
             }
 
             hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, obstacleMask);
@@ -192,7 +205,7 @@ public class BulletPhysics : MonoBehaviour
             }
         }
 
-        BreakableStats breakableStats = hit.collider.gameObject.GetComponent<BreakableStats>(); // Destroy enemyh bullets on collision with other enemy
+        BreakableStats breakableStats = hit.collider.gameObject.GetComponent<BreakableStats>(); // Destroy enemy bullets on collision with other enemy
         if (breakableStats != null)
         {
             if (playerBullet) 
@@ -200,6 +213,17 @@ public class BulletPhysics : MonoBehaviour
                 breakableStats.ChangeHealth(-harmfulObject.damage);
             }
                
+            harmfulObject.tryDestroy();
+        }
+
+        ShootableSwitch shootableSwitch = hit.collider.gameObject.GetComponent<ShootableSwitch>();
+        if (shootableSwitch != null)
+        {
+            if (playerBullet)
+            {
+                    shootableSwitch.ToggleSwitch();
+            }
+
             harmfulObject.tryDestroy();
         }
     }

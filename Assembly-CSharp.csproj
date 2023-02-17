@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Interface\SoundManager.cs" />
     <Compile Include="Assets\Scripts\BulletPhysics.cs" />
     <Compile Include="Assets\MainCameraLR.cs" />
+    <Compile Include="Assets\Scripts\Environment\ShootableSwitch.cs" />
     <Compile Include="Assets\Scripts\Triggers\Hurtbox.cs" />
     <Compile Include="Assets\PushableBoxController.cs" />
     <Compile Include="Assets\Scripts\Environment\CrateController.cs" />
