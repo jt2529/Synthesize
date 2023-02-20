@@ -74,7 +74,7 @@ public class MovementPhysics : MonoBehaviour
                 {
                     pushableBoxController = hit.transform.gameObject.GetComponent<PushableBoxController>();
                 }
-                else { 
+                else {
 
                     float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
@@ -114,8 +114,11 @@ public class MovementPhysics : MonoBehaviour
         }
 
         if (pushableBoxController != null)
-        { 
-            pushableBoxController.Push(velocity);
+        {
+            if (pushableBoxController.isInteractable == false) 
+            {
+                pushableBoxController.Push(velocity);
+            }
         }
     }
 

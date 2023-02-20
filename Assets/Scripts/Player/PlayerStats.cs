@@ -19,6 +19,9 @@ public class PlayerStats : MonoBehaviour
     public float timeToJumpApex;
     public float moveSpeed;
     private bool playerInvulnerable;
+    public bool isTeleporting;
+    public GameObject currentInteractableObject;
+    public bool isCurrentInteractableObjectLocked;
 
     [SerializeField]
     public bool playerAlive;

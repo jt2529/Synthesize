@@ -75,6 +75,11 @@ public class PlayerAbilitiesController : MonoBehaviour {
         {
             gun.FireBullet();
         }
+
+        if (Input.GetKeyDown(KeyCode.E)) 
+        {
+            triggerInteract();
+        }
     }  
 
     void attack()
@@ -95,6 +100,18 @@ public class PlayerAbilitiesController : MonoBehaviour {
     public void endJumpAttack()
     {
         state.SetBool("JumpAttack", false);
+    }
+
+    void triggerInteract() 
+    {
+        if (stats.currentInteractableObject != null) 
+        {
+            Interactable[] interactableObjects = stats.currentInteractableObject.GetComponents<Interactable>();
+            foreach (Interactable interactableObject in interactableObjects)
+            {
+                interactableObject.Interact(this.gameObject);
+            }
+        }
     }
     
 }
