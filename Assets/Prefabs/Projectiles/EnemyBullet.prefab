@@ -153,6 +153,9 @@ MonoBehaviour:
   breakableMask:
     serializedVersion: 2
     m_Bits: 131072
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 4194304
   horizontalRayCount: 2
   verticalRayCount: 2
   playerBullet: 0

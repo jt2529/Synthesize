@@ -19,6 +19,10 @@ public class PlayerStats : MonoBehaviour
     public float timeToJumpApex;
     public float moveSpeed;
     private bool playerInvulnerable;
+    public bool isTeleporting;
+    public GameObject currentInteractableObject;
+    public bool isCurrentInteractableObjectLocked;
+    public List<int> keyItems;
 
     [SerializeField]
     public bool playerAlive;
@@ -188,5 +192,20 @@ public class PlayerStats : MonoBehaviour
     public void kill()
     {
         ChangeHealth(-this.health);
+    }
+
+    public void AddKeyItem(int keyItemNumber) 
+    {
+        keyItems.Add(keyItemNumber);
+    }
+
+    public void ClearKeyItems()
+    {
+        keyItems.Clear();
+    }
+
+    public int GetKeyItemsCount() 
+    {
+        return keyItems.Count;
     }
 }
