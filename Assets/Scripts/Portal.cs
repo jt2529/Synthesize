@@ -6,32 +6,43 @@ public class Portal : MonoBehaviour , Interactable
 {
     public GameObject otherPortal;
     public bool isInteractable;
+    public int keyItemsToUnlock;
+    public bool unlocked;
     // Start is called before the first frame update
     void Start()
     {
-        
+        unlocked = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
         if (playerStats != null)
         {
+            if (playerStats.GetKeyItemsCount() < keyItemsToUnlock)
+            {
+                unlocked = false;
+            }
+            else
+            {
+                unlocked = true;
+            }
+
             if (isInteractable)
             {
-                if (!playerStats.isCurrentInteractableObjectLocked) 
+                if (!playerStats.isCurrentInteractableObjectLocked)
                 {
                     playerStats.currentInteractableObject = this.gameObject;
                 }
             }
-            else 
+            else
             {
                 if (!playerStats.isTeleporting)
                 {
@@ -47,7 +58,7 @@ public class Portal : MonoBehaviour , Interactable
                     playerStats.isTeleporting = false;
                 }
             }
-        }
+            }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -73,6 +84,9 @@ public class Portal : MonoBehaviour , Interactable
 
     public void Interact(GameObject playerObject) 
     {
-        playerObject.transform.position = otherPortal.transform.position;
+        if (unlocked) 
+        {
+            playerObject.transform.position = otherPortal.transform.position;
+        }
     }
 }
