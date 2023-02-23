@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerPhysicsController))]
 public class PlayerPhysicsController : MonoBehaviour
@@ -19,14 +20,13 @@ public class PlayerPhysicsController : MonoBehaviour
     float velocityXSmoothing;
 
     private float hInput;
-    private float vInput;
 
     [SerializeField]
     private bool isGrounded;
     [SerializeField]
     private bool isRunning;
     public float forceUpward;
-    
+
     private Animator animator;
     private AudioSource sound;
     MovementPhysics physics;
@@ -34,7 +34,6 @@ public class PlayerPhysicsController : MonoBehaviour
     private bool jumpBuffered = false;
     private bool jumpReleaseBuffered = false;
     private bool hInputBuffered = false;
-    private bool vInputBuffered = false;
 
     // Use this for initialization
     void Start()
@@ -51,41 +50,41 @@ public class PlayerPhysicsController : MonoBehaviour
     {
         // Here we will check for play input and flag that input has been recieved. We check for these flags
         // in fixedUpdate. Getting input here feels more responsive to the player.
-        if (Input.GetButtonDown("Jump"))
-        {
 
-            jumpBuffered = true;
-            StartCoroutine(JumpBufferExpire(0.10f));
-        }
-        if (Input.GetButtonUp("Jump"))
-        {
-            jumpReleaseBuffered = true;
-            StartCoroutine(JumpReleaseBufferExpire(0.10f));
-        }
-
-        hInput = Input.GetAxisRaw("Horizontal");
-
-        if(hInput != 0)
+        if (hInput != 0)
         {
             hInputBuffered = true;
         } else
         {
             hInputBuffered = false;
         }
-
-       vInput = Input.GetAxisRaw("Vertical");
-
-        if (vInput != 0)
-        {
-            vInputBuffered = true;
-        }
-        else
-        {
-            vInputBuffered = false;
-        }
-
     }
-    
+
+    public void OnMove(InputValue value)
+    {
+        hInput = value.Get<Vector2>().x;
+    }
+
+    public void OnLook(InputValue value)
+    {
+        stats.aimingDirection = value.Get<Vector2>();
+    }
+
+    public void OnJump(InputValue value)
+    {
+        if (value.isPressed) 
+        {
+            jumpBuffered = true;
+            jumpReleaseBuffered = false;
+            //StartCoroutine(JumpBufferExpire(0.10f));
+        }
+        else 
+        {
+            jumpReleaseBuffered = true;
+            jumpBuffered = false;
+            //StartCoroutine(JumpReleaseBufferExpire(0.10f));
+        }
+    }
 
     void FixedUpdate()
     {
@@ -96,6 +95,8 @@ public class PlayerPhysicsController : MonoBehaviour
             animator.SetBool("isAlive", false);
             return;
         }
+
+        
 
         updatePlayerPhysics();
 
@@ -112,40 +113,21 @@ public class PlayerPhysicsController : MonoBehaviour
         // hInput is NOT buffered
         if (!hInputBuffered)
         {
-            if (vInput != 0)
-            {
-                stats.aimingDirection.x = 0;
-                stats.aimingDirection.y = input.y;
-            }
-            else
-            {
-                stats.aimingDirection.y = 0;
-                if (sprite.flipX == true)
-                {
-                    stats.aimingDirection.x = -1;
-                }
-                else
-                {
-                    stats.aimingDirection.x = 1;
-                }
-            }
+            
             isRunning = false;
         }
         else //hInput is buffered
         {
             isRunning = true;
-            if (input.x != 0)
-            { 
-                stats.aimingDirection.x = input.x; 
-            } 
-            stats.aimingDirection.y = input.y / 2;
             if (hInput > 0)
             {
                 sprite.flipX = false;
+                stats.facingRight = true;
             }
             if (hInput < 0)
             {
                 sprite.flipX = true;
+                stats.facingRight = false;
             }
         }
 
@@ -235,6 +217,11 @@ public class PlayerPhysicsController : MonoBehaviour
         {
             jumpReleaseBuffered = false;
         }
+    }
+
+    public void OnMove()
+    {
+        
     }
 
     public bool getJumpBuffered()

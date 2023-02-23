@@ -26,6 +26,7 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField]
     public bool playerAlive;
+    public bool facingRight;
     private float damageMultiplier;
     private Transform currentTransform;
     private Vector3 oldPosition;

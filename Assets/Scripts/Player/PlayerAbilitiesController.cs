@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class PlayerAbilitiesController : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
     public Keytar keytar;
     public int[] lastThreeNotes;
     public EscapeMenu menu;
+    public Camera mainCamera;
 
     private Animator state;
     private MovementPhysics controller;
@@ -33,7 +35,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!stats.isPlayerAlive())
+        /*if (!stats.isPlayerAlive())
         {
             return;
         }
@@ -69,18 +71,43 @@ public class PlayerAbilitiesController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Z))
         {
             lastThreeNotes = keytar.GetLastPlayed();
-        }
+        }*/
+    }
 
-        if (Input.GetKeyDown(KeyCode.Y))
+    void OnInteract(InputValue value) 
+    {
+        triggerInteract();
+    }
+
+    void OnFire(InputValue value) 
+    {   
+        if (Mathf.Abs(stats.aimingDirection.x) < 0.1 && Mathf.Abs(stats.aimingDirection.y) < 0.1)
+        {
+            if (stats.facingRight)
+            {
+                stats.aimingDirection.x = 1;
+            }
+            else
+            {
+                stats.aimingDirection.x = -1;
+            }
+            stats.aimingDirection.y = 0;
+            gun.FireBullet();
+            stats.aimingDirection.x = 0;
+            stats.aimingDirection.y = 0;
+        }
+        else 
         {
             gun.FireBullet();
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.E)) 
-        {
-            triggerInteract();
-        }
-    }  
+    void OnFireMouse(InputValue value) 
+    {
+        new Vector2 mousePosition = 
+        stats.aimingDirection = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); 
+        gun.FireBullet();
+    }
 
     void attack()
     {
