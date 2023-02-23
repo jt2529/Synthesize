@@ -137,7 +137,6 @@ public class PlayerPhysicsController : MonoBehaviour
         if (jumpBuffered && physics.collisions.below)
         {
             velocity.y = maxJumpVelocity;
-            sound.Play();
             stats.isGrounded = false;
             jumpBuffered = false;
         }
