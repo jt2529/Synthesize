@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerAbilitiesController : MonoBehaviour {
 
     public Dictionary<int, KeyCode> noteMap;
-    public PlayerGun gun;
+    public PlayerGun primary;
+    public PlayerWeapon secondary;
     public PlayerStats stats;
     public Keytar keytar;
     public int[] lastThreeNotes;
@@ -76,7 +77,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
 
     void OnInteract(InputValue value) 
     {
-        triggerInteract();
+        TriggerInteract();
     }
 
     void OnFire(InputValue value) 
@@ -92,43 +93,55 @@ public class PlayerAbilitiesController : MonoBehaviour {
                 stats.aimingDirection.x = -1;
             }
             stats.aimingDirection.y = 0;
-            gun.FireBullet();
+            primary.FireBullet();
             stats.aimingDirection.x = 0;
             stats.aimingDirection.y = 0;
         }
         else 
         {
-            gun.FireBullet();
+            primary.FireBullet();
         }
     }
 
     void OnFireMouse(InputValue value) 
     {
         stats.aimingDirection = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); 
-        gun.FireBullet();
+        primary.FireBullet();
     }
 
-    void attack()
+    void OnSecondaryFire(InputValue value) 
     {
-        state.SetBool("Attack", true);
+        if (stats.isAbleToAttack) 
+        { 
+            secondary.MeleeAttack(); 
+        }
+
+        stats.isAbleToAttack = false;
+        if (stats.isGrounded)
+        {
+            state.SetBool("Attack", true);
+        }
+        else 
+        {
+            state.SetBool("JumpAttack", true);
+        }
     }
 
-    public void endAttack()
+    public void EndAttack()
     {
+        stats.isAbleToAttack = true;
         state.SetBool("Attack", false);
+        secondary.EndMeleeAttack();
     }
 
-    void jumpAttack()
-    {
-        state.SetBool("JumpAttack", true);
-    }
-
-    public void endJumpAttack()
+    public void EndJumpAttack()
     {
         state.SetBool("JumpAttack", false);
+        stats.isAbleToAttack = true;
+        secondary.EndMeleeAttack();
     }
 
-    void triggerInteract() 
+    void TriggerInteract() 
     {
         if (stats.currentInteractableObject != null) 
         {

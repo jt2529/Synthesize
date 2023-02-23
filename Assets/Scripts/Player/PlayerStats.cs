@@ -20,6 +20,10 @@ public class PlayerStats : MonoBehaviour
     public float moveSpeed;
     private bool playerInvulnerable;
     public bool isTeleporting;
+    public bool isAbleToAttack;
+    public bool isGrounded;
+    public bool isRunning;
+
     public GameObject currentInteractableObject;
     public bool isCurrentInteractableObjectLocked;
     public List<int> keyItems;
@@ -42,6 +46,7 @@ public class PlayerStats : MonoBehaviour
         minJumpHeight = maxJumpHeight / 4f;
         playerInvulnerable = false;
         playerAlive = true;
+        isAbleToAttack = true; 
     }
 
     // Use this for initialization

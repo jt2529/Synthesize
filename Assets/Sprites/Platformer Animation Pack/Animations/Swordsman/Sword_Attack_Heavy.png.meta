@@ -18,7 +18,7 @@ TextureImporter:
       213: 21300008
     second: Sword_Attack_Heavy_4
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -78,6 +78,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -103,6 +104,30 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -112,7 +137,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
+        width: 35
         height: 32
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -131,9 +156,9 @@ TextureImporter:
       name: Sword_Attack_Heavy_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 35
         y: 0
-        width: 32
+        width: 37
         height: 32
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -152,7 +177,7 @@ TextureImporter:
       name: Sword_Attack_Heavy_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 72
         y: 0
         width: 32
         height: 32
@@ -173,9 +198,9 @@ TextureImporter:
       name: Sword_Attack_Heavy_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 104
         y: 0
-        width: 32
+        width: 33
         height: 32
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -186,27 +211,6 @@ TextureImporter:
       bones: []
       spriteID: da25e1ee620e78f428a8298a5a3d48c7
       internalID: 21300006
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sword_Attack_Heavy_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f89ca3615550b14b85131111aecec48
-      internalID: 21300008
       vertices: []
       indices: 
       edges: []

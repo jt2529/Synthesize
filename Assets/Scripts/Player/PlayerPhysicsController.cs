@@ -20,11 +20,6 @@ public class PlayerPhysicsController : MonoBehaviour
     float velocityXSmoothing;
 
     private float hInput;
-
-    [SerializeField]
-    private bool isGrounded;
-    [SerializeField]
-    private bool isRunning;
     public float forceUpward;
 
     private Animator animator;
@@ -114,19 +109,27 @@ public class PlayerPhysicsController : MonoBehaviour
         if (!hInputBuffered)
         {
             
-            isRunning = false;
+            stats.isRunning = false;
         }
         else //hInput is buffered
         {
-            isRunning = true;
+            stats.isRunning = true;
             if (hInput > 0)
             {
-                sprite.flipX = false;
+                if (!stats.facingRight) 
+                {
+                    transform.localScale = new Vector3(1,1,1);
+                }
+                //sprite.flipX = false;
                 stats.facingRight = true;
             }
             if (hInput < 0)
             {
-                sprite.flipX = true;
+                if (stats.facingRight)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+                //sprite.flipX = true;
                 stats.facingRight = false;
             }
         }
@@ -135,13 +138,13 @@ public class PlayerPhysicsController : MonoBehaviour
         {
             velocity.y = maxJumpVelocity;
             sound.Play();
-            isGrounded = false;
+            stats.isGrounded = false;
             jumpBuffered = false;
         }
 
         if (forceUpward > 0) 
         {
-            isGrounded = false;
+            stats.isGrounded = false;
             velocity.y = forceUpward;
             forceUpward += gravity * Time.deltaTime;
             if (forceUpward < 0)
@@ -152,7 +155,7 @@ public class PlayerPhysicsController : MonoBehaviour
 
         if (!physics.collisions.below)
         {
-            isGrounded = false;
+            stats.isGrounded = false;
         }
 
         if (jumpReleaseBuffered)
@@ -178,7 +181,7 @@ public class PlayerPhysicsController : MonoBehaviour
 
         if(physics.collisions.below)
         {
-            isGrounded = true;
+            stats.isGrounded = true;
             
         }
 
@@ -187,8 +190,8 @@ public class PlayerPhysicsController : MonoBehaviour
 
     void updateAnimationState()
     {
-        animator.SetBool("isRunning", isRunning);
-        animator.SetBool("isGrounded", isGrounded);
+        animator.SetBool("isRunning", stats.isRunning);
+        animator.SetBool("isGrounded", stats.isGrounded);
         animator.SetBool("isAlive", stats.isPlayerAlive());   
     }
 
