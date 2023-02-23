@@ -104,7 +104,6 @@ public class PlayerAbilitiesController : MonoBehaviour {
 
     void OnFireMouse(InputValue value) 
     {
-        new Vector2 mousePosition = 
         stats.aimingDirection = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); 
         gun.FireBullet();
     }
