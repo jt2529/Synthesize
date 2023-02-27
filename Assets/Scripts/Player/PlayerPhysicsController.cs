@@ -100,7 +100,10 @@ public class PlayerPhysicsController : MonoBehaviour
         if (physics.collisions.above || physics.collisions.below)
         {
             velocity.y = 0;
-            forceUpward = 0;
+            if (physics.collisions.above) 
+            {
+                forceUpward = 0;
+            }
         }
 
         Vector2 input = new Vector2(hInput, Input.GetAxisRaw("Vertical"));

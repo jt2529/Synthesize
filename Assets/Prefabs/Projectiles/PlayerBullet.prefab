@@ -166,6 +166,9 @@ MonoBehaviour:
   speed: 7
   direction: {x: 0, y: 0}
   isReady: 0
+  velocity: {x: 0, y: 0}
+  weight: 2
+  stunTime: 0.3
   onDestroy: {fileID: 1460710244819518, guid: f3eb857ad5ae9624da24a6e001174a5d, type: 3}
 --- !u!95 &95100780553203618
 Animator:

@@ -6067,12 +6067,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1333855516}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1645349441 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8400655132294538400, guid: 14adbff6001a49e4d85fde00f5764be0,
-    type: 3}
-  m_PrefabInstance: {fileID: 8399255357754728861}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1707144262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8228636016725403116, guid: 1343127abc9207b4fb2c5418cb2f6da7,
@@ -6851,27 +6845,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8399255357754728861}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &4788028755076435
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645349441}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &603651904742554963
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7589,12 +7562,12 @@ PrefabInstance:
     - target: {fileID: 8395031385481053398, guid: 14adbff6001a49e4d85fde00f5764be0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.93
+      value: -8.88
       objectReference: {fileID: 0}
     - target: {fileID: 8395031385481053398, guid: 14adbff6001a49e4d85fde00f5764be0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.33
+      value: 3.41
       objectReference: {fileID: 0}
     - target: {fileID: 8395031385481053398, guid: 14adbff6001a49e4d85fde00f5764be0,
         type: 3}
@@ -7651,5 +7624,10 @@ PrefabInstance:
       propertyPath: moveTowardsObject
       value: 
       objectReference: {fileID: 1490389218861259954}
+    - target: {fileID: 8433099638392349304, guid: 14adbff6001a49e4d85fde00f5764be0,
+        type: 3}
+      propertyPath: targetVerticalOffset
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14adbff6001a49e4d85fde00f5764be0, type: 3}

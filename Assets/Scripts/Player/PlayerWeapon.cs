@@ -11,6 +11,10 @@ public class PlayerWeapon : MonoBehaviour
     private bool isAttacking;
     private List<string> enemyCollisionTracker;
     public PlayerStats stats;
+    public float knockbackPower;
+    public float stunTime;
+    private Vector2 knockbackVector;
+    private Vector2 directionalKnockbackVector;
 
     [SerializeField]
     private ContactFilter2D contactFilter;
@@ -24,6 +28,7 @@ public class PlayerWeapon : MonoBehaviour
         contactFilter.SetLayerMask(LayerMask.GetMask("Enemy"));
         contactFilter.useLayerMask = true;
         collider.enabled = false;
+        knockbackVector = new Vector2(1, 0) * knockbackPower;
     }
 
     // Update is called once per frame
@@ -38,7 +43,12 @@ public class PlayerWeapon : MonoBehaviour
                 {
                     if (!enemyCollisionTracker.Contains(enemyCollision.name)) 
                     {
-                        enemyCollision.GetComponent<EnemyStats>().ChangeHealth(damage);
+                        directionalKnockbackVector = knockbackVector;
+                        if (!stats.facingRight)
+                        {
+                            directionalKnockbackVector = directionalKnockbackVector * -1;
+                        }
+                        enemyCollision.GetComponent<EnemyStats>().Attack(damage, directionalKnockbackVector, stunTime);
                         enemyCollisionTracker.Add(enemyCollision.name);
                     }
                     
