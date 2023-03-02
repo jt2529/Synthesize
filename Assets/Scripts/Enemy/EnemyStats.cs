@@ -11,6 +11,7 @@ public class EnemyStats : MonoBehaviour {
     public float timeToJumpApex;
     public float weight;
     public float fireRate;
+    public HealthBar healthBar;
     public Vector2 force;
     public float stunTimer;
     public bool isStunned;
@@ -58,6 +59,7 @@ public class EnemyStats : MonoBehaviour {
     {
         Debug.Log("Modifying enemy health by " + changeAmount);
         health = health + changeAmount;
+        healthBar.ShowHealthBar();
 
         if (health < 1)
         {
