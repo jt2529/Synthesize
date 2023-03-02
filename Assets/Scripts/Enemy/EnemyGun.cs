@@ -6,9 +6,10 @@ public class EnemyGun : MonoBehaviour {
 
     public GameObject EnemyBullet;
     public GameObject aimAtObject;
+    public EnemyStats stats;
     // Use this for initialization
     void Start () {
-        InvokeRepeating("FireBullet", 1f, 2f);
+        InvokeRepeating("FireBullet", 1f, stats.fireRate);
     }
 	
 	// Update is called once per frame
@@ -17,7 +18,7 @@ public class EnemyGun : MonoBehaviour {
 
     public void FireBullet() {
 
-        if (aimAtObject != null) {
+        if (aimAtObject != null && !stats.isStunned) {
 
             GameObject bullet = (GameObject)Instantiate(EnemyBullet);
 

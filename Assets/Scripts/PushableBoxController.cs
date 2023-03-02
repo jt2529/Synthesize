@@ -69,7 +69,7 @@ public class PushableBoxController : MonoBehaviour, Interactable {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
-        if (isInteractable)
+        if (isInteractable && playerStats != null)
         {
             playerStats.currentInteractableObject = this.gameObject;
         }
@@ -78,7 +78,7 @@ public class PushableBoxController : MonoBehaviour, Interactable {
     private void OnTriggerExit2D(Collider2D collision)
     {
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
-        if (isInteractable && playerStats.currentInteractableObject == this.gameObject)
+        if (isInteractable && playerStats != null && playerStats.currentInteractableObject == this.gameObject)
         {
             playerStats.currentInteractableObject = null;
             //isBeingMoved = false;

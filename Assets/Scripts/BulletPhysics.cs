@@ -28,6 +28,9 @@ public class BulletPhysics : MonoBehaviour
     public float speed;
     public Vector2 direction;
     public bool isReady;
+    public Vector2 velocity;
+    public float weight;
+    public float stunTime;
 
     public GameObject onDestroy;
 
@@ -49,8 +52,6 @@ public class BulletPhysics : MonoBehaviour
 
         if (isReady)
         {
-            Vector2 velocity = transform.position;
-
             velocity.x = direction.x * (speed * Time.deltaTime + playerSpeed.x * Time.deltaTime);
             velocity.y = direction.y * (speed * Time.deltaTime + playerSpeed.y * Time.deltaTime);
 
@@ -191,7 +192,7 @@ public class BulletPhysics : MonoBehaviour
             EnemyStats enemyStats = hit.collider.gameObject.GetComponent<EnemyStats>();
             if (enemyStats != null) 
             {
-                enemyStats.ChangeHealth(-harmfulObject.damage);
+                enemyStats.Attack(-harmfulObject.damage, velocity * weight, stunTime );
                 harmfulObject.tryDestroy();
             }
         }

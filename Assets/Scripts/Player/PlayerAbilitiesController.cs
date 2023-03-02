@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class PlayerAbilitiesController : MonoBehaviour {
 
     public Dictionary<int, KeyCode> noteMap;
-    public PlayerGun gun;
+    public PlayerGun primary;
+    public PlayerWeapon secondary;
     public PlayerStats stats;
     public Keytar keytar;
     public int[] lastThreeNotes;
     public EscapeMenu menu;
+    public Camera mainCamera;
 
     private Animator state;
     private MovementPhysics controller;
@@ -33,7 +36,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!stats.isPlayerAlive())
+        /*if (!stats.isPlayerAlive())
         {
             return;
         }
@@ -69,40 +72,76 @@ public class PlayerAbilitiesController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Z))
         {
             lastThreeNotes = keytar.GetLastPlayed();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            gun.FireBullet();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E)) 
-        {
-            triggerInteract();
-        }
-    }  
-
-    void attack()
-    {
-        state.SetBool("Attack", true);
+        }*/
     }
 
-    public void endAttack()
+    void OnInteract(InputValue value) 
     {
+        TriggerInteract();
+    }
+
+    void OnFire(InputValue value) 
+    {   
+        if (Mathf.Abs(stats.aimingDirection.x) < 0.1 && Mathf.Abs(stats.aimingDirection.y) < 0.1)
+        {
+            if (stats.facingRight)
+            {
+                stats.aimingDirection.x = 1;
+            }
+            else
+            {
+                stats.aimingDirection.x = -1;
+            }
+            stats.aimingDirection.y = 0;
+            primary.FireBullet();
+            stats.aimingDirection.x = 0;
+            stats.aimingDirection.y = 0;
+        }
+        else 
+        {
+            primary.FireBullet();
+        }
+    }
+
+    void OnFireMouse(InputValue value) 
+    {
+        stats.aimingDirection = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); 
+        primary.FireBullet();
+    }
+
+    void OnSecondaryFire(InputValue value) 
+    {
+        if (stats.isAbleToAttack) 
+        { 
+            secondary.MeleeAttack(); 
+        }
+
+        stats.isAbleToAttack = false;
+        if (stats.isGrounded)
+        {
+            state.SetBool("Attack", true);
+        }
+        else 
+        {
+            state.SetBool("JumpAttack", true);
+        }
+    }
+
+    public void EndAttack()
+    {
+        stats.isAbleToAttack = true;
         state.SetBool("Attack", false);
+        secondary.EndMeleeAttack();
     }
 
-    void jumpAttack()
-    {
-        state.SetBool("JumpAttack", true);
-    }
-
-    public void endJumpAttack()
+    public void EndJumpAttack()
     {
         state.SetBool("JumpAttack", false);
+        stats.isAbleToAttack = true;
+        secondary.EndMeleeAttack();
     }
 
-    void triggerInteract() 
+    void TriggerInteract() 
     {
         if (stats.currentInteractableObject != null) 
         {

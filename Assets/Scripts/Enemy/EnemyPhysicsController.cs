@@ -12,9 +12,11 @@ public class EnemyPhysicsController : MonoBehaviour {
     public bool canFly;
     public bool canJump;
     public float jumpInterval;
-    float gravity; 
+    public float gravity;
+    public float targetVerticalOffset;
     float jumpVelocity; 
     float velocityXSmoothing;
+    float velocityYSmoothing;
     Vector3 velocity;
     MovementPhysics physics;
     BoxCollider2D collider;
@@ -34,35 +36,95 @@ public class EnemyPhysicsController : MonoBehaviour {
         if (physics.collisions.above || physics.collisions.below)
         {
             velocity.y = 0;
+            stats.force.y = 0;
         }
         float targetVelocityX = 0;
+        float targetVelocityY = 0;
 
-        if (transform.position.x > targetLocation.x)
+        if (!stats.isStunned) 
         {
-            targetVelocityX = (-1) * stats.moveSpeed;
-        }
-        else if (transform.position.x < targetLocation.x)
-        {
-            targetVelocityX = stats.moveSpeed;
-        }
+            if (transform.position.x > targetLocation.x)
+            {
+                targetVelocityX = (-1) * stats.moveSpeed;
+            }
+            else if (transform.position.x < targetLocation.x)
+            {
+                targetVelocityX = stats.moveSpeed;
+            }
 
-        if (canJump && targetLocation.y < collider.bounds.min.y && physics.collisions.below)
-        {
-            velocity.y = jumpVelocity;
+            if (canJump && targetLocation.y < collider.bounds.min.y && physics.collisions.below)
+            {
+                velocity.y = jumpVelocity;
+            }
+
+            if (canFly) 
+            {
+                if (transform.position.y > targetLocation.y)
+                {
+                    targetVelocityY = (-1) * stats.moveSpeed;
+                }
+                else if (transform.position.y < targetLocation.y)
+                {
+                    targetVelocityY = stats.moveSpeed;
+                }
+            }
         }
 
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+        velocity.y = Mathf.SmoothDamp(velocity.y, targetVelocityY, ref velocityYSmoothing, accelerationTimeAirborne);
 
         if (canFly != true)
-        { 
-            velocity.y += gravity * Time.deltaTime; 
+        {
+            velocity.y += gravity * Time.deltaTime;
         }
-        
 
         if (velocity.y < gravity)
         {
             velocity.y = gravity;
         }
+
+        //Add current force to velocity, and decrement the force stat value by object weight * time
+        if (stats.force.x != 0 || stats.force.y != 0)
+        {
+            velocity.x += stats.force.x;
+            velocity.y += stats.force.y;
+            
+            //Force is always trying to get to 0
+            if (stats.force.y < 0)
+            {
+                stats.force.y += stats.weight * Time.deltaTime * Mathf.Abs(stats.force.y);
+                if (stats.force.y > 0) 
+                {
+                    stats.force.y = 0;
+                }
+            }
+            else 
+            {
+                stats.force.y -= stats.weight * Time.deltaTime * Mathf.Abs(stats.force.y);
+                if (stats.force.y < 0)
+                {
+                    stats.force.y = 0;
+                }
+            }
+
+            if (stats.force.x < 0)
+            {
+                stats.force.x += stats.weight * Time.deltaTime * Mathf.Abs(stats.force.x);
+                if (stats.force.x > 0)
+                {
+                    stats.force.x = 0;
+                }
+            }
+            else
+            {
+                stats.force.x -= stats.weight * Time.deltaTime * Mathf.Abs(stats.force.x);
+                if (stats.force.x < 0)
+                {
+                    stats.force.x = 0;
+                }
+            }
+        }
+
         physics.Move(velocity * Time.deltaTime);
     }
 
@@ -88,11 +150,11 @@ public class EnemyPhysicsController : MonoBehaviour {
         }
         if (direction.y >= 0)
         {
-            targetLocation.y = positionTo.y - yDistanceFromObject;
+            targetLocation.y = positionTo.y - yDistanceFromObject + targetVerticalOffset;
         }
         else
         {
-            targetLocation.y = positionTo.y + yDistanceFromObject;
+            targetLocation.y = positionTo.y + yDistanceFromObject + targetVerticalOffset;
         }
     }
 }
