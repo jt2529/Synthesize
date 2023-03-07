@@ -43,12 +43,14 @@ public class PlayerWeapon : MonoBehaviour
                 {
                     if (!enemyCollisionTracker.Contains(enemyCollision.name)) 
                     {
-                        directionalKnockbackVector = knockbackVector;
+                        directionalKnockbackVector = knockbackVector * stats.knockbackMultiplier;
                         if (!stats.facingRight)
                         {
                             directionalKnockbackVector = directionalKnockbackVector * -1;
                         }
-                        enemyCollision.GetComponent<EnemyStats>().Attack(damage, directionalKnockbackVector, stunTime);
+
+                        int hitDamage = (int)(damage * stats.meleeDamageMultiplier);
+                        enemyCollision.GetComponent<EnemyStats>().Attack(hitDamage, directionalKnockbackVector, stunTime);
                         enemyCollisionTracker.Add(enemyCollision.name);
                     }
                     

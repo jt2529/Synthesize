@@ -55,11 +55,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimingDirection: {x: 1, y: 0}
-  maxHealth: 1000
   health: 1000
+  baseMaxJumpHeight: 2.2
+  jumpHeightMultipler: 1
+  minJumpHeight: 0
   maxJumpHeight: 2.2
+  numberOfJumps: 2
+  numberOfJumpsLeft: 1
   timeToJumpApex: 0.45
+  baseMoveSpeed: 4
+  moveSpeedMultipler: 1
   moveSpeed: 4
+  damageMultipler: 1
+  knockbackMultiplier: 1
+  baseMaxHealth: 1000
+  maxHealthMultiplier: 1
+  maxHealth: 1000
+  meleeDamageMultiplier: 1
+  rangedDamageMultiplier: 1
+  playerInvulnerable: 0
   isTeleporting: 0
   isAbleToAttack: 0
   isGrounded: 0

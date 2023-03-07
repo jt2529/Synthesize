@@ -29,9 +29,11 @@ public class PlayerGun : MonoBehaviour
     {
         GameObject bullet = (GameObject)Instantiate(PlayerBullet);
         bullet.transform.position = transform.position;
+        bullet.GetComponent<HarmfulObject>().damage = (int)(bullet.GetComponent<HarmfulObject>().baseDamage * stats.rangedDamageMultiplier);
 
         BulletPhysics bulletPhysics = bullet.GetComponent<BulletPhysics>();
         bulletPhysics.SetDirection(direction);
         bulletPhysics.playerSpeed = stats.currentSpeed;
+        bulletPhysics.weight = bulletPhysics.weight * stats.knockbackMultiplier;
     }
 }

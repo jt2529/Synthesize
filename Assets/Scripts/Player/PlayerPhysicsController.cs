@@ -12,6 +12,7 @@ public class PlayerPhysicsController : MonoBehaviour
 
     [SerializeField]
     float gravity;
+    float originalGravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     Vector3 velocity;
@@ -39,6 +40,7 @@ public class PlayerPhysicsController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         sound = GetComponent<AudioSource>();
+        originalGravity = gravity;
     }
     // Update is called once per frame
     void Update()
@@ -77,6 +79,7 @@ public class PlayerPhysicsController : MonoBehaviour
         {
             jumpReleaseBuffered = true;
             jumpBuffered = false;
+            stats.numberOfJumpsLeft -= 1;
             //StartCoroutine(JumpReleaseBufferExpire(0.10f));
         }
     }
@@ -137,7 +140,7 @@ public class PlayerPhysicsController : MonoBehaviour
             }
         }
 
-        if (jumpBuffered && physics.collisions.below)
+        if (jumpBuffered && (physics.collisions.below || stats.numberOfJumpsLeft > 0))
         {
             velocity.y = maxJumpVelocity;
             stats.isGrounded = false;
@@ -148,7 +151,7 @@ public class PlayerPhysicsController : MonoBehaviour
         {
             stats.isGrounded = false;
             velocity.y = forceUpward;
-            forceUpward += gravity * Time.deltaTime;
+            forceUpward += originalGravity * Time.deltaTime;
             if (forceUpward < 0)
             {
                 forceUpward = 0;
@@ -157,7 +160,15 @@ public class PlayerPhysicsController : MonoBehaviour
 
         if (!physics.collisions.below)
         {
+            if (stats.isGrounded) 
+            {
+                stats.numberOfJumpsLeft -= 1;
+            }
             stats.isGrounded = false;
+        }
+        else 
+        {
+            stats.numberOfJumpsLeft = stats.numberOfJumps;
         }
 
         if (jumpReleaseBuffered)
