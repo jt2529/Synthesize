@@ -7,6 +7,7 @@ public class EnemyStats : MonoBehaviour {
     public int maxHealth;
     public float moveSpeed;
     public int health;
+    public int rewards;
     public float jumpHeight;
     public float timeToJumpApex;
     public float weight;
@@ -63,7 +64,13 @@ public class EnemyStats : MonoBehaviour {
 
         if (health < 1)
         {
+            DropRewards();
             Destroy(gameObject);
         }
+    }
+
+    public void DropRewards() 
+    { 
+        
     }
 }

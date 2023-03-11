@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Player\MovementPhysics.cs" />
     <Compile Include="Assets\Scripts\InstrumentList.cs" />
     <Compile Include="Assets\Scripts\Environment\DeployPlatform.cs" />
+    <Compile Include="Assets\Scripts\StatBoost.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWeapon.cs" />
     <Compile Include="Assets\Scripts\Environment\DoorController.cs" />
     <Compile Include="Assets\Scripts\SceneReset.cs" />

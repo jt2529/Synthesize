@@ -12,6 +12,7 @@ public class PlayerPhysicsController : MonoBehaviour
 
     [SerializeField]
     float gravity;
+    float originalGravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     Vector3 velocity;
@@ -39,6 +40,7 @@ public class PlayerPhysicsController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         sound = GetComponent<AudioSource>();
+        originalGravity = gravity;
     }
     // Update is called once per frame
     void Update()
@@ -77,8 +79,20 @@ public class PlayerPhysicsController : MonoBehaviour
         {
             jumpReleaseBuffered = true;
             jumpBuffered = false;
+            stats.numberOfJumpsLeft -= 1;
             //StartCoroutine(JumpReleaseBufferExpire(0.10f));
         }
+    }
+
+    public void OnDash(InputValue value) 
+    {
+        if (stats.numberOfDashesLeft > 0)
+        {
+            stats.numberOfDashesLeft -= 1;
+            stats.isDashing = true;
+            stats.dashTimeLeft = stats.fullDashTime;
+        }
+        
     }
 
     void FixedUpdate()
@@ -137,7 +151,7 @@ public class PlayerPhysicsController : MonoBehaviour
             }
         }
 
-        if (jumpBuffered && physics.collisions.below)
+        if (jumpBuffered && (physics.collisions.below || stats.numberOfJumpsLeft > 0))
         {
             velocity.y = maxJumpVelocity;
             stats.isGrounded = false;
@@ -148,7 +162,7 @@ public class PlayerPhysicsController : MonoBehaviour
         {
             stats.isGrounded = false;
             velocity.y = forceUpward;
-            forceUpward += gravity * Time.deltaTime;
+            forceUpward += originalGravity * Time.deltaTime;
             if (forceUpward < 0)
             {
                 forceUpward = 0;
@@ -157,7 +171,15 @@ public class PlayerPhysicsController : MonoBehaviour
 
         if (!physics.collisions.below)
         {
+            if (stats.isGrounded) 
+            {
+                stats.numberOfJumpsLeft -= 1;
+            }
             stats.isGrounded = false;
+        }
+        else 
+        {
+            stats.numberOfJumpsLeft = stats.numberOfJumps;
         }
 
         if (jumpReleaseBuffered)
@@ -169,9 +191,31 @@ public class PlayerPhysicsController : MonoBehaviour
             }
         }
 
-        float targetVelocityX = input.x * stats.GetMoveSpeed();
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-        velocity.y += gravity * Time.deltaTime;
+        if (stats.isDashing)
+        {
+            velocity.x = stats.dashSpeedMultiplier * input.x * stats.GetMoveSpeed();
+            if (stats.isGrounded)
+            { 
+                velocity.y += gravity * Time.deltaTime; 
+            }
+            else 
+            {
+                velocity.y = 0;
+            }
+        }
+        else if(stats.isDashingEnd) //Need this case to slow player down on dash finish
+        {
+            velocity.x = input.x * stats.GetMoveSpeed();
+            velocity.y += gravity * Time.deltaTime;
+            stats.isDashingEnd = false;
+        }
+        else
+        {
+            float targetVelocityX = input.x * stats.GetMoveSpeed();
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            velocity.y += gravity * Time.deltaTime;
+        }
+        
 
         // Player cannot fall faster than our gravity
         if (velocity.y < gravity)
@@ -194,7 +238,8 @@ public class PlayerPhysicsController : MonoBehaviour
     {
         animator.SetBool("isRunning", stats.isRunning);
         animator.SetBool("isGrounded", stats.isGrounded);
-        animator.SetBool("isAlive", stats.isPlayerAlive());   
+        animator.SetBool("isAlive", stats.isPlayerAlive());
+        animator.SetBool("isDashing", stats.isDashing);
     }
 
     void updatePlayerPhysics()

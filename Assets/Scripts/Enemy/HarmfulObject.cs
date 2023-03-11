@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HarmfulObject : MonoBehaviour {
 
+    public int baseDamage;
     public int damage;
     public BoxCollider2D objectHitBox;
     public bool destructable;

@@ -8,21 +8,50 @@ public class PlayerStats : MonoBehaviour
     // These will all be modifiable by the player's active chord modifiers
 
     public Vector2 aimingDirection;
-    public int maxHealth = 100;
+    
 
     [SerializeField]
     private int health;
 
-    private int numberOfJumps;
-    private float minJumpHeight;
-    public float maxJumpHeight;
+    public float baseMaxJumpHeight;
+    public float jumpHeightMultipler;
+    public float minJumpHeight;
+    public  float maxJumpHeight;
+
+    public int numberOfJumps;
+    public int numberOfJumpsLeft;
     public float timeToJumpApex;
+
+    public int numberOfDashes;
+    public int numberOfDashesLeft;
+    public float fullDashTime;
+    public float dashTimeLeft;
+    public float dashSpeedMultiplier;
+    public float dashChargeCooldownTime;
+    public float dashChargeCooldownTimeLeft;
+
+    public float baseMoveSpeed;
+    public float moveSpeedMultipler;
     public float moveSpeed;
-    private bool playerInvulnerable;
+
+    public float damageMultipler;
+
+    public float knockbackMultiplier;
+
+    public int baseMaxHealth;
+    public float maxHealthMultiplier;
+    public int maxHealth;
+
+    public float meleeDamageMultiplier;
+    public float rangedDamageMultiplier;
+
+    public bool playerInvulnerable;
     public bool isTeleporting;
     public bool isAbleToAttack;
     public bool isGrounded;
     public bool isRunning;
+    public bool isDashing;
+    public bool isDashingEnd;
 
     public GameObject currentInteractableObject;
     public bool isCurrentInteractableObjectLocked;
@@ -31,7 +60,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     public bool playerAlive;
     public bool facingRight;
-    private float damageMultiplier;
     private Transform currentTransform;
     private Vector3 oldPosition;
     public Vector2 currentSpeed;
@@ -39,14 +67,15 @@ public class PlayerStats : MonoBehaviour
     //Set variable values here
     private void Awake()
     {
+        maxHealth = baseMaxHealth;
         aimingDirection.x = 1;
         aimingDirection.y = 0;
         health = maxHealth;
-        numberOfJumps = 1;
         minJumpHeight = maxJumpHeight / 4f;
         playerInvulnerable = false;
         playerAlive = true;
-        isAbleToAttack = true; 
+        isAbleToAttack = true;
+        numberOfDashesLeft = numberOfDashes;
     }
 
     // Use this for initialization
@@ -61,7 +90,7 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void FixedUpdate()
@@ -69,6 +98,30 @@ public class PlayerStats : MonoBehaviour
         currentSpeed.x = Mathf.Abs(currentTransform.position.x - oldPosition.x);
         currentSpeed.y = Mathf.Abs(currentTransform.position.x - oldPosition.x);
         oldPosition = currentTransform.position;
+        if (isDashing) 
+        {
+            dashTimeLeft -= Time.deltaTime;
+            if (dashTimeLeft <= 0) 
+            {
+                dashTimeLeft = 0;
+                isDashing = false;
+                isDashingEnd = true;
+            }
+        }
+
+        if (numberOfDashesLeft < numberOfDashes) 
+        {
+            if (dashChargeCooldownTimeLeft <= 0)
+            {
+                dashChargeCooldownTimeLeft = dashChargeCooldownTime;
+            }
+
+            dashChargeCooldownTimeLeft -= Time.deltaTime;
+            if (dashChargeCooldownTimeLeft <= 0) 
+            {
+                numberOfDashesLeft++;
+            }
+        }
     }
 
     public bool isPlayerAlive()
@@ -76,9 +129,15 @@ public class PlayerStats : MonoBehaviour
         return playerAlive;
     }
 
-    public void SetMaxHealth(int newMaxHealth)
+    public void SetMaxHealth(float newMaxHealth)
     {
-        maxHealth = newMaxHealth;
+        if (newMaxHealth > maxHealth) 
+        {
+            health += (int)(newMaxHealth - maxHealth);
+        }
+        maxHealth = (int)newMaxHealth;
+       
+        
     }
 
     public void ChangeHealth(int changeAmount)
@@ -124,13 +183,13 @@ public class PlayerStats : MonoBehaviour
         numberOfJumps = jumps;
     }
 
-    public void SetJumpHeight(int jumpHeight)
+    public void SetJumpHeight(float jumpHeight)
     {
         maxJumpHeight = jumpHeight;
         minJumpHeight = jumpHeight / 4f;
     }
 
-    public void SetMoveSpeed(int newMoveSpeed)
+    public void SetMoveSpeed(float newMoveSpeed)
     {
         moveSpeed = newMoveSpeed;
     }
@@ -200,7 +259,7 @@ public class PlayerStats : MonoBehaviour
         ChangeHealth(-this.health);
     }
 
-    public void AddKeyItem(int keyItemNumber) 
+    public void AddKeyItem(int keyItemNumber)
     {
         keyItems.Add(keyItemNumber);
     }
@@ -210,8 +269,46 @@ public class PlayerStats : MonoBehaviour
         keyItems.Clear();
     }
 
-    public int GetKeyItemsCount() 
+    public int GetKeyItemsCount()
     {
         return keyItems.Count;
+    }
+
+    public void ChangeJumpHeight(float statMultiplier)
+    {
+        jumpHeightMultipler += statMultiplier;
+        SetJumpHeight(baseMaxJumpHeight * jumpHeightMultipler);
+    }
+
+    public void ChangeMoveSpeed(float statMultiplier)
+    {
+        moveSpeedMultipler += statMultiplier;
+        SetMoveSpeed(baseMoveSpeed * moveSpeedMultipler);
+    }
+
+    public void ChangeMaxHealth(float statMultiplier)
+    {
+        maxHealthMultiplier += statMultiplier;
+        SetMaxHealth(baseMaxHealth * maxHealthMultiplier);
+    }
+
+    public void ChangeMeleeDamage(float statMultiplier)
+    {
+        meleeDamageMultiplier += statMultiplier;
+    }
+
+    public void ChangeRangedDamage(float statMultiplier)
+    {
+        rangedDamageMultiplier += statMultiplier;
+    }
+
+    public void ChangeKnockback(float statMultiplier)
+    {
+        knockbackMultiplier += statMultiplier;
+    }
+
+    public void ChangeJumps(float statMultiplier)
+    {
+        numberOfJumps = numberOfJumps + 1;
     }
 }
