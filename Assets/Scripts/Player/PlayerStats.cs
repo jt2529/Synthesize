@@ -22,6 +22,14 @@ public class PlayerStats : MonoBehaviour
     public int numberOfJumpsLeft;
     public float timeToJumpApex;
 
+    public int numberOfDashes;
+    public int numberOfDashesLeft;
+    public float fullDashTime;
+    public float dashTimeLeft;
+    public float dashSpeedMultiplier;
+    public float dashChargeCooldownTime;
+    public float dashChargeCooldownTimeLeft;
+
     public float baseMoveSpeed;
     public float moveSpeedMultipler;
     public float moveSpeed;
@@ -42,6 +50,8 @@ public class PlayerStats : MonoBehaviour
     public bool isAbleToAttack;
     public bool isGrounded;
     public bool isRunning;
+    public bool isDashing;
+    public bool isDashingEnd;
 
     public GameObject currentInteractableObject;
     public bool isCurrentInteractableObjectLocked;
@@ -65,6 +75,7 @@ public class PlayerStats : MonoBehaviour
         playerInvulnerable = false;
         playerAlive = true;
         isAbleToAttack = true;
+        numberOfDashesLeft = numberOfDashes;
     }
 
     // Use this for initialization
@@ -87,6 +98,30 @@ public class PlayerStats : MonoBehaviour
         currentSpeed.x = Mathf.Abs(currentTransform.position.x - oldPosition.x);
         currentSpeed.y = Mathf.Abs(currentTransform.position.x - oldPosition.x);
         oldPosition = currentTransform.position;
+        if (isDashing) 
+        {
+            dashTimeLeft -= Time.deltaTime;
+            if (dashTimeLeft <= 0) 
+            {
+                dashTimeLeft = 0;
+                isDashing = false;
+                isDashingEnd = true;
+            }
+        }
+
+        if (numberOfDashesLeft < numberOfDashes) 
+        {
+            if (dashChargeCooldownTimeLeft <= 0)
+            {
+                dashChargeCooldownTimeLeft = dashChargeCooldownTime;
+            }
+
+            dashChargeCooldownTimeLeft -= Time.deltaTime;
+            if (dashChargeCooldownTimeLeft <= 0) 
+            {
+                numberOfDashesLeft++;
+            }
+        }
     }
 
     public bool isPlayerAlive()

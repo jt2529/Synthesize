@@ -84,6 +84,17 @@ public class PlayerPhysicsController : MonoBehaviour
         }
     }
 
+    public void OnDash(InputValue value) 
+    {
+        if (stats.numberOfDashesLeft > 0)
+        {
+            stats.numberOfDashesLeft -= 1;
+            stats.isDashing = true;
+            stats.dashTimeLeft = stats.fullDashTime;
+        }
+        
+    }
+
     void FixedUpdate()
     {
 
@@ -180,9 +191,31 @@ public class PlayerPhysicsController : MonoBehaviour
             }
         }
 
-        float targetVelocityX = input.x * stats.GetMoveSpeed();
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-        velocity.y += gravity * Time.deltaTime;
+        if (stats.isDashing)
+        {
+            velocity.x = stats.dashSpeedMultiplier * input.x * stats.GetMoveSpeed();
+            if (stats.isGrounded)
+            { 
+                velocity.y += gravity * Time.deltaTime; 
+            }
+            else 
+            {
+                velocity.y = 0;
+            }
+        }
+        else if(stats.isDashingEnd) //Need this case to slow player down on dash finish
+        {
+            velocity.x = input.x * stats.GetMoveSpeed();
+            velocity.y += gravity * Time.deltaTime;
+            stats.isDashingEnd = false;
+        }
+        else
+        {
+            float targetVelocityX = input.x * stats.GetMoveSpeed();
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            velocity.y += gravity * Time.deltaTime;
+        }
+        
 
         // Player cannot fall faster than our gravity
         if (velocity.y < gravity)
@@ -205,7 +238,8 @@ public class PlayerPhysicsController : MonoBehaviour
     {
         animator.SetBool("isRunning", stats.isRunning);
         animator.SetBool("isGrounded", stats.isGrounded);
-        animator.SetBool("isAlive", stats.isPlayerAlive());   
+        animator.SetBool("isAlive", stats.isPlayerAlive());
+        animator.SetBool("isDashing", stats.isDashing);
     }
 
     void updatePlayerPhysics()
