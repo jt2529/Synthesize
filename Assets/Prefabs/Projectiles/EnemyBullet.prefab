@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898927d930a00a545a05ad755d58affe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 25
   damage: 25
   objectHitBox: {fileID: 61475930546555174}
   destructable: 1
@@ -164,4 +165,7 @@ MonoBehaviour:
   speed: 5
   direction: {x: 0, y: 0}
   isReady: 0
+  velocity: {x: 0, y: 0}
+  weight: 0
+  stunTime: 0
   onDestroy: {fileID: 1460710244819518, guid: f3eb857ad5ae9624da24a6e001174a5d, type: 3}

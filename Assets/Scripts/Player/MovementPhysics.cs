@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class MovementPhysics : MonoBehaviour
 {
 
     private LayerMask collisionMask;
+    private GameObject gameObjectHit;
     const float skinWidth = .023f;
     RaycastOrigins raycastOrigins;
 
@@ -26,7 +28,7 @@ public class MovementPhysics : MonoBehaviour
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles" );
+        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles", "OneWayObstacles" );
     }
 
 
@@ -43,17 +45,71 @@ public class MovementPhysics : MonoBehaviour
 
         if (velocity.x != 0)
         {
-            HorizontalCollisions(ref velocity);
+            HorizontalCollisions(ref velocity, ref gameObjectHit);
         }
         if (velocity.y != 0)
         {
-            VerticalCollisions(ref velocity);
+            VerticalCollisions(ref velocity, ref gameObjectHit);
         }
 
         transform.Translate(velocity);
     }
 
-    void HorizontalCollisions(ref Vector2 velocity)
+    public void Move(Vector2 velocity, PlayerStats playerStats)
+    {
+        UpdateRaycastOrigins();
+        collisions.Reset();
+        collisions.velocityOld = velocity;
+
+        if (playerStats.isDropping)
+        {
+            collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles");
+        }
+        
+        if (velocity.y < 0)
+        {
+            DescendSlope(ref velocity);
+        }
+
+        if (velocity.x != 0)
+        {
+            playerStats.objectTouchingLeft = null;
+            playerStats.objectTouchingRight = null;
+            if (velocity.x > 0)
+            {
+                HorizontalCollisions(ref velocity, ref playerStats.objectTouchingRight);
+            }
+
+            if (velocity.x < 0)
+            {
+                HorizontalCollisions(ref velocity, ref playerStats.objectTouchingLeft);
+            }
+
+        }
+        if (velocity.y != 0)
+        {
+            playerStats.objectTouchingBelow = null;
+            playerStats.objectTouchingAbove = null;
+            if (velocity.y > 0)
+            {
+                VerticalCollisions(ref velocity, ref playerStats.objectTouchingAbove);
+            }
+
+            if (velocity.y < 0)
+            {
+                VerticalCollisions(ref velocity, ref playerStats.objectTouchingBelow);
+            }
+            
+        }
+        transform.Translate(velocity);
+
+        if (playerStats.isDropping)
+        {
+            collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles", "OneWayObstacles");
+        }
+    }
+
+    public void HorizontalCollisions(ref Vector2 velocity, ref GameObject gameObjectHit)
     {
         float directionX = Mathf.Sign(velocity.x);
         float rayLength = Mathf.Abs(velocity.x) + skinWidth;
@@ -110,6 +166,11 @@ public class MovementPhysics : MonoBehaviour
                         collisions.right = directionX == 1;
                     }
                 }
+                if (gameObjectHit == null)
+                {
+                    gameObjectHit = hit.transform.gameObject;
+                }
+                
             }
         }
 
@@ -122,8 +183,7 @@ public class MovementPhysics : MonoBehaviour
         }
     }
 
-
-    void VerticalCollisions(ref Vector2 velocity)
+    public void VerticalCollisions(ref Vector2 velocity, ref GameObject gameObjectHit)
     {
         float directionY = Mathf.Sign(velocity.y);
         float rayLength = Mathf.Abs(velocity.y) + skinWidth;
@@ -138,29 +198,37 @@ public class MovementPhysics : MonoBehaviour
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             if (hit)
-            {    
-                velocity.y = (hit.distance - skinWidth) * directionY;
-                rayLength = hit.distance;
-
-                if (collisions.climbingSlope)
+            {
+                if ((LayerMask.GetMask("OneWayObstacles") & (1 << hit.transform.gameObject.layer)) == 0 || directionY != 1)   //Only collide above if it is not a one-way obstacle
                 {
-                    velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
-                }
+                    velocity.y = (hit.distance - skinWidth) * directionY;
+                    rayLength = hit.distance;
 
-                if (directionY == -1) 
-                {
-                    collisions.below = true;
-                    if (hit.transform.gameObject.GetComponent<MovementPhysics>() != null)
+                    if (collisions.climbingSlope)
                     {
-                        currentVelocity = hit.transform.gameObject.GetComponent<MovementPhysics>().currentVelocity;
+                        velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
                     }
-                        
-                } 
-                else if (directionY == 1)
-                {
-                    collisions.above = true;
+
+                    if (directionY == -1)
+                    {
+                        collisions.below = true;
+                        if (hit.transform.gameObject.GetComponent<MovementPhysics>() != null)
+                        {
+                            currentVelocity = hit.transform.gameObject.GetComponent<MovementPhysics>().currentVelocity;
+                        }
+
+                    }
+                    else if (directionY == 1)
+                    {
+
+                        collisions.above = true;
+                    }
                 }
-                
+
+                if (gameObjectHit == null)
+                {
+                    gameObjectHit = hit.transform.gameObject;
+                }
             }
         }
         velocity += currentVelocity;
@@ -182,6 +250,7 @@ public class MovementPhysics : MonoBehaviour
                 }
             }
         }
+
     }
 
     void ClimbSlope(ref Vector2 velocity, float slopeAngle)

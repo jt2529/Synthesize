@@ -21,6 +21,7 @@ public class PlayerPhysicsController : MonoBehaviour
     float velocityXSmoothing;
 
     private float hInput;
+    private float vInput;
     public float forceUpward;
 
     private Animator animator;
@@ -29,6 +30,7 @@ public class PlayerPhysicsController : MonoBehaviour
 
     private bool jumpBuffered = false;
     private bool jumpReleaseBuffered = false;
+    private bool dropBuffered = false;
     private bool hInputBuffered = false;
 
     // Use this for initialization
@@ -60,6 +62,7 @@ public class PlayerPhysicsController : MonoBehaviour
     public void OnMove(InputValue value)
     {
         hInput = value.Get<Vector2>().x;
+        vInput = value.Get<Vector2>().y;
     }
 
     public void OnLook(InputValue value)
@@ -69,17 +72,30 @@ public class PlayerPhysicsController : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
-        if (value.isPressed) 
+        if (value.isPressed && vInput < 0) 
+        {
+            if (stats.objectTouchingBelow != null && (LayerMask.GetMask("OneWayObstacles") & (1 << stats.objectTouchingBelow.layer)) != 0)
+            {
+                stats.isDropping = true;
+            }
+            else 
+            {
+                jumpBuffered = true;
+                jumpReleaseBuffered = false;
+            }
+            
+        }
+        else if (value.isPressed)
         {
             jumpBuffered = true;
             jumpReleaseBuffered = false;
             //StartCoroutine(JumpBufferExpire(0.10f));
         }
-        else 
+        else
         {
             jumpReleaseBuffered = true;
             jumpBuffered = false;
-            stats.numberOfJumpsLeft -= 1;
+            stats.isDropping = false;
             //StartCoroutine(JumpReleaseBufferExpire(0.10f));
         }
     }
@@ -156,6 +172,7 @@ public class PlayerPhysicsController : MonoBehaviour
             velocity.y = maxJumpVelocity;
             stats.isGrounded = false;
             jumpBuffered = false;
+            stats.numberOfJumpsLeft -= 1;
         }
 
         if (forceUpward > 0) 
@@ -171,10 +188,6 @@ public class PlayerPhysicsController : MonoBehaviour
 
         if (!physics.collisions.below)
         {
-            if (stats.isGrounded) 
-            {
-                stats.numberOfJumpsLeft -= 1;
-            }
             stats.isGrounded = false;
         }
         else 
@@ -223,7 +236,7 @@ public class PlayerPhysicsController : MonoBehaviour
             velocity.y = gravity;
         }
 
-        physics.Move(velocity * Time.deltaTime);
+        physics.Move(velocity * Time.deltaTime, stats);
 
         if(physics.collisions.below)
         {

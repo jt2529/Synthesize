@@ -1224,7 +1224,7 @@ TextureImporter:
       213: 21300812
     second: industrial.v2_406
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -1284,6 +1284,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -1321,6 +1322,30 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1334,9 +1359,13 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 15}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 8, y: -8}
+        - {x: 8, y: -7}
+        - {x: -8, y: -7}
+        - {x: -8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 70827da330d8f34498f4193de79b1733
@@ -1355,9 +1384,14 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 15}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: -7}
+        - {x: 0, y: -7}
+        - {x: 8, y: -7}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 8c21ec947e117cb43ae664c11c816a7b
@@ -1376,9 +1410,13 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 15}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: -7}
+        - {x: 8, y: -7}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 3645fc1935568bc428586c5dbd7d0f94
@@ -1397,9 +1435,13 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 15}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: -7}
+        - {x: 8, y: -7}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 1ad4c762a31b99e4ab9aca6329443657
@@ -9998,9 +10040,9 @@ TextureImporter:
       industrial.v2_318: 21300636
       industrial.v2_13: 21300026
       industrial.v2_3: 21300006
-      industrial.v2_177: 21300354
-      industrial.v2_149: 21300298
       industrial.v2_171: 21300342
+      industrial.v2_149: 21300298
+      industrial.v2_177: 21300354
       industrial.v2_96: 21300192
       industrial.v2_190: 21300380
       industrial.v2_244: 21300488
@@ -10110,13 +10152,13 @@ TextureImporter:
       industrial.v2_4: 21300008
       industrial.v2_391: 21300782
       industrial.v2_37: 21300074
-      industrial.v2_160: 21300320
       industrial.v2_278: 21300556
+      industrial.v2_315: 21300630
       industrial.v2_12: 21300024
       industrial.v2_158: 21300316
       industrial.v2_271: 21300542
-      industrial.v2_315: 21300630
       industrial.v2_6: 21300012
+      industrial.v2_160: 21300320
       industrial.v2_193: 21300386
       industrial.v2_243: 21300486
       industrial.v2_294: 21300588
@@ -10215,8 +10257,8 @@ TextureImporter:
       industrial.v2_71: 21300142
       industrial.v2_213: 21300426
       industrial.v2_242: 21300484
-      industrial.v2_188: 21300376
       industrial.v2_255: 21300510
+      industrial.v2_188: 21300376
       industrial.v2_355: 21300710
       industrial.v2_148: 21300296
       industrial.v2_359: 21300718
@@ -10244,10 +10286,10 @@ TextureImporter:
       industrial.v2_283: 21300566
       industrial.v2_246: 21300492
       industrial.v2_143: 21300286
-      industrial.v2_191: 21300382
       industrial.v2_259: 21300518
       industrial.v2_249: 21300498
       industrial.v2_385: 21300770
+      industrial.v2_191: 21300382
       industrial.v2_376: 21300752
       industrial.v2_187: 21300374
       industrial.v2_88: 21300176
@@ -10259,8 +10301,8 @@ TextureImporter:
       industrial.v2_390: 21300780
       industrial.v2_231: 21300462
       industrial.v2_174: 21300348
-      industrial.v2_267: 21300534
       industrial.v2_386: 21300772
+      industrial.v2_267: 21300534
       industrial.v2_76: 21300152
       industrial.v2_351: 21300702
       industrial.v2_272: 21300544
@@ -10296,8 +10338,8 @@ TextureImporter:
       industrial.v2_214: 21300428
       industrial.v2_43: 21300086
       industrial.v2_264: 21300528
-      industrial.v2_256: 21300512
       industrial.v2_302: 21300604
+      industrial.v2_256: 21300512
       industrial.v2_44: 21300088
       industrial.v2_279: 21300558
       industrial.v2_383: 21300766

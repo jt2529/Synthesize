@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898927d930a00a545a05ad755d58affe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 10
   damage: 10
   objectHitBox: {fileID: 61475930546555174}
   destructable: 1

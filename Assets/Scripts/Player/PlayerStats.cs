@@ -52,10 +52,15 @@ public class PlayerStats : MonoBehaviour
     public bool isRunning;
     public bool isDashing;
     public bool isDashingEnd;
+    public bool isDropping;
 
     public GameObject currentInteractableObject;
     public bool isCurrentInteractableObjectLocked;
     public List<int> keyItems;
+    public GameObject objectTouchingLeft;
+    public GameObject objectTouchingRight;
+    public GameObject objectTouchingAbove;
+    public GameObject objectTouchingBelow;
 
     [SerializeField]
     public bool playerAlive;
