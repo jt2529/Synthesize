@@ -97,7 +97,7 @@ public class MovementPhysics : MonoBehaviour
 
             if (velocity.y < 0)
             {
-                VerticalCollisions(ref velocity, ref playerStats.objectTouchingBelow);
+                 VerticalCollisions(ref velocity, ref playerStats.objectTouchingBelow);
             }
             
         }
@@ -164,6 +164,7 @@ public class MovementPhysics : MonoBehaviour
 
                         collisions.left = directionX == -1;
                         collisions.right = directionX == 1;
+                        collisions.wallSlope = slopeAngle;
                     }
                 }
                 if (gameObjectHit == null)
@@ -334,7 +335,7 @@ public class MovementPhysics : MonoBehaviour
         public bool left, right;
         public bool climbingSlope;
         public bool descendingSlope;
-        public float slopeAngle, slopeAngleOld;
+        public float slopeAngle, slopeAngleOld, wallSlope;
         public Vector3 velocityOld;
 
         public void Reset()
@@ -345,6 +346,7 @@ public class MovementPhysics : MonoBehaviour
             descendingSlope = false;
             slopeAngleOld = slopeAngle;
             slopeAngle = 0;
+            wallSlope = 0;
         }
     }
 }

@@ -22,6 +22,10 @@ public class PlayerStats : MonoBehaviour
     public int numberOfJumpsLeft;
     public float timeToJumpApex;
 
+    public float wallJumpPower;
+    public float wallJumpHeight;
+    public float wallSlideSpeedDampener;
+
     public int numberOfDashes;
     public int numberOfDashesLeft;
     public float fullDashTime;
@@ -53,6 +57,7 @@ public class PlayerStats : MonoBehaviour
     public bool isDashing;
     public bool isDashingEnd;
     public bool isDropping;
+    public bool isWallSliding;
 
     public GameObject currentInteractableObject;
     public bool isCurrentInteractableObjectLocked;

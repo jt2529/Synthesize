@@ -26,11 +26,10 @@ public class PlayerPhysicsController : MonoBehaviour
 
     private Animator animator;
     private AudioSource sound;
-    MovementPhysics physics;
+    private MovementPhysics physics;
 
     private bool jumpBuffered = false;
     private bool jumpReleaseBuffered = false;
-    private bool dropBuffered = false;
     private bool hInputBuffered = false;
 
     // Use this for initialization
@@ -141,7 +140,7 @@ public class PlayerPhysicsController : MonoBehaviour
         // hInput is NOT buffered
         if (!hInputBuffered)
         {
-            
+            stats.isWallSliding = false;
             stats.isRunning = false;
         }
         else //hInput is buffered
@@ -165,14 +164,41 @@ public class PlayerPhysicsController : MonoBehaviour
                 //sprite.flipX = true;
                 stats.facingRight = false;
             }
+
+            if ((stats.objectTouchingLeft != null || stats.objectTouchingRight != null) && physics.collisions.wallSlope == 90)
+            {
+                stats.isWallSliding = true;
+            }
+            else 
+            { 
+                stats.isWallSliding = false; 
+            }
         }
 
-        if (jumpBuffered && (physics.collisions.below || stats.numberOfJumpsLeft > 0))
+
+
+        if (jumpBuffered && (physics.collisions.below || stats.isWallSliding || stats.numberOfJumpsLeft > 0))
         {
             velocity.y = maxJumpVelocity;
             stats.isGrounded = false;
             jumpBuffered = false;
-            stats.numberOfJumpsLeft -= 1;
+            if (stats.isWallSliding && !physics.collisions.below)
+            {
+                if (stats.objectTouchingLeft != null)
+                {
+                    velocity.x = stats.wallJumpPower;
+                }
+                else 
+                {
+                    velocity.x = stats.wallJumpPower * -1;
+                }
+                
+                velocity.y = stats.wallJumpHeight;
+            }
+            else
+            {
+                stats.numberOfJumpsLeft -= 1;
+            }
         }
 
         if (forceUpward > 0) 
@@ -193,6 +219,7 @@ public class PlayerPhysicsController : MonoBehaviour
         else 
         {
             stats.numberOfJumpsLeft = stats.numberOfJumps;
+            stats.isWallSliding = false;
         }
 
         if (jumpReleaseBuffered)
@@ -229,11 +256,16 @@ public class PlayerPhysicsController : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
         }
         
-
+                    
         // Player cannot fall faster than our gravity
         if (velocity.y < gravity)
         {
             velocity.y = gravity;
+        }
+
+        if (stats.isWallSliding && velocity.y < 0)
+        {
+            velocity.y += stats.wallSlideSpeedDampener * Time.deltaTime;
         }
 
         physics.Move(velocity * Time.deltaTime, stats);
@@ -241,7 +273,6 @@ public class PlayerPhysicsController : MonoBehaviour
         if(physics.collisions.below)
         {
             stats.isGrounded = true;
-            
         }
 
         updateAnimationState();
@@ -253,6 +284,7 @@ public class PlayerPhysicsController : MonoBehaviour
         animator.SetBool("isGrounded", stats.isGrounded);
         animator.SetBool("isAlive", stats.isPlayerAlive());
         animator.SetBool("isDashing", stats.isDashing);
+        animator.SetBool("isWallSliding", stats.isWallSliding);
     }
 
     void updatePlayerPhysics()

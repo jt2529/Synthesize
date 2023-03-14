@@ -60,9 +60,19 @@ MonoBehaviour:
   jumpHeightMultipler: 1
   minJumpHeight: 0
   maxJumpHeight: 2.2
-  numberOfJumps: 2
+  numberOfJumps: 5
   numberOfJumpsLeft: 1
   timeToJumpApex: 0.45
+  wallJumpPower: 15
+  wallJumpHeight: 9
+  wallSlideSpeedDampener: 15
+  numberOfDashes: 5
+  numberOfDashesLeft: 0
+  fullDashTime: 0.15
+  dashTimeLeft: 0
+  dashSpeedMultiplier: 4
+  dashChargeCooldownTime: 2
+  dashChargeCooldownTimeLeft: 0
   baseMoveSpeed: 4
   moveSpeedMultipler: 1
   moveSpeed: 4
@@ -78,9 +88,17 @@ MonoBehaviour:
   isAbleToAttack: 0
   isGrounded: 0
   isRunning: 0
+  isDashing: 0
+  isDashingEnd: 0
+  isDropping: 0
+  isWallSliding: 0
   currentInteractableObject: {fileID: 0}
   isCurrentInteractableObjectLocked: 0
   keyItems: 
+  objectTouchingLeft: {fileID: 0}
+  objectTouchingRight: {fileID: 0}
+  objectTouchingAbove: {fileID: 0}
+  objectTouchingBelow: {fileID: 0}
   playerAlive: 1
   facingRight: 1
   currentSpeed: {x: 0, y: 0}
@@ -97,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accelerationTimeAirborne: 0.2
-  accelerationTimeGrounded: 0.05
+  accelerationTimeGrounded: 0.1
   gravity: -21.728397
   forceUpward: 0
 --- !u!212 &212520685325539296
