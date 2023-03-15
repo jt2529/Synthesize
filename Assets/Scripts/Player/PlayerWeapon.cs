@@ -9,7 +9,7 @@ public class PlayerWeapon : MonoBehaviour
     public List<Collider2D> enemyCollisions;
     public int damage;
     private bool isAttacking;
-    private List<string> enemyCollisionTracker;
+    private List<int> enemyCollisionTracker;
     public PlayerStats stats;
     public float knockbackPower;
     public float stunTime;
@@ -22,7 +22,7 @@ public class PlayerWeapon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        enemyCollisionTracker = new List<string>();
+        enemyCollisionTracker = new List<int>();
         stats = gameObject.GetComponentInParent<PlayerStats>();
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(LayerMask.GetMask("Enemy"));
@@ -41,7 +41,7 @@ public class PlayerWeapon : MonoBehaviour
             {
                 foreach (Collider2D enemyCollision in enemyCollisions)
                 {
-                    if (!enemyCollisionTracker.Contains(enemyCollision.name)) 
+                    if (!enemyCollisionTracker.Contains(enemyCollision.GetInstanceID())) 
                     {
                         directionalKnockbackVector = knockbackVector * stats.knockbackMultiplier;
                         if (!stats.facingRight)
@@ -51,7 +51,7 @@ public class PlayerWeapon : MonoBehaviour
 
                         int hitDamage = (int)(damage * stats.meleeDamageMultiplier);
                         enemyCollision.GetComponent<EnemyStats>().Attack(hitDamage, directionalKnockbackVector, stunTime);
-                        enemyCollisionTracker.Add(enemyCollision.name);
+                        enemyCollisionTracker.Add(enemyCollision.GetInstanceID());
                     }
                     
                 }
@@ -68,6 +68,6 @@ public class PlayerWeapon : MonoBehaviour
     {
         isAttacking = false;
         collider.enabled = false;
-        enemyCollisionTracker = new List<string>();
+        enemyCollisionTracker.Clear();
     }
 }

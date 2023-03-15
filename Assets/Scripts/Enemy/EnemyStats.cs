@@ -12,6 +12,7 @@ public class EnemyStats : MonoBehaviour {
     public float timeToJumpApex;
     public float weight;
     public float fireRate;
+    public float aggroDistance;
     public HealthBar healthBar;
     public Vector2 force;
     public float stunTimer;
@@ -70,7 +71,15 @@ public class EnemyStats : MonoBehaviour {
     }
 
     public void DropRewards() 
-    { 
+    {
+        if (rewards > 0) 
+        {
+            GameController gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+            for (int i = 0; i < rewards; i++)
+            {
+                gameController.DropLoot(transform.position);
+            }
+        }
         
     }
 }

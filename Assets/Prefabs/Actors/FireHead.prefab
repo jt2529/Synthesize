@@ -280,6 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898927d930a00a545a05ad755d58affe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 0
   damage: 50
   objectHitBox: {fileID: 8379519939015996364}
   destructable: 0
@@ -298,10 +299,12 @@ MonoBehaviour:
   maxHealth: 300
   moveSpeed: 0.5
   health: 400
+  rewards: 0
   jumpHeight: 4
   timeToJumpApex: 4
   weight: 10
   fireRate: 0.5
+  aggroDistance: 10
   healthBar: {fileID: 382064299}
   force: {x: 0, y: 0}
   stunTimer: 0

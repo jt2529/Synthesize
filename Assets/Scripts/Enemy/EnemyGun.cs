@@ -17,7 +17,10 @@ public class EnemyGun : MonoBehaviour {
     }
 
     public void FireBullet() {
-
+        if (aimAtObject == null)
+        {
+            aimAtObject = GameObject.FindGameObjectWithTag("Player");
+        }
         if (aimAtObject != null && !stats.isStunned) {
 
             GameObject bullet = (GameObject)Instantiate(EnemyBullet);

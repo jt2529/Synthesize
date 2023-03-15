@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class KeyItem : MonoBehaviour , Interactable
 {
-    public GameObject otherPortal;
-    public bool isInteractable;
     public int keyItemNumber;
     // Start is called before the first frame update
     void Start()

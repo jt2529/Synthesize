@@ -28,6 +28,10 @@ public class EnemyPhysicsController : MonoBehaviour {
         physics = GetComponent <MovementPhysics>();
         gravity = -(2 * stats.jumpHeight) / Mathf.Pow(stats.timeToJumpApex, 2);
         jumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.jumpHeight);
+        if (moveTowardsObject == null)
+        {
+            moveTowardsObject = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 	
 	// Update is called once per frame
@@ -128,7 +132,8 @@ public class EnemyPhysicsController : MonoBehaviour {
         physics.Move(velocity * Time.deltaTime);
     }
 
-    private void FindTargetLocation() {
+    private void FindTargetLocation() 
+    {
         Vector2 direction = moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min - collider.bounds.min;
         Vector2 positionTo;
         if (direction.x >= 0)
@@ -139,7 +144,17 @@ public class EnemyPhysicsController : MonoBehaviour {
         {
             positionTo = new Vector2(moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.x, moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.y);
         }
-        
+
+        float distance = Vector2.Distance(positionTo, transform.position);
+        if (Mathf.Abs(distance) > stats.aggroDistance)
+        {
+            stats.isStunned = true;
+        }
+        else 
+        {
+            stats.isStunned = false;
+        }
+
         if (direction.x >= 0)
         {
             targetLocation.x = positionTo.x - xDistanceFromObject;

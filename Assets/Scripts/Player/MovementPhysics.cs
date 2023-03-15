@@ -24,7 +24,7 @@ public class MovementPhysics : MonoBehaviour
     public CollisionInfo collisions; 
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
