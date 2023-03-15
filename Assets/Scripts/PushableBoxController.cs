@@ -52,7 +52,7 @@ public class PushableBoxController : MonoBehaviour, Interactable {
         isBeingMoved = !isBeingMoved;
         if (isBeingMoved)
         {
-            playerStats.isCurrentInteractableObjectLocked = true;
+            playerStats.currentInteractableObjectLocked = this;
             Vector3 translation = new Vector3(playerObject.transform.position.x - transform.position.x, playerObject.transform.position.y - transform.position.y + pickupOffset, 0);
             transform.Translate(translation); 
             transform.SetParent(playerObject.transform);
@@ -60,7 +60,7 @@ public class PushableBoxController : MonoBehaviour, Interactable {
         }
         else 
         {
-            playerStats.isCurrentInteractableObjectLocked = false;
+            playerStats.currentInteractableObjectLocked = null;
             transform.SetParent(null);
             velocity.y = 0;
         }
@@ -71,16 +71,16 @@ public class PushableBoxController : MonoBehaviour, Interactable {
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
         if (isInteractable && playerStats != null)
         {
-            playerStats.currentInteractableObject = this.gameObject;
+            playerStats.currentInteractableObjects.Add(this.gameObject);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
-        if (isInteractable && playerStats != null && playerStats.currentInteractableObject == this.gameObject)
+        if (isInteractable && playerStats != null)
         {
-            playerStats.currentInteractableObject = null;
+            playerStats.currentInteractableObjects.RemoveAt(playerStats.currentInteractableObjects.IndexOf(this.gameObject));
             //isBeingMoved = false;
         }
     }

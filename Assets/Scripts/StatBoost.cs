@@ -24,9 +24,9 @@ public class StatBoost : MonoBehaviour , Interactable
     {
 
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
-        if (playerStats != null && !playerStats.isCurrentInteractableObjectLocked) 
+        if (playerStats != null) 
         {
-            playerStats.currentInteractableObject = this.gameObject;
+            playerStats.currentInteractableObjects.Add(this.gameObject);
         }
     }
 
@@ -35,10 +35,7 @@ public class StatBoost : MonoBehaviour , Interactable
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
         if (playerStats != null) 
         {
-            if (playerStats.currentInteractableObject == this.gameObject)
-            {
-                playerStats.currentInteractableObject = null;
-            }
+             playerStats.currentInteractableObjects.RemoveAt(playerStats.currentInteractableObjects.IndexOf(this.gameObject));
         }
     }
 

@@ -59,8 +59,8 @@ public class PlayerStats : MonoBehaviour
     public bool isDropping;
     public bool isWallSliding;
 
-    public GameObject currentInteractableObject;
-    public bool isCurrentInteractableObjectLocked;
+    public List<GameObject> currentInteractableObjects;
+    public Interactable currentInteractableObjectLocked;
     public List<int> keyItems;
     public GameObject objectTouchingLeft;
     public GameObject objectTouchingRight;

@@ -143,12 +143,22 @@ public class PlayerAbilitiesController : MonoBehaviour {
 
     void TriggerInteract() 
     {
-        if (stats.currentInteractableObject != null) 
+        if (stats.currentInteractableObjects.Count > 0) 
         {
-            Interactable[] interactableObjects = stats.currentInteractableObject.GetComponents<Interactable>();
-            foreach (Interactable interactableObject in interactableObjects)
+            if (stats.currentInteractableObjectLocked != null)
             {
-                interactableObject.Interact(this.gameObject);
+                stats.currentInteractableObjectLocked.Interact(this.gameObject);
+            }
+            else 
+            {
+                Interactable[] interactableObjects = stats.currentInteractableObjects[stats.currentInteractableObjects.Count - 1].GetComponents<Interactable>();
+                foreach (Interactable interactableObject in interactableObjects)
+                {
+                    if (stats.currentInteractableObjectLocked == null || stats.currentInteractableObjectLocked == interactableObject)
+                    {
+                        interactableObject.Interact(this.gameObject);
+                    }
+                }
             }
         }
     }
