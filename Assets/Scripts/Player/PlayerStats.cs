@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     // These will all be modifiable by the player's active chord modifiers
 
     public Vector2 aimingDirection;
+    static GameObject playerObject;
     
 
     [SerializeField]
@@ -77,6 +78,16 @@ public class PlayerStats : MonoBehaviour
     //Set variable values here
     private void Awake()
     {
+        if (playerObject == null)
+        {
+            playerObject = this.gameObject;
+            GameObject.DontDestroyOnLoad(this.gameObject);
+        }
+        else 
+        {
+            Destroy(this.gameObject);
+        }
+        
         maxHealth = baseMaxHealth;
         aimingDirection.x = 1;
         aimingDirection.y = 0;

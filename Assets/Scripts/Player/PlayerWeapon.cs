@@ -50,7 +50,7 @@ public class PlayerWeapon : MonoBehaviour
                         }
 
                         int hitDamage = (int)(damage * stats.meleeDamageMultiplier);
-                        enemyCollision.GetComponent<EnemyStats>().Attack(hitDamage, directionalKnockbackVector, stunTime);
+                        enemyCollision.GetComponent<EnemyStats>().ReceiveAttack(hitDamage, directionalKnockbackVector, stunTime);
                         enemyCollisionTracker.Add(enemyCollision.GetInstanceID());
                     }
                     

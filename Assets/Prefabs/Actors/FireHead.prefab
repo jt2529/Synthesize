@@ -302,7 +302,7 @@ MonoBehaviour:
   rewards: 0
   jumpHeight: 4
   timeToJumpApex: 4
-  weight: 10
+  weight: 8
   fireRate: 0.5
   aggroDistance: 10
   healthBar: {fileID: 382064299}

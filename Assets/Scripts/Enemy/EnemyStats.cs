@@ -45,7 +45,7 @@ public class EnemyStats : MonoBehaviour {
         }
     }
 
-    public void Attack(int damage, Vector2 knockbackForce, float stunTime) 
+    public void ReceiveAttack(int damage, Vector2 knockbackForce, float stunTime) 
     {
         ChangeHealth(damage);   //Damage the enemy
         force += knockbackForce; //Add a knockback force to the enemy (referenced by Enemy Physics Controller)
@@ -77,7 +77,7 @@ public class EnemyStats : MonoBehaviour {
             GameController gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
             for (int i = 0; i < rewards; i++)
             {
-                gameController.DropLoot(transform.position);
+                GameController.gameControllerInstance.DropLoot(transform.position);
             }
         }
         
