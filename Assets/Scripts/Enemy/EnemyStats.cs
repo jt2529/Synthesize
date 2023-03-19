@@ -77,7 +77,7 @@ public class EnemyStats : MonoBehaviour {
             GameController gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
             for (int i = 0; i < rewards; i++)
             {
-                GameController.gameControllerInstance.DropLoot(transform.position);
+                gameController.DropLoot(transform.position);
             }
         }
         

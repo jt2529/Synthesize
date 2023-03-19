@@ -6,14 +6,13 @@ using UnityEngine.SceneManagement;
 public class EscapeMenu : MonoBehaviour
 {
 
-    GameObject[] menuObjects;
-    bool isOpen;
+    public GameObject[] menuObjects;
+    public bool isOpen;
 
     // Use this for initialization
     void Start()
     {
         isOpen = false;
-        menuObjects = GameObject.FindGameObjectsWithTag("MenuItem");
         hideMenu();
     }
 
@@ -28,11 +27,13 @@ public class EscapeMenu : MonoBehaviour
     {
         if (isOpen)
         {
+            Time.timeScale = 1;
             hideMenu();
             isOpen = false;
         }
         else
         {
+            Time.timeScale = 0;
             showMenu();
             isOpen = true;
         }
@@ -58,6 +59,7 @@ public class EscapeMenu : MonoBehaviour
 
     public void ReloadScene()
     {
+        Time.timeScale = 1;
         Scene scene =SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }

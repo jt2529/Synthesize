@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
-    public static GameController gameControllerInstance;
     public List<Transform> enemySpawnPoints;
     public List<Transform> keySpawnPoints;
     public List<GameObject> enemyPrefabs;
@@ -17,14 +15,6 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (gameControllerInstance != null && gameControllerInstance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            gameControllerInstance = this;
-        }
         SpawnEnemies();
         SpawnKeys();
     }

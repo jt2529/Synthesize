@@ -13,6 +13,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
     public int[] lastThreeNotes;
     public EscapeMenu menu;
     public Camera mainCamera;
+    public PlayerInput input;
 
     private Animator state;
     private MovementPhysics controller;
@@ -124,6 +125,20 @@ public class PlayerAbilitiesController : MonoBehaviour {
         else 
         {
             state.SetBool("JumpAttack", true);
+        }
+    }
+
+    private void OnPause(InputValue value)
+    {
+        
+        menu.MenuControl();
+        if (menu.isOpen)
+        {
+            input.SwitchCurrentActionMap("UI");
+        }
+        else 
+        {
+            input.SwitchCurrentActionMap("Player");
         }
     }
 
