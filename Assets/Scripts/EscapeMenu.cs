@@ -39,6 +39,17 @@ public class EscapeMenu : MonoBehaviour
         }
     }
 
+    public void Save() 
+    {
+        GameController.controllerInstance.Save();
+        
+    }
+
+    public void Load()
+    {
+        GameController.controllerInstance.LoadScene(GameController.controllerInstance.gameData.activeSceneName, true);
+    }
+
     //shows objects with ShowOnPause tag
     public void showMenu()
     {
@@ -59,8 +70,6 @@ public class EscapeMenu : MonoBehaviour
 
     public void ReloadScene()
     {
-        Time.timeScale = 1;
-        Scene scene =SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        GameController.controllerInstance.LoadScene(GameController.controllerInstance.gameData.activeSceneName, false);
     }
 }

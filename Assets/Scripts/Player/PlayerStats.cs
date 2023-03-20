@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerStats : MonoBehaviour
 {
-
-    // These will all be modifiable by the player's active chord modifiers
-
     public Vector2 aimingDirection;
     
-
-    [SerializeField]
-    private int health;
-
+    public int health;
     public float baseMaxJumpHeight;
     public float jumpHeightMultipler;
     public float minJumpHeight;
