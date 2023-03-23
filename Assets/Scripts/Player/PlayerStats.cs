@@ -6,51 +6,61 @@ public class PlayerStats : MonoBehaviour
 {
 
     // These will all be modifiable by the player's active chord modifiers
-
+    [HideInInspector]
     public Vector2 aimingDirection;
-    
 
+    [Header("Core")]
     [SerializeField]
     private int health;
-
-    public float baseMaxJumpHeight;
-    public float jumpHeightMultipler;
-    public float minJumpHeight;
-    public  float maxJumpHeight;
-
-    public int numberOfJumps;
-    public int numberOfJumpsLeft;
-    public float timeToJumpApex;
-
-    public int numberOfDashes;
-    public int numberOfDashesLeft;
-    public float fullDashTime;
-    public float dashTimeLeft;
-    public float dashSpeedMultiplier;
-    public float dashChargeCooldownTime;
-    public float dashChargeCooldownTimeLeft;
-
+    public int baseMaxHealth;
+    public float maxHealthMultiplier;
+    public int maxHealth;
     public float baseMoveSpeed;
     public float moveSpeedMultipler;
     public float moveSpeed;
 
+    [Space(10)]
+    [Header("Jump")]
+    public float baseMaxJumpHeight;
+    public float jumpHeightMultipler;
+    public float minJumpHeight;
+    public  float maxJumpHeight;
+    public int numberOfJumps;
+    [HideInInspector] public int numberOfJumpsLeft;
+    public float timeToJumpApex;
+
+    [Space(10)]
+
+    [Header("Dash")]
+    public int numberOfDashes;
+    [HideInInspector] public int numberOfDashesLeft;
+    public float fullDashTime;
+    [HideInInspector] public float dashTimeLeft;
+    public float dashSpeedMultiplier;
+    public float dashChargeCooldownTime;
+    [HideInInspector] public float dashChargeCooldownTimeLeft;
+
+    [Space(10)]
+    [Header("Combat")]
     public float damageMultipler;
-
     public float knockbackMultiplier;
-
-    public int baseMaxHealth;
-    public float maxHealthMultiplier;
-    public int maxHealth;
-
     public float meleeDamageMultiplier;
     public float rangedDamageMultiplier;
 
+    [Space(10)]
+    [Header("Status")]
     public bool playerInvulnerable;
+    [HideInInspector]
     public bool isTeleporting;
+    [HideInInspector]
     public bool isAbleToAttack;
+    [HideInInspector]
     public bool isGrounded;
+    [HideInInspector]
     public bool isRunning;
+    [HideInInspector]
     public bool isDashing;
+    [HideInInspector]
     public bool isDashingEnd;
 
     public GameObject currentInteractableObject;
