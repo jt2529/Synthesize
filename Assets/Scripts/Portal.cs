@@ -9,6 +9,10 @@ public class Portal : MonoBehaviour , Interactable
     public bool isInteractable;
     public int keyItemsToUnlock;
     public bool unlocked;
+
+    // Events
+    public GameEventScriptableObject portalEntered;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +51,9 @@ public class Portal : MonoBehaviour , Interactable
             {
                 if (!playerStats.isTeleporting)
                 {
+                    // notify listeners that the player entered a portal
+                    portalEntered.Raise();
+
                     collision.transform.position = otherPortal.transform.position;
                 }
 
