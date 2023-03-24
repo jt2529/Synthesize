@@ -17,7 +17,7 @@ MonoBehaviour:
   physicalStat: {fileID: 11400000, guid: 9d0ce6235da16584d9a2c0bfe2c36579, type: 2}
   luckStat: {fileID: 11400000, guid: 5dcda26b3d34f0248ae0e3a19414c61d, type: 2}
   profileName: Basic Physical
-  mentalBonus: 4
+  mentalBonus: 6
   socialBonus: 1
   physicalBonus: 9
   luckBonus: 2
