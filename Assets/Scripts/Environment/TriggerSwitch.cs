@@ -50,4 +50,13 @@ public class TriggerSwitch : MonoBehaviour {
         }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        foreach (Toggler t in targets)
+        {
+            Gizmos.DrawLine(transform.position, t.transform.position);
+        }
+
+    }
+
 }
