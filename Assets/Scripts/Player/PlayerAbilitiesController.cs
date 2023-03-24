@@ -34,46 +34,6 @@ public class PlayerAbilitiesController : MonoBehaviour {
         };
     }
 	
-	// Update is called once per frame
-	void Update () {
-        /*if (!stats.isPlayerAlive())
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            menu.MenuControl();
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            if(controller.collisions.below)
-            {
-                attack();
-            } else
-            {
-                jumpAttack();
-            }
-        }
-
-        for (int i = 0; i < noteMap.Count; i++)
-        {
-            if (Input.GetKeyDown(noteMap[i]))
-            {
-                keytar.Play(i);
-            }
-            else if (Input.GetKeyUp(noteMap[i]))
-            {
-                keytar.Release(i);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            lastThreeNotes = keytar.GetLastPlayed();
-        }*/
-    }
 
     void OnInteract(InputValue value) 
     {

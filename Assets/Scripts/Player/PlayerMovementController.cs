@@ -2,9 +2,14 @@
 using System.Collections;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerPhysicsController))]
-public class PlayerPhysicsController : MonoBehaviour
+[RequireComponent(typeof(PlayerMovementController))]
+public class PlayerMovementController : MonoBehaviour
 {
+
+    public PlayerControls playerControls;
+
+    private InputAction move;
+    private InputAction jump;
 
     PlayerStats stats;
     public float accelerationTimeAirborne = .1f;
@@ -31,8 +36,29 @@ public class PlayerPhysicsController : MonoBehaviour
     private bool jumpReleaseBuffered = false;
     private bool hInputBuffered = false;
 
-    // Use this for initialization
-    void Start()
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
+
+    private void OnEnable()
+    {
+        move = playerControls.Player.Move;
+        move.Enable();
+
+        jump = playerControls.Player.Jump;
+        jump.Enable();
+
+    }
+
+    private void OnDisable()
+    {
+        move.Disable();
+        jump.Disable();
+    }
+
+        // Use this for initialization
+        void Start()
     {
         physics = GetComponent<MovementPhysics>();
         stats = GetComponent<PlayerStats>();
@@ -57,9 +83,9 @@ public class PlayerPhysicsController : MonoBehaviour
         }
     }
 
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
-        hInput = value.Get<Vector2>().x;
+        hInput = context.ReadValue<Vector2>().x;
     }
 
     public void OnLook(InputValue value)
@@ -109,7 +135,7 @@ public class PlayerPhysicsController : MonoBehaviour
 
         updatePlayerPhysics();
 
-        hInput = Input.GetAxisRaw("Horizontal");
+        hInput = move.ReadValue<Vector2>().x;
 
         if (physics.collisions.above || physics.collisions.below)
         {
@@ -120,7 +146,7 @@ public class PlayerPhysicsController : MonoBehaviour
             }
         }
 
-        Vector2 input = new Vector2(hInput, Input.GetAxisRaw("Vertical"));
+        Vector2 input = new Vector2(hInput, jump.ReadValue<int>());
         
         // hInput is NOT buffered
         if (!hInputBuffered)

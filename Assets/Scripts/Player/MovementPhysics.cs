@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class MovementPhysics : MonoBehaviour
@@ -19,7 +20,7 @@ public class MovementPhysics : MonoBehaviour
     public float maxDescendAngle = 75;
 
     BoxCollider2D collider;
-    public CollisionInfo collisions; 
+    public CollisionInfo collisions;
 
     // Use this for initialization
     void Start()

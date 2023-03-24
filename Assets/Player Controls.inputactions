@@ -1,5 +1,5 @@
 {
-    "name": "InputActions",
+    "name": "Player Controls",
     "maps": [
         {
             "name": "Player",
@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
+                    "name": "Fire Primary",
                     "type": "Button",
                     "id": "094e9157-e4c9-4cca-b8af-893e660ae501",
                     "expectedControlType": "Button",
@@ -60,16 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "FireMouse",
-                    "type": "Button",
-                    "id": "51dad2eb-74c4-47bb-bf12-cfb3084f5064",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SecondaryFire",
+                    "name": "Fire Secondary",
                     "type": "Button",
                     "id": "03265a96-cbd6-4965-a2a4-71b8b7a91c31",
                     "expectedControlType": "Button",
@@ -251,7 +242,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Fire",
+                    "action": "Fire Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -262,7 +253,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Touch",
-                    "action": "Fire",
+                    "action": "Fire Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -273,7 +264,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Joystick",
-                    "action": "Fire",
+                    "action": "Fire Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -284,7 +275,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
-                    "action": "Fire",
+                    "action": "Fire Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -334,34 +325,23 @@
                 },
                 {
                     "name": "",
-                    "id": "722e3780-0fc6-4755-9098-508643b6280e",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "FireMouse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "7999a61c-4e1b-4cf2-8e0f-3c8d1a06df32",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "SecondaryFire",
+                    "groups": "Gamepad",
+                    "action": "Fire Secondary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "33ed3de5-2adb-4f4b-bacd-aa916aaf33a5",
+                    "id": "12990d2d-1057-4015-9f0e-3a2c3373eb91",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SecondaryFire",
+                    "action": "Fire Secondary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -384,6 +364,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "722e3780-0fc6-4755-9098-508643b6280e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Fire Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

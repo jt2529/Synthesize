@@ -18,7 +18,7 @@ public class JumpPad : MonoBehaviour
     {
         if (jumpActivated != true)
         {
-            PlayerPhysicsController playerPhysicsController = (PlayerPhysicsController)collision.GetComponentInParent(typeof(PlayerPhysicsController));
+            PlayerMovementController playerPhysicsController = (PlayerMovementController)collision.GetComponentInParent(typeof(PlayerMovementController));
             if (playerPhysicsController)
             {
                 playerPhysicsController.forceUpward = jumpPadPower;
@@ -33,7 +33,7 @@ public class JumpPad : MonoBehaviour
     {
         if (jumpActivated == true)
         {
-            PlayerPhysicsController playerPhysicsController = (PlayerPhysicsController)collision.GetComponentInParent(typeof(PlayerPhysicsController));
+            PlayerMovementController playerPhysicsController = (PlayerMovementController)collision.GetComponentInParent(typeof(PlayerMovementController));
             if (playerPhysicsController)
             {
                 if (playerPhysicsController.getJumpBuffered()) ;

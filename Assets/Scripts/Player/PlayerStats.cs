@@ -70,7 +70,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     [SerializeField]
     public bool playerAlive;
     public bool facingRight;
-    private Transform currentTransform;
+    //private Transform currentTransform;
     private Vector3 oldPosition;
     public Vector2 currentSpeed;
 
@@ -102,8 +102,8 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
         refreshCoreStats();
         numberOfDashesLeft = numberOfDashes;
 
-        currentTransform = GetComponent<Transform>();
-        oldPosition = currentTransform.position;
+        oldPosition = transform.position;
+        currentSpeed = Vector2.zero;
         currentSpeed.x = 0;
         currentSpeed.y = 0;
     }
@@ -120,9 +120,9 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
 
     void FixedUpdate()
     {
-        currentSpeed.x = Mathf.Abs(currentTransform.position.x - oldPosition.x);
-        currentSpeed.y = Mathf.Abs(currentTransform.position.x - oldPosition.x);
-        oldPosition = currentTransform.position;
+        currentSpeed.x = Mathf.Abs(transform.position.x - oldPosition.x);
+        currentSpeed.y = Mathf.Abs(transform.position.x - oldPosition.x);
+        oldPosition = transform.position;
         if (isDashing) 
         {
             dashTimeLeft -= Time.deltaTime;
