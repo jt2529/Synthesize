@@ -45,9 +45,11 @@ public class PlayerMovementController : MonoBehaviour
     {
         move = playerControls.Player.Move;
         move.Enable();
+        
 
         jump = playerControls.Player.Jump;
         jump.Enable();
+        jump.performed += OnJump;
 
     }
 
@@ -83,19 +85,14 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        hInput = context.ReadValue<Vector2>().x;
-    }
-
     public void OnLook(InputValue value)
     {
         stats.aimingDirection = value.Get<Vector2>();
     }
 
-    public void OnJump(InputValue value)
+    public void OnJump(InputAction.CallbackContext context)
     {
-        if (value.isPressed) 
+        if (context.performed) 
         {
             jumpBuffered = true;
             jumpReleaseBuffered = false;
@@ -135,8 +132,6 @@ public class PlayerMovementController : MonoBehaviour
 
         updatePlayerPhysics();
 
-        hInput = move.ReadValue<Vector2>().x;
-
         if (physics.collisions.above || physics.collisions.below)
         {
             velocity.y = 0;
@@ -146,7 +141,7 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
 
-        Vector2 input = new Vector2(hInput, jump.ReadValue<int>());
+        //Vector2 input = new Vector2(move.ReadValue<Vector2>().x, jump.ReadValue<float>());
         
         // hInput is NOT buffered
         if (!hInputBuffered)
@@ -177,11 +172,17 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
 
+        if(jumpBuffered && stats.numberOfJumpsLeft <= 0)
+        {
+            jumpBuffered = false;
+        }
+
         if (jumpBuffered && (physics.collisions.below || stats.numberOfJumpsLeft > 0))
         {
             velocity.y = maxJumpVelocity;
             stats.isGrounded = false;
             jumpBuffered = false;
+            stats.numberOfJumpsLeft -= 1;
         }
 
         if (forceUpward > 0) 
@@ -219,7 +220,7 @@ public class PlayerMovementController : MonoBehaviour
 
         if (stats.isDashing)
         {
-            velocity.x = stats.dashSpeedMultiplier * input.x * stats.GetMoveSpeed();
+            velocity.x = stats.dashSpeedMultiplier * move.ReadValue<Vector2>().x * stats.GetMoveSpeed();
             if (stats.isGrounded)
             { 
                 velocity.y += gravity * Time.deltaTime; 
@@ -231,13 +232,13 @@ public class PlayerMovementController : MonoBehaviour
         }
         else if(stats.isDashingEnd) //Need this case to slow player down on dash finish
         {
-            velocity.x = input.x * stats.GetMoveSpeed();
+            velocity.x = move.ReadValue<Vector2>().x * stats.GetMoveSpeed();
             velocity.y += gravity * Time.deltaTime;
             stats.isDashingEnd = false;
         }
         else
         {
-            float targetVelocityX = input.x * stats.GetMoveSpeed();
+            float targetVelocityX = move.ReadValue<Vector2>().x * stats.GetMoveSpeed();
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
             velocity.y += gravity * Time.deltaTime;
         }
@@ -273,31 +274,6 @@ public class PlayerMovementController : MonoBehaviour
         gravity = -(2 * stats.GetMaxJumpHeight()) / Mathf.Pow(stats.GetTimeToJumpApex(), 2);
         maxJumpVelocity = Mathf.Abs(gravity) * stats.GetTimeToJumpApex();
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.GetMinJumpHeight());
-    }
-
-    IEnumerator JumpBufferExpire(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-        if(jumpBuffered == true)
-        {
-            jumpBuffered = false;
-        }
-    }
-
-    IEnumerator JumpReleaseBufferExpire(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-        if (jumpReleaseBuffered == true)
-        {
-            jumpReleaseBuffered = false;
-        }
-    }
-
-    public void OnMove()
-    {
-        
     }
 
     public bool getJumpBuffered()

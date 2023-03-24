@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Stats/Core", order = 1)]
 public class CoreStatScriptableObject : ScriptableObject
@@ -27,13 +28,10 @@ public class CoreStatScriptableObject : ScriptableObject
     
     public int totalBuff()
     {
-        int buffTotal = 0; ;
-        foreach(int buff in buffList)
-        {
-            buffTotal += buff;
-        }
 
-        return buffTotal;
+        throw new System.NotImplementedException();
+
+        return 0;
     }
 
 }

@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1141467816}
+    - target: {fileID: 114163616613990546, guid: 38db5fa80d14bfd4a82643837fce2836,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38db5fa80d14bfd4a82643837fce2836, type: 3}
 --- !u!1 &373596206
@@ -206,7 +211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &373596207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2726,6 +2731,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2548911217369509969, guid: 655c652b431cad8448e7aa11f3c7303f,
+        type: 3}
+      propertyPath: portalEntered
+      value: 
+      objectReference: {fileID: 11400000, guid: fd77ca325af554646b9da4604a1bb073,
+        type: 2}
     - target: {fileID: 8228636016725403116, guid: 655c652b431cad8448e7aa11f3c7303f,
         type: 3}
       propertyPath: m_RootOrder
@@ -3787,7 +3798,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953985264}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55ad77afaa8bda743ac21cce6bde6af3, type: 3}
   m_Name: 

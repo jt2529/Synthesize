@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.TerrainTools;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour, IDamageable<float>
+public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 {
     // These will all be modifiable by the player's active chord modifiers
     [HideInInspector]
@@ -347,5 +347,8 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
         numberOfJumps = numberOfJumps + 1;
     }
 
-
+    public void Heal(float healAmount)
+    {
+        throw new System.NotImplementedException();
+    }
 }
