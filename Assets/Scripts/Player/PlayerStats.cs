@@ -1,20 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, IDamageable<float>
 {
-
     // These will all be modifiable by the player's active chord modifiers
     [HideInInspector]
     public Vector2 aimingDirection;
 
+    private bool coreStatChange = false; // indicates that one of our core stats has changed and a refresh is required.
     [Header("Core")]
-    [SerializeField]
+    public StatProfileScriptableObject statProfile;
     private int health;
-    public int baseMaxHealth;
     public float maxHealthMultiplier;
-    public int maxHealth;
+    private int maxHealth;
     public float baseMoveSpeed;
     public float moveSpeedMultipler;
     public float moveSpeed;
@@ -34,7 +34,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Dash")]
     public int numberOfDashes;
     [HideInInspector] public int numberOfDashesLeft;
-    public float fullDashTime;
+    public float fullDashTime = 0.15f;
     [HideInInspector] public float dashTimeLeft;
     public float dashSpeedMultiplier;
     public float dashChargeCooldownTime;
@@ -74,10 +74,19 @@ public class PlayerStats : MonoBehaviour
     private Vector3 oldPosition;
     public Vector2 currentSpeed;
 
+    // Events
+    public GameEventScriptableObject playerDeathEvent;
+
+    public void refreshCoreStats()
+    {
+        maxHealth = statProfile.physicalValue() * 30;
+        numberOfDashes = statProfile.mentalBonus / 2;
+        dashChargeCooldownTime = 16f - statProfile.mentalBonus;
+    }
+
     //Set variable values here
     private void Awake()
     {
-        maxHealth = baseMaxHealth;
         aimingDirection.x = 1;
         aimingDirection.y = 0;
         health = maxHealth;
@@ -85,12 +94,14 @@ public class PlayerStats : MonoBehaviour
         playerInvulnerable = false;
         playerAlive = true;
         isAbleToAttack = true;
-        numberOfDashesLeft = numberOfDashes;
     }
 
     // Use this for initialization
     void Start()
     {
+        refreshCoreStats();
+        numberOfDashesLeft = numberOfDashes;
+
         currentTransform = GetComponent<Transform>();
         oldPosition = currentTransform.position;
         currentSpeed.x = 0;
@@ -100,7 +111,11 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (coreStatChange)
+        {
+            refreshCoreStats();
+            coreStatChange = false;
+        }
     }
 
     void FixedUpdate()
@@ -130,6 +145,22 @@ public class PlayerStats : MonoBehaviour
             if (dashChargeCooldownTimeLeft <= 0) 
             {
                 numberOfDashesLeft++;
+            }
+        }
+    }
+
+    public void Damage(float damageTaken)
+    {
+        if (!playerInvulnerable)
+        {
+            if (health - damageTaken >= 0)
+            {
+                health = (int)(health - damageTaken);
+            }else
+            {
+                health = 0;
+                playerAlive = false;
+                playerDeathEvent.Raise();
             }
         }
     }
@@ -296,12 +327,6 @@ public class PlayerStats : MonoBehaviour
         SetMoveSpeed(baseMoveSpeed * moveSpeedMultipler);
     }
 
-    public void ChangeMaxHealth(float statMultiplier)
-    {
-        maxHealthMultiplier += statMultiplier;
-        SetMaxHealth(baseMaxHealth * maxHealthMultiplier);
-    }
-
     public void ChangeMeleeDamage(float statMultiplier)
     {
         meleeDamageMultiplier += statMultiplier;
@@ -321,4 +346,6 @@ public class PlayerStats : MonoBehaviour
     {
         numberOfJumps = numberOfJumps + 1;
     }
+
+
 }

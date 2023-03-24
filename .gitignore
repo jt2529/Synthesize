@@ -90,3 +90,5 @@ Logs/shadercompiler-UnityShaderCompiler.exe0.log
 ProjectSettings/EditorBuildSettings.asset
 UserSettings/EditorUserSettings.asset
 UserSettings/EditorUserSettings.asset
+Assembly-CSharp.csproj
+*.meta
