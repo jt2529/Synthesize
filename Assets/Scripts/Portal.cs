@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour , Interactable
 {
+
     public GameObject otherPortal;
     public bool isInteractable;
     public int keyItemsToUnlock;
@@ -88,5 +89,15 @@ public class Portal : MonoBehaviour , Interactable
         {
             playerObject.transform.position = otherPortal.transform.position;
         }
+    }
+
+    public void DrawPortalLink(Vector2 start, Vector2 end, Color color)
+    {
+        
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawLine(transform.position, otherPortal.transform.position);
     }
 }
