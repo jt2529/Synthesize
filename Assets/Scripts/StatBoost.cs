@@ -54,7 +54,7 @@ public class StatBoost : MonoBehaviour , Interactable
                 playerStats.ChangeMoveSpeed(statBoost);
                 break;
             case StatType.Health:
-                playerStats.ChangeMaxHealth(statBoost);
+                //playerStats.ChangeMaxHealth(statBoost);
                 break;
             case StatType.MeleeDamage:
                 playerStats.ChangeMeleeDamage(statBoost);
