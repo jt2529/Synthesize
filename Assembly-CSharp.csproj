@@ -66,12 +66,14 @@
     <Compile Include="Assets\Scripts\Player\Abilities\Ability Controller.cs" />
     <Compile Include="Assets\Scripts\SceneReset.cs" />
     <Compile Include="Assets\Scripts\Player\Abilities\Ability.cs" />
+    <Compile Include="Assets\Scripts\Player\Player Movement.cs" />
     <Compile Include="Assets\Scripts\Player\Keytar.cs" />
     <Compile Include="Assets\Scripts\Environment\ShootableSwitch.cs" />
     <Compile Include="Assets\Scripts\Triggers\Hurtbox.cs" />
     <Compile Include="Assets\Scripts\Environment\CrateController.cs" />
     <Compile Include="Assets\Scripts\Enemy\HarmfulObject.cs" />
     <Compile Include="Assets\Scripts\EscapeMenu.cs" />
+    <Compile Include="Assets\Player Controls.cs" />
     <Compile Include="Assets\Scripts\Slimer.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovementController.cs" />
     <Compile Include="Assets\Scripts\Interface\TextTyper.cs" />
@@ -109,8 +111,6 @@
     <Compile Include="Assets\Scripts\Interface\IHealable.cs" />
     <Compile Include="Assets\Scripts\Toggler.cs" />
     <Compile Include="Assets\Scripts\Enemy\BreakableStats.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerInputController.cs" />
-    <Compile Include="Assets\Player Controls.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

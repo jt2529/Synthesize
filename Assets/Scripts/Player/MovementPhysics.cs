@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class MovementPhysics : MonoBehaviour
@@ -27,7 +26,7 @@ public class MovementPhysics : MonoBehaviour
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles" );
+        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles");
     }
 
 
@@ -67,7 +66,7 @@ public class MovementPhysics : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
-            
+
             if (hit)
             {
                 //Check if object is movable, if so, then push it at the user's velocity
@@ -75,7 +74,8 @@ public class MovementPhysics : MonoBehaviour
                 {
                     pushableBoxController = hit.transform.gameObject.GetComponent<PushableBoxController>();
                 }
-                else {
+                else
+                {
 
                     float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
@@ -116,7 +116,7 @@ public class MovementPhysics : MonoBehaviour
 
         if (pushableBoxController != null)
         {
-            if (pushableBoxController.isInteractable == false) 
+            if (pushableBoxController.isInteractable == false)
             {
                 pushableBoxController.Push(velocity);
             }
@@ -139,7 +139,7 @@ public class MovementPhysics : MonoBehaviour
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
             if (hit)
-            {    
+            {
                 velocity.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
 
@@ -148,20 +148,20 @@ public class MovementPhysics : MonoBehaviour
                     velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
                 }
 
-                if (directionY == -1) 
+                if (directionY == -1)
                 {
                     collisions.below = true;
                     if (hit.transform.gameObject.GetComponent<MovementPhysics>() != null)
                     {
                         currentVelocity = hit.transform.gameObject.GetComponent<MovementPhysics>().currentVelocity;
                     }
-                        
-                } 
+
+                }
                 else if (directionY == 1)
                 {
                     collisions.above = true;
                 }
-                
+
             }
         }
         velocity += currentVelocity;

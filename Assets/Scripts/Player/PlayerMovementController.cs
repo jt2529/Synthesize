@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using System;
 
 [RequireComponent(typeof(PlayerMovementController))]
 public class PlayerMovementController : MonoBehaviour
@@ -12,10 +13,7 @@ public class PlayerMovementController : MonoBehaviour
     private InputAction jump;
 
     PlayerStats stats;
-    public float accelerationTimeAirborne = .1f;
-    public float accelerationTimeGrounded = .05f;
 
-    [SerializeField]
     float gravity;
     float originalGravity;
     float maxJumpVelocity;
@@ -26,7 +24,7 @@ public class PlayerMovementController : MonoBehaviour
     float velocityXSmoothing;
 
     private float hInput;
-    public float forceUpward;
+    [HideInInspector] public float forceUpward;
 
     private Animator animator;
     private AudioSource sound;
@@ -122,6 +120,8 @@ public class PlayerMovementController : MonoBehaviour
     {
 
         
+        
+
         if (stats.GetPlayerAlive() != true)
         {
             animator.SetBool("isAlive", false);
@@ -131,7 +131,7 @@ public class PlayerMovementController : MonoBehaviour
         
 
         updatePlayerPhysics();
-
+        hInput = move.ReadValue<Vector2>().x;
         if (physics.collisions.above || physics.collisions.below)
         {
             velocity.y = 0;
@@ -239,7 +239,7 @@ public class PlayerMovementController : MonoBehaviour
         else
         {
             float targetVelocityX = move.ReadValue<Vector2>().x * stats.GetMoveSpeed();
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? stats.groundAccelerationTime : stats.airAccelerationTime);
             velocity.y += gravity * Time.deltaTime;
         }
         

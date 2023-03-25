@@ -13,39 +13,41 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     [Header("Core")]
     public StatProfileScriptableObject statProfile;
     private int health;
-    public float maxHealthMultiplier;
+    public float maxHealthMultiplier = 1;
     private int maxHealth;
-    public float baseMoveSpeed;
-    public float moveSpeedMultipler;
-    public float moveSpeed;
+    public float baseMoveSpeed = 4;
+    public float moveSpeedMultipler = 1;
+    public float moveSpeed = 4;
+    public float airAccelerationTime = 0.1f;
+    public float groundAccelerationTime = 0.05f;
 
     [Space(10)]
     [Header("Jump")]
-    public float baseMaxJumpHeight;
-    public float jumpHeightMultipler;
-    public float minJumpHeight;
-    public  float maxJumpHeight;
-    public int numberOfJumps;
-    [HideInInspector] public int numberOfJumpsLeft;
-    public float timeToJumpApex;
+    public float baseMaxJumpHeight = 2.2f;
+    public float jumpHeightMultipler = 1;
+    public float minJumpHeight = 2.2f / 4;
+    public  float maxJumpHeight = 2.2f;
+    public int numberOfJumps = 2;
+    [HideInInspector] public int numberOfJumpsLeft = 2;
+    public float timeToJumpApex = 0.45f;
 
     [Space(10)]
 
     [Header("Dash")]
-    public int numberOfDashes;
-    [HideInInspector] public int numberOfDashesLeft;
+    public int numberOfDashes = 2;
+    [HideInInspector] public int numberOfDashesLeft = 2;
     public float fullDashTime = 0.15f;
     [HideInInspector] public float dashTimeLeft;
-    public float dashSpeedMultiplier;
-    public float dashChargeCooldownTime;
+    public float dashSpeedMultiplier = 4;
+    public float dashChargeCooldownTime = 2;
     [HideInInspector] public float dashChargeCooldownTimeLeft;
 
     [Space(10)]
     [Header("Combat")]
-    public float damageMultipler;
-    public float knockbackMultiplier;
-    public float meleeDamageMultiplier;
-    public float rangedDamageMultiplier;
+    public float damageMultipler = 1;
+    public float knockbackMultiplier = 1;
+    public float meleeDamageMultiplier = 1;
+    public float rangedDamageMultiplier = 1;
 
     [Space(10)]
     [Header("Status")]
