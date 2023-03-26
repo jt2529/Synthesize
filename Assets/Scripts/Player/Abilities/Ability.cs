@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ability : MonoBehaviour
+public abstract class Ability : MonoBehaviour, IAbility
 {
 
     public PlayerStats abilitySource;
@@ -12,6 +12,8 @@ public abstract class Ability : MonoBehaviour
 
     public GameEventScriptableObject beginSecondaryEvent;
     public GameEventScriptableObject endSecondaryEvent;
+
+    public GameEventScriptableObject reloadEvent;
 
     public abstract void beginPrimary();
     public abstract void endPrimary();

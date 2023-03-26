@@ -29,7 +29,6 @@ public class MovementPhysics : MonoBehaviour
         collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles");
     }
 
-
     public void Move(Vector2 velocity)
     {
         UpdateRaycastOrigins();
@@ -52,6 +51,7 @@ public class MovementPhysics : MonoBehaviour
 
         transform.Translate(velocity);
     }
+
 
     void HorizontalCollisions(ref Vector2 velocity)
     {

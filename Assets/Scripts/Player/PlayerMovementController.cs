@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using System;
 
-[RequireComponent(typeof(PlayerMovementController))]
+
 public class PlayerMovementController : MonoBehaviour
 {
 
@@ -11,6 +11,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private InputAction move;
     private InputAction jump;
+    private InputAction dash;
 
     PlayerStats stats;
 
@@ -49,12 +50,17 @@ public class PlayerMovementController : MonoBehaviour
         jump.Enable();
         jump.performed += OnJump;
 
+        dash = playerControls.Player.Jump;
+        dash.Enable();
+        dash.performed += OnDash;
+
     }
 
     private void OnDisable()
     {
         move.Disable();
         jump.Disable();
+        dash.Disable();
     }
 
         // Use this for initialization
@@ -105,7 +111,7 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    public void OnDash(InputValue value) 
+    public void OnDash(InputAction.CallbackContext context) 
     {
         if (stats.numberOfDashesLeft > 0)
         {
@@ -121,8 +127,8 @@ public class PlayerMovementController : MonoBehaviour
 
         
         
-
-        if (stats.GetPlayerAlive() != true)
+        
+        if (!stats.playerAlive)
         {
             animator.SetBool("isAlive", false);
             return;
@@ -143,7 +149,8 @@ public class PlayerMovementController : MonoBehaviour
 
         //Vector2 input = new Vector2(move.ReadValue<Vector2>().x, jump.ReadValue<float>());
         
-        // hInput is NOT buffered
+        // This block determines which direction the player is facing based on the hInput. 
+        // This seems very buggy and needs changed.
         if (!hInputBuffered)
         {
             
@@ -172,6 +179,9 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
 
+
+        // Disables our jump input if we have no more jumps left.
+        // Enabled/Disabled should be handdled at the player stats and input level I think and will need to be moved.
         if(jumpBuffered && stats.numberOfJumpsLeft <= 0)
         {
             jumpBuffered = false;
@@ -185,6 +195,8 @@ public class PlayerMovementController : MonoBehaviour
             stats.numberOfJumpsLeft -= 1;
         }
 
+        // Applies an upwards force on the player, such as a bounce pad.
+        // Currently only applies this force directly upwards.
         if (forceUpward > 0) 
         {
             stats.isGrounded = false;
@@ -196,17 +208,18 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
 
-        if (!physics.collisions.below)
+        // Not sure what is happening here.
+        if (!physics.collisions.below) // No collisions below
         {
-            if (stats.isGrounded) 
+            if (stats.isGrounded) // So if we have no collisions below, but our player is considered on the ground
             {
-                stats.numberOfJumpsLeft -= 1;
+                stats.numberOfJumpsLeft -= 1; // reduce the number of jumps we have remaining?
             }
-            stats.isGrounded = false;
+            stats.isGrounded = false; // then set the player state to grounded.
         }
         else 
         {
-            stats.numberOfJumpsLeft = stats.numberOfJumps;
+            stats.numberOfJumpsLeft = stats.numberOfJumps; // If we have a collision below we get all of our jumps back
         }
 
         if (jumpReleaseBuffered)
@@ -220,7 +233,7 @@ public class PlayerMovementController : MonoBehaviour
 
         if (stats.isDashing)
         {
-            velocity.x = stats.dashSpeedMultiplier * move.ReadValue<Vector2>().x * stats.GetMoveSpeed();
+            velocity.x = stats.dashSpeedMultiplier * move.ReadValue<Vector2>().x * stats.moveSpeed;
             if (stats.isGrounded)
             { 
                 velocity.y += gravity * Time.deltaTime; 
@@ -232,13 +245,13 @@ public class PlayerMovementController : MonoBehaviour
         }
         else if(stats.isDashingEnd) //Need this case to slow player down on dash finish
         {
-            velocity.x = move.ReadValue<Vector2>().x * stats.GetMoveSpeed();
+            velocity.x = move.ReadValue<Vector2>().x * stats.moveSpeed;
             velocity.y += gravity * Time.deltaTime;
             stats.isDashingEnd = false;
         }
         else
         {
-            float targetVelocityX = move.ReadValue<Vector2>().x * stats.GetMoveSpeed();
+            float targetVelocityX = move.ReadValue<Vector2>().x * stats.moveSpeed;
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? stats.groundAccelerationTime : stats.airAccelerationTime);
             velocity.y += gravity * Time.deltaTime;
         }
@@ -271,9 +284,9 @@ public class PlayerMovementController : MonoBehaviour
 
     void updatePlayerPhysics()
     {
-        gravity = -(2 * stats.GetMaxJumpHeight()) / Mathf.Pow(stats.GetTimeToJumpApex(), 2);
-        maxJumpVelocity = Mathf.Abs(gravity) * stats.GetTimeToJumpApex();
-        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.GetMinJumpHeight());
+        gravity = -(2 * stats.maxJumpHeight) / Mathf.Pow(stats.timeToJumpApex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * stats.timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.minJumpHeight);
     }
 
     public bool getJumpBuffered()

@@ -8,7 +8,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
     public Dictionary<int, KeyCode> noteMap;
     public PlayerGun primary;
     public PlayerWeapon secondary;
-    public PlayerStats stats;
+    private PlayerStats stats;
     public Keytar keytar;
     public int[] lastThreeNotes;
     public EscapeMenu menu;
@@ -21,6 +21,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
     void Start () {
 
         controller = GetComponent<MovementPhysics>();
+        stats = GetComponent<PlayerStats>();
         state = GetComponent<Animator>();
         noteMap = new Dictionary<int, KeyCode>() {
             { 0, KeyCode.U },

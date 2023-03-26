@@ -33,7 +33,7 @@ public class PlayerGun : MonoBehaviour
 
         BulletPhysics bulletPhysics = bullet.GetComponent<BulletPhysics>();
         bulletPhysics.SetDirection(direction);
-        bulletPhysics.playerSpeed = stats.currentSpeed;
+        bulletPhysics.playerSpeed = stats.velocity;
         bulletPhysics.weight = bulletPhysics.weight * stats.knockbackMultiplier;
     }
 }

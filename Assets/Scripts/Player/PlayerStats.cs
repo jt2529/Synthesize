@@ -20,6 +20,9 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public float moveSpeed = 4;
     public float airAccelerationTime = 0.1f;
     public float groundAccelerationTime = 0.05f;
+    public float velocityXSmoothing;
+    public float gravity = -21f;
+    
 
     [Space(10)]
     [Header("Jump")]
@@ -28,19 +31,21 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public float minJumpHeight = 2.2f / 4;
     public  float maxJumpHeight = 2.2f;
     public int numberOfJumps = 2;
-    [HideInInspector] public int numberOfJumpsLeft = 2;
+    public int numberOfJumpsLeft = 2;
     public float timeToJumpApex = 0.45f;
+    public float maxJumpVelocity;
+    public float minJumpVelocity;
 
     [Space(10)]
 
     [Header("Dash")]
     public int numberOfDashes = 2;
-    [HideInInspector] public int numberOfDashesLeft = 2;
+    public int numberOfDashesLeft = 2;
     public float fullDashTime = 0.15f;
-    [HideInInspector] public float dashTimeLeft;
+    public float dashTimeLeft;
     public float dashSpeedMultiplier = 4;
     public float dashChargeCooldownTime = 2;
-    [HideInInspector] public float dashChargeCooldownTimeLeft;
+    public float dashChargeCooldownTimeLeft;
 
     [Space(10)]
     [Header("Combat")]
@@ -52,18 +57,12 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     [Space(10)]
     [Header("Status")]
     public bool playerInvulnerable;
-    [HideInInspector]
     public bool isTeleporting;
-    [HideInInspector]
     public bool isAbleToAttack;
-    [HideInInspector]
     public bool isGrounded;
-    [HideInInspector]
-    public bool isRunning;
-    [HideInInspector]
-    public bool isDashing;
-    [HideInInspector]
-    public bool isDashingEnd;
+    public bool isRunning = false;
+    public bool isDashing = false;
+    public bool isDashingEnd = false;
 
     public GameObject currentInteractableObject;
     public bool isCurrentInteractableObjectLocked;
@@ -74,7 +73,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public bool facingRight;
     //private Transform currentTransform;
     private Vector3 oldPosition;
-    public Vector2 currentSpeed;
+    public Vector2 velocity;
 
     // Events
     public GameEventScriptableObject playerDeathEvent;
@@ -84,6 +83,8 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         maxHealth = statProfile.physicalValue() * 30;
         numberOfDashes = statProfile.mentalBonus / 2;
         dashChargeCooldownTime = 16f - statProfile.mentalBonus;
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
     }
 
     //Set variable values here
@@ -105,9 +106,10 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         numberOfDashesLeft = numberOfDashes;
 
         oldPosition = transform.position;
-        currentSpeed = Vector2.zero;
-        currentSpeed.x = 0;
-        currentSpeed.y = 0;
+        velocity = Vector2.zero;
+        velocity.x = 0;
+        velocity.y = 0;
+        
     }
 
     // Update is called once per frame
@@ -122,9 +124,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 
     void FixedUpdate()
     {
-        currentSpeed.x = Mathf.Abs(transform.position.x - oldPosition.x);
-        currentSpeed.y = Mathf.Abs(transform.position.x - oldPosition.x);
-        oldPosition = transform.position;
+        //oldPosition = transform.position;
         if (isDashing) 
         {
             dashTimeLeft -= Time.deltaTime;
@@ -221,10 +221,6 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 
     }
 
-    public void SetNumberOfJumps(int jumps)
-    {
-        numberOfJumps = jumps;
-    }
 
     public void SetJumpHeight(float jumpHeight)
     {
@@ -232,125 +228,14 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         minJumpHeight = jumpHeight / 4f;
     }
 
-    public void SetMoveSpeed(float newMoveSpeed)
-    {
-        moveSpeed = newMoveSpeed;
-    }
 
-    public void SetPlayerVulnerable()
-    {
-        playerInvulnerable = false;
-    }
 
-    public int GetMaxHealth()
-    {
-        return maxHealth;
-    }
 
-    public int GetHealth()
-    {
-        return health;
-    }
-
-    public int GetNumberOfJumps()
-    {
-        return numberOfJumps;
-    }
-
-    public float GetMaxJumpHeight()
-    {
-        return maxJumpHeight;
-    }
-
-    public float GetMinJumpHeight()
-    {
-        return minJumpHeight;
-    }
-
-    public float GetTimeToJumpApex()
-    {
-        return timeToJumpApex;
-    }
-
-    public Vector2 GetAimingDirection()
-    {
-        return aimingDirection;
-    }
-
-    public float GetMoveSpeed()
-    {
-        return moveSpeed;
-    }
-
-    public bool GetPlayerInvulnerable()
-    {
-        return playerInvulnerable;
-    }
-
-    public bool GetPlayerAlive()
-    {
-        return playerAlive;
-    }
-
-    public void hurt(int dmg)
-    {
-        ChangeHealth(-dmg);
-    }
-
-    public void kill()
-    {
-        ChangeHealth(-this.health);
-    }
-
-    public void AddKeyItem(int keyItemNumber)
-    {
-        keyItems.Add(keyItemNumber);
-    }
-
-    public void ClearKeyItems()
-    {
-        keyItems.Clear();
-    }
-
-    public int GetKeyItemsCount()
-    {
-        return keyItems.Count;
-    }
-
-    public void ChangeJumpHeight(float statMultiplier)
-    {
-        jumpHeightMultipler += statMultiplier;
-        SetJumpHeight(baseMaxJumpHeight * jumpHeightMultipler);
-    }
-
-    public void ChangeMoveSpeed(float statMultiplier)
-    {
-        moveSpeedMultipler += statMultiplier;
-        SetMoveSpeed(baseMoveSpeed * moveSpeedMultipler);
-    }
-
-    public void ChangeMeleeDamage(float statMultiplier)
-    {
-        meleeDamageMultiplier += statMultiplier;
-    }
-
-    public void ChangeRangedDamage(float statMultiplier)
-    {
-        rangedDamageMultiplier += statMultiplier;
-    }
-
-    public void ChangeKnockback(float statMultiplier)
-    {
-        knockbackMultiplier += statMultiplier;
-    }
-
-    public void ChangeJumps(float statMultiplier)
-    {
-        numberOfJumps = numberOfJumps + 1;
-    }
 
     public void Heal(float healAmount)
     {
         throw new System.NotImplementedException();
     }
+
+    
 }

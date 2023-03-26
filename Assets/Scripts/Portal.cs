@@ -31,7 +31,7 @@ public class Portal : MonoBehaviour , Interactable
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
         if (playerStats != null)
         {
-            if (playerStats.GetKeyItemsCount() < keyItemsToUnlock)
+            if (playerStats.keyItems.Count < keyItemsToUnlock)
             {
                 unlocked = false;
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hurtbox : MonoBehaviour {
 
-    public int damage = 10;
+    public int damageValue = 10;
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -13,7 +13,7 @@ public class Hurtbox : MonoBehaviour {
         {
             PlayerStats ps = col.GetComponent<PlayerStats>();
             Debug.Log(ps.name + " entered the killbox.");
-            ps.hurt(damage);
+            ps.Damage(damageValue);
         }
 
     }
