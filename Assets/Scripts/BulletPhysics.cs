@@ -201,7 +201,7 @@ public class BulletPhysics : MonoBehaviour
             PlayerStats playerStats = hit.collider.gameObject.GetComponent<PlayerStats>();
             if (playerStats != null)
             {
-                playerStats.ChangeHealth(-harmfulObject.damage);
+                playerStats.Damage(-harmfulObject.damage);
                 harmfulObject.tryDestroy();
             }
         }

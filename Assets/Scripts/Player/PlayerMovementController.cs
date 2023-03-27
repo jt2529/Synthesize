@@ -219,7 +219,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         else 
         {
-            stats.numberOfJumpsLeft = stats.numberOfJumps; // If we have a collision below we get all of our jumps back
+            stats.numberOfJumpsLeft = stats.maxNumberofJumps; // If we have a collision below we get all of our jumps back
         }
 
         if (jumpReleaseBuffered)

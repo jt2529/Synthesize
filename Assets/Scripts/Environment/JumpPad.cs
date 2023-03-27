@@ -23,7 +23,7 @@ public class JumpPad : MonoBehaviour
             {
                 playerPhysicsController.forceUpward = jumpPadPower;
                 PlayerStats playerStats = (PlayerStats)collision.GetComponentInParent(typeof(PlayerStats));
-                playerStats.numberOfJumpsLeft = playerStats.numberOfJumps - 1;
+                playerStats.numberOfJumpsLeft = playerStats.maxNumberofJumps - 1;
             }
         }
     }

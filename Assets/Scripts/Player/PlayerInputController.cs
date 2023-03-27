@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerInputController : MonoBehaviour
     public PlayerControls playerControls;
     private InputAction move;
     private InputAction jump;
+    private InputAction dash;
 
     public Ability firstAbility;
     public Ability secondAbility;
@@ -16,10 +18,11 @@ public class PlayerInputController : MonoBehaviour
     public Ability fourthAbility;
 
     private PlayerStats stats;
-    private MovementPhysics playerPhysics;
+    private MovementController playerMovement;
+    //private MovementPhysics playerPhysics;
 
     // Movement
-    private float hInput = 0;
+    public float hInput = 0;
     bool jumpBuffered = false;
 
     // Physics?
@@ -31,7 +34,6 @@ public class PlayerInputController : MonoBehaviour
     [Space(5)]
     public GameEventScriptableObject playerAirborne;
     public GameEventScriptableObject playerGrounded;
-
 
     private void Awake()
     {
@@ -46,6 +48,10 @@ public class PlayerInputController : MonoBehaviour
         jump = playerControls.Player.Jump;
         jump.Enable();
         jump.performed += OnJump;
+
+        dash = playerControls.Player.Dash;
+        dash.Enable();
+        dash.performed += OnDash;
     }
 
     private void OnDisable()
@@ -57,52 +63,19 @@ public class PlayerInputController : MonoBehaviour
         private void Start()
     {
         stats = GetComponent<PlayerStats>();
-        playerPhysics = GetComponent<MovementPhysics>();
+        playerMovement = GetComponent<MovementController>();
+        //playerPhysics = GetComponent<MovementPhysics>();
+
+        updatePlayerPhysics();
     }
 
     public void FixedUpdate()
     {
 
+        // Reads our "Move Input", getting the X value. This will be -1 through 1
         hInput = move.ReadValue<Vector2>().x;
+        playerMovement.HorizontalInput(hInput);
 
-        updatePlayerPhysics();
-        // Stop falling or rising when a collision is detected
-        if (playerPhysics.collisions.above || playerPhysics.collisions.below)
-        {
-            stats.velocity.y = 0;
-        }
-
-        if (jumpBuffered && stats.numberOfJumpsLeft <= 0)
-        {
-            jumpBuffered = false;
-        }
-
-        if (jumpBuffered && (playerPhysics.collisions.below || stats.numberOfJumpsLeft > 0))
-        {
-            stats.velocity.y = stats.maxJumpVelocity;
-            
-            playerAirborne.Raise();
-            playerJumped.Raise();
-
-            jumpBuffered = false;
-        }
-
-        float targetVelocityX = hInput * stats.moveSpeed;
-        stats.velocity.x = Mathf.SmoothDamp(stats.velocity.x, targetVelocityX, ref stats.velocityXSmoothing, (playerPhysics.collisions.below) ? stats.groundAccelerationTime : stats.airAccelerationTime);
-        stats.velocity.y += stats.gravity * Time.deltaTime;
-
-        // Player cannot fall faster than our gravity
-        if (stats.velocity.y < stats.gravity)
-        {
-            stats.velocity.y = stats.gravity;
-        }
-
-        playerPhysics.Move(stats.velocity * Time.deltaTime);
-        if (playerPhysics.collisions.below)
-        {
-            stats.isGrounded = true;
-
-        }
     }
 
     void updatePlayerPhysics()
@@ -114,9 +87,16 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (stats.JumpAllowed())
+        {
+            playerMovement.BufferJumpInput();
+        }
         
-        jumpBuffered = true;
-        
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        Debug.Log("Dash Pressed");
     }
 
 

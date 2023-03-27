@@ -12,7 +12,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     private bool coreStatChange = false; // indicates that one of our core stats has changed and a refresh is required.
     [Header("Core")]
     public StatProfileScriptableObject statProfile;
-    private int health;
+    private int currentHealth;
     public float maxHealthMultiplier = 1;
     private int maxHealth;
     public float baseMoveSpeed = 4;
@@ -30,11 +30,12 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public float jumpHeightMultipler = 1;
     public float minJumpHeight = 2.2f / 4;
     public  float maxJumpHeight = 2.2f;
-    public int numberOfJumps = 2;
+    public int maxNumberofJumps = 2;
     public int numberOfJumpsLeft = 2;
     public float timeToJumpApex = 0.45f;
     public float maxJumpVelocity;
     public float minJumpVelocity;
+    private bool jumpAllowed = false;
 
     [Space(10)]
 
@@ -56,10 +57,11 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 
     [Space(10)]
     [Header("Status")]
-    public bool playerInvulnerable;
-    public bool isTeleporting;
-    public bool isAbleToAttack;
-    public bool isGrounded;
+    public bool playerInvulnerable = false;
+    public bool gravityEnabled = true;
+    public bool isTeleporting = false;
+    public bool isAbleToAttack = true;
+    public bool isGrounded = false;
     public bool isRunning = false;
     public bool isDashing = false;
     public bool isDashingEnd = false;
@@ -71,12 +73,12 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     [SerializeField]
     public bool playerAlive;
     public bool facingRight;
-    //private Transform currentTransform;
     private Vector3 oldPosition;
     public Vector2 velocity;
 
     // Events
     public GameEventScriptableObject playerDeathEvent;
+
 
     public void refreshCoreStats()
     {
@@ -92,7 +94,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     {
         aimingDirection.x = 1;
         aimingDirection.y = 0;
-        health = maxHealth;
+        currentHealth = maxHealth;
         minJumpHeight = maxJumpHeight / 4f;
         playerInvulnerable = false;
         playerAlive = true;
@@ -124,43 +126,57 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 
     void FixedUpdate()
     {
-        //oldPosition = transform.position;
-        if (isDashing) 
-        {
-            dashTimeLeft -= Time.deltaTime;
-            if (dashTimeLeft <= 0) 
-            {
-                dashTimeLeft = 0;
-                isDashing = false;
-                isDashingEnd = true;
-            }
-        }
+        ////This block calculates the total time the player should be in the "Dashing" state and counts down until this time is reached to reset our dash state.
+        //if (isDashing) 
+        //{
+        //    dashTimeLeft -= Time.deltaTime;
+        //    if (dashTimeLeft <= 0) 
+        //    {
+        //        dashTimeLeft = 0;
+        //        isDashing = false;
+        //        isDashingEnd = true;
+        //    }
+        //}
 
-        if (numberOfDashesLeft < numberOfDashes) 
-        {
-            if (dashChargeCooldownTimeLeft <= 0)
-            {
-                dashChargeCooldownTimeLeft = dashChargeCooldownTime;
-            }
 
-            dashChargeCooldownTimeLeft -= Time.deltaTime;
-            if (dashChargeCooldownTimeLeft <= 0) 
-            {
-                numberOfDashesLeft++;
-            }
-        }
+        //// Dash Cooldown
+        //// This dash charge reset code first checkes to see if we reached our cooldown time since last frame. If we have, the timer resets
+        //// If we didn't reach our cooldown time last frame, we subtract the time it took to reach our current frame
+        //// If we are now at or below our remaining cooldown time, we regain a dash charge. 
+        //// On the next frame the game will see that we are at or below 0 cooldown remaining and reset the cooldown.
+
+        //// If we have used a dash charge and it has not recharged yet
+        //if (numberOfDashesLeft < numberOfDashes) 
+        //{   
+        //    // Check to see if the cooldown for the dash charge has passed
+        //    if (dashChargeCooldownTimeLeft <= 0) // if it has...
+        //    {   
+        //        // Set the cooldown back to the maximum cooldown time
+        //        dashChargeCooldownTimeLeft = dashChargeCooldownTime;
+        //    }
+
+
+        //    // If we still have time left on our cooldown
+        //    dashChargeCooldownTimeLeft -= Time.deltaTime; // reduce the cooldown by time since our last frame
+        //    if (dashChargeCooldownTimeLeft <= 0) // if we are now at or below our cooldown time
+        //    {
+        //        numberOfDashesLeft++; // add a dash charge
+        //    }
+        //}
+
+        
     }
 
     public void Damage(float damageTaken)
     {
         if (!playerInvulnerable)
         {
-            if (health - damageTaken >= 0)
+            if (currentHealth - damageTaken > 0)
             {
-                health = (int)(health - damageTaken);
+                currentHealth = (int)(currentHealth - damageTaken);
             }else
             {
-                health = 0;
+                currentHealth = 0;
                 playerAlive = false;
                 playerDeathEvent.Raise();
             }
@@ -176,51 +192,12 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     {
         if (newMaxHealth > maxHealth) 
         {
-            health += (int)(newMaxHealth - maxHealth);
+            currentHealth += (int)(newMaxHealth - maxHealth);
         }
         maxHealth = (int)newMaxHealth;
        
         
     }
-
-    public void ChangeHealth(int changeAmount)
-    {
-
-        if (health + changeAmount >= maxHealth)
-        {
-            health = maxHealth;
-        }
-        else
-        {
-            if (changeAmount > 0)
-            {
-                health = health + changeAmount;
-            }
-            else
-            if (!playerInvulnerable)
-            {
-                Debug.Log("Modifying health by " + changeAmount);
-                health = health + changeAmount;
-
-                if (health < 1)
-                {
-                    playerAlive = false;
-                    Debug.Log("Player Died");
-                }
-                if (changeAmount < 0)
-                {
-                    playerInvulnerable = true;
-
-                    // Set this back equal to false in 3 seconds.
-                    Invoke("SetPlayerVulnerable", 3);
-                }
-            }
-
-        }
-
-
-    }
-
 
     public void SetJumpHeight(float jumpHeight)
     {
@@ -237,5 +214,26 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         throw new System.NotImplementedException();
     }
 
+    public void UseJump()
+    {
+
+        isGrounded = false;
+        numberOfJumpsLeft -= 1;
+
+    }
+
+    public void ResetJumps()
+    {
+        numberOfJumpsLeft = maxNumberofJumps;
+    }
+
+    public bool JumpAllowed()
+    {
+        if (numberOfJumpsLeft > 0)
+        {
+            return true;
+        }
+        return false;
+    }
     
 }

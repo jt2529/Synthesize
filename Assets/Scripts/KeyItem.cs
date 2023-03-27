@@ -44,7 +44,7 @@ public class KeyItem : MonoBehaviour , Interactable
     public void Interact(GameObject playerObject) 
     {
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
-        playerStats.AddKeyItem(keyItemNumber);
+        playerStats.keyItems.Add(keyItemNumber);
         Destroy(gameObject);
     }
 }

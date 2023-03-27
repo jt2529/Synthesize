@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Environment\CrateController.cs" />
     <Compile Include="Assets\Scripts\Enemy\HarmfulObject.cs" />
     <Compile Include="Assets\Scripts\Interface\IAbility.cs" />
+    <Compile Include="Assets\Scripts\Interface\IInteractable.cs" />
     <Compile Include="Assets\Scripts\EscapeMenu.cs" />
     <Compile Include="Assets\Player Controls.cs" />
     <Compile Include="Assets\Scripts\Slimer.cs" />
@@ -112,7 +113,7 @@
     <Compile Include="Assets\Scripts\Interface\IHealable.cs" />
     <Compile Include="Assets\Scripts\Toggler.cs" />
     <Compile Include="Assets\Scripts\Enemy\BreakableStats.cs" />
-    <Compile Include="Assets\Scripts\Interface\IInteractable.cs" />
+    <Compile Include="Assets\MovementController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
