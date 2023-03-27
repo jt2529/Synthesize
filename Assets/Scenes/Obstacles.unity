@@ -4542,6 +4542,7 @@ GameObject:
   - component: {fileID: 1482391443}
   - component: {fileID: 1482391445}
   - component: {fileID: 1482391448}
+  - component: {fileID: 1482391452}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -4621,6 +4622,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimingDirection: {x: 0, y: 0}
+  dashAbility: {fileID: 1482391452}
+  firstAbility: {fileID: 0}
+  secondAbility: {fileID: 0}
+  thirdAbility: {fileID: 0}
+  fourthAbility: {fileID: 0}
   statProfile: {fileID: 11400000, guid: f30e6888415f0a943bf1c07ec57f3c1b, type: 2}
   maxHealthMultiplier: 1
   baseMoveSpeed: 4
@@ -4644,8 +4650,8 @@ MonoBehaviour:
   fullDashTime: 0.15
   dashTimeLeft: 0
   dashSpeedMultiplier: 4
-  dashChargeCooldownTime: 2
-  dashChargeCooldownTimeLeft: 0
+  dashChargeCooldownTime: 4
+  dashChargeCooldownTimeLeft: 4
   damageMultipler: 1
   knockbackMultiplier: 1
   meleeDamageMultiplier: 1
@@ -4749,10 +4755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84fa5d1cd334dd942bc98b5a1632aa97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstAbility: {fileID: 0}
-  secondAbility: {fileID: 0}
-  thirdAbility: {fileID: 0}
-  fourthAbility: {fileID: 0}
   hInput: 0
   forceUpward: 0
   playerJumped: {fileID: 11400000, guid: 29a616cbe9b829a4f9fca2c3340813ca, type: 2}
@@ -4771,6 +4773,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceUpward: 0
+--- !u!114 &1482391452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482391440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb98e0d0f6fe8b442a088f61321db519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 4
+  beginPrimaryEvent: {fileID: 11400000, guid: 79ab822f1c774e14d830644d9a9fcad3, type: 2}
+  endPrimaryEvent: {fileID: 11400000, guid: e42974095a403a845bc6277bd7903873, type: 2}
+  beginSecondaryEvent: {fileID: 0}
+  endSecondaryEvent: {fileID: 0}
 --- !u!1 &1585845761
 GameObject:
   m_ObjectHideFlags: 0

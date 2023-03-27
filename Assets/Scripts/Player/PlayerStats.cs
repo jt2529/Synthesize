@@ -9,6 +9,14 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     [HideInInspector]
     public Vector2 aimingDirection;
 
+    [Header("Abilities")]
+    public Ability dashAbility;
+
+    public Ability firstAbility;
+    public Ability secondAbility;
+    public Ability thirdAbility;
+    public Ability fourthAbility;
+
     private bool coreStatChange = false; // indicates that one of our core stats has changed and a refresh is required.
     [Header("Core")]
     public StatProfileScriptableObject statProfile;

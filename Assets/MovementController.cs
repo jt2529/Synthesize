@@ -42,10 +42,6 @@ public class MovementController : MonoBehaviour
             CalculateYVelocityWithGravity();
         }
         
-        
-        
-
-
 
         playerPhysics.Move(stats.velocity * Time.deltaTime);
 

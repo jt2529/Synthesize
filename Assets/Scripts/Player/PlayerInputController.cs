@@ -8,14 +8,11 @@ public class PlayerInputController : MonoBehaviour
 {
 
     public PlayerControls playerControls;
-    private InputAction move;
+    private InputAction moveInput;
     private InputAction jump;
-    private InputAction dash;
+    private InputAction dashInput;
 
-    public Ability firstAbility;
-    public Ability secondAbility;
-    public Ability thirdAbility;   
-    public Ability fourthAbility;
+
 
     private PlayerStats stats;
     private MovementController playerMovement;
@@ -42,21 +39,21 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnEnable()
     {
-        move = playerControls.Player.Move;
-        move.Enable();
+        moveInput = playerControls.Player.Move;
+        moveInput.Enable();
 
         jump = playerControls.Player.Jump;
         jump.Enable();
         jump.performed += OnJump;
 
-        dash = playerControls.Player.Dash;
-        dash.Enable();
-        dash.performed += OnDash;
+        dashInput = playerControls.Player.Dash;
+        dashInput.Enable();
+        dashInput.performed += OnDash;
     }
 
     private void OnDisable()
     {
-        move.Disable();
+        moveInput.Disable();
         jump.Disable();
     }
 
@@ -73,7 +70,7 @@ public class PlayerInputController : MonoBehaviour
     {
 
         // Reads our "Move Input", getting the X value. This will be -1 through 1
-        hInput = move.ReadValue<Vector2>().x;
+        hInput = moveInput.ReadValue<Vector2>().x;
         playerMovement.HorizontalInput(hInput);
 
     }
@@ -96,7 +93,7 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        Debug.Log("Dash Pressed");
+        stats.dashAbility.beginAbility();
     }
 
 

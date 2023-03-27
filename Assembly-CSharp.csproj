@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Enemy\EnemyPhysicsController.cs" />
+    <Compile Include="Assets\MovementController.cs" />
     <Compile Include="Assets\Scripts\Player\MovementPhysics.cs" />
     <Compile Include="Assets\Scripts\InstrumentList.cs" />
     <Compile Include="Assets\Scripts\Environment\DeployPlatform.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Assets\Scripts\BulletPhysics.cs" />
     <Compile Include="Assets\Scripts\MainCameraLR.cs" />
     <Compile Include="Assets\Scripts\PushableBoxController.cs" />
+    <Compile Include="Assets\Scripts\Player\Abilities\Dash.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerGun.cs" />
     <Compile Include="Assets\Scripts\sound\BeatInfo.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyStats.cs" />
@@ -113,7 +115,6 @@
     <Compile Include="Assets\Scripts\Interface\IHealable.cs" />
     <Compile Include="Assets\Scripts\Toggler.cs" />
     <Compile Include="Assets\Scripts\Enemy\BreakableStats.cs" />
-    <Compile Include="Assets\MovementController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

@@ -29,7 +29,7 @@ public class AbilityController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") || Input.GetAxis("R Trigger") == 1)
             {
-                rightTriggerAbility.beginPrimary();
+                rightTriggerAbility.beginAbility();
             }
 
             if (Input.GetButtonDown("Reload"))
@@ -42,7 +42,7 @@ public class AbilityController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire2") || Input.GetAxis("L Trigger") != 0)
             {
-                leftTriggerAbility.beginPrimary();
+                leftTriggerAbility.beginAbility();
             }
         }
 
@@ -50,7 +50,7 @@ public class AbilityController : MonoBehaviour
         {
             if (AButtonEnabled)
             {
-                AButtonAbility.beginPrimary();
+                AButtonAbility.beginAbility();
             }
         }
 
