@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementController : MonoBehaviour
 {
@@ -35,13 +36,38 @@ public class MovementController : MonoBehaviour
             Jump();
         }
 
-        calculateXVelocity();
+
+
+
+
+        if (stats.isDashing)
+        {
+            stats.velocity.x = stats.dashSpeedMultiplier * hInput * stats.moveSpeed;
+            if (stats.isGrounded)
+            {
+                stats.velocity.y += stats.gravity * Time.deltaTime;
+            }
+            else
+            {
+                stats.velocity.y = 0;
+            }
+        }
+        else if (stats.isDashingEnd) //Need this case to slow player down on dash finish
+        {
+            stats.velocity.x = hInput * stats.moveSpeed;
+            stats.velocity.y += stats.gravity * Time.deltaTime;
+            stats.isDashing = false;
+            stats.isDashingEnd = false;
+        }
+        else
+        {
+            calculateXVelocity();
+        }
 
         if (stats.gravityEnabled)
         {
             CalculateYVelocityWithGravity();
         }
-        
 
         playerPhysics.Move(stats.velocity * Time.deltaTime);
 

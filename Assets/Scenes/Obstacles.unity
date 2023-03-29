@@ -4648,7 +4648,7 @@ MonoBehaviour:
   numberOfDashes: 2
   numberOfDashesLeft: 2
   fullDashTime: 0.15
-  dashTimeLeft: 0
+  dashTimeRemaining: 0.15
   dashSpeedMultiplier: 4
   dashChargeCooldownTime: 4
   dashChargeCooldownTimeLeft: 4
@@ -4786,10 +4786,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 4
-  beginPrimaryEvent: {fileID: 11400000, guid: 79ab822f1c774e14d830644d9a9fcad3, type: 2}
-  endPrimaryEvent: {fileID: 11400000, guid: e42974095a403a845bc6277bd7903873, type: 2}
-  beginSecondaryEvent: {fileID: 0}
-  endSecondaryEvent: {fileID: 0}
+  abilityOnCooldown: 0
+  beginAbilityEvent: {fileID: 0}
+  endAbilityEvent: {fileID: 0}
 --- !u!1 &1585845761
 GameObject:
   m_ObjectHideFlags: 0

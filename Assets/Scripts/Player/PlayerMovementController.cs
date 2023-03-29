@@ -117,7 +117,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             stats.numberOfDashesLeft -= 1;
             stats.isDashing = true;
-            stats.dashTimeLeft = stats.fullDashTime;
+            stats.dashTimeRemaining = stats.fullDashTime;
         }
         
     }

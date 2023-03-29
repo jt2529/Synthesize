@@ -51,7 +51,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public int numberOfDashes = 2;
     public int numberOfDashesLeft = 2;
     public float fullDashTime = 0.15f;
-    public float dashTimeLeft;
+    public float dashTimeRemaining;
     public float dashSpeedMultiplier = 4;
     public float dashChargeCooldownTime = 2;
     public float dashChargeCooldownTimeLeft;
