@@ -4650,7 +4650,7 @@ MonoBehaviour:
   fullDashTime: 0.15
   dashTimeRemaining: 0.15
   dashSpeedMultiplier: 4
-  dashChargeCooldownTime: 4
+  dashChargeCooldownTime: 1
   dashChargeCooldownTimeLeft: 4
   damageMultipler: 1
   knockbackMultiplier: 1
@@ -4785,10 +4785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb98e0d0f6fe8b442a088f61321db519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 4
-  abilityOnCooldown: 0
-  beginAbilityEvent: {fileID: 0}
-  endAbilityEvent: {fileID: 0}
+  _beginAbilityEvent: {fileID: 0}
+  _endAbilityEvent: {fileID: 0}
 --- !u!1 &1585845761
 GameObject:
   m_ObjectHideFlags: 0

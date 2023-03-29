@@ -5,6 +5,7 @@ using UnityEngine.PlayerLoop;
 
 // Dash is the first example of a player ability using the new Ability Abstract class
 
+// There is no enforcement of dash eligibility. If it is off cooldown and you press dash, the player will atempt to dash. 
 public class Dash : Ability
 {
 
@@ -27,17 +28,13 @@ public class Dash : Ability
 
     public override void beginAbility()
     {
-        Debug.Log("Dash Begin Primary");
-        //dashTimeRemaining = _abilityMaxDuration;
         BeginabilityDurationTimer(_abilityMaxDuration);
         BeginCooldown(_cooldownTime);
     }
 
     public override void endAbility()
     {
-
         stats.isDashingEnd = true;
-        Debug.Log("Dash Ends");
     }
 
     public override void reload()
@@ -55,11 +52,6 @@ public class Dash : Ability
         playerInput = GetComponent<PlayerInputController>();
         _cooldownTime = stats.dashChargeCooldownTime;
         _abilityMaxDuration = stats.fullDashTime;
-    }
-
-    protected override void BeginabilityDurationTimer(float abilityDuration)
-    {
-        StartCoroutine(AbilityDurationTimer(abilityDuration));
     }
     
 }

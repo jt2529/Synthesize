@@ -33,6 +33,8 @@ public abstract class Ability : MonoBehaviour, IAbility
 
     //Cooldown
     protected bool _abilityOnCooldown = false;
+    protected bool _chargeIsRefreshing = false;
+    protected bool _multipleChargeRefreshAllowed = false;
     protected float _cooldownTime = 4;
     protected float _cooldownTimeRemaining = 4;
 
@@ -53,9 +55,13 @@ public abstract class Ability : MonoBehaviour, IAbility
         StartCoroutine(AbilityDurationTimer(abilityDuration));
     }
 
-    protected virtual void BeginChargeCooldown(float chargeCooldownTime)
+    protected virtual void BeginChargeCooldown(float chargeRefreshTime)
     {
-        StartCoroutine(ChargeCooldownTimer(chargeCooldownTime));
+        if (!_chargeIsRefreshing || _multipleChargeRefreshAllowed)
+        {
+            StartCoroutine(ChargeCooldownTimer(chargeRefreshTime));
+        }
+        
     }
 
 
@@ -72,6 +78,7 @@ public abstract class Ability : MonoBehaviour, IAbility
         if (_currentCharges > 0)
         {
             _currentCharges -= 1;
+            BeginChargeCooldown(_cooldownTime);
         }
     }
 
@@ -90,9 +97,11 @@ public abstract class Ability : MonoBehaviour, IAbility
         endAbility();
     }
 
-    protected IEnumerator ChargeCooldownTimer(float chargeCooldownTime)
+    protected IEnumerator ChargeCooldownTimer(float chargeRefreshTime)
     {
-        yield return new WaitForSeconds(chargeCooldownTime);
+        _chargeIsRefreshing = true;
+        yield return new WaitForSeconds(chargeRefreshTime);
+        _chargeIsRefreshing = false;
         AddCharge();
     }
 }
