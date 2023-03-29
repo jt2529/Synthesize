@@ -93,7 +93,7 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        stats.dashAbility.beginAbility();
+            stats.dashAbility.beginAbility();        
     }
 
 

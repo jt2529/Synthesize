@@ -20,12 +20,8 @@ public abstract class Ability : MonoBehaviour, IAbility
     protected float _abilityMaxDuration;
     protected float _abilityDurationRemaining;
 
-
-    // I'm focusing on just getting a standard ability to work for now, where the ability is activated, lasts for a certain duration, and then deactivates. 
-    // These variables are mostly placeholders for when I can work on a charge system in the future.
-    // Some basic methods related to charges have been written but are mostly unused.
-    // Charges
-    // [SerializeField] protected bool _usesCharges = false;
+    // Charges (There are functions made to interact with charges, but the Ability class does not currently use charges when using an Ability.)
+    [SerializeField] protected bool _usesCharges = false;
     protected int _maxCharges;
     protected int _currentCharges;
     protected float _chargeMaxCooldownTime;
@@ -103,5 +99,15 @@ public abstract class Ability : MonoBehaviour, IAbility
         yield return new WaitForSeconds(chargeRefreshTime);
         _chargeIsRefreshing = false;
         AddCharge();
+    }
+
+    public virtual bool isOnCooldown()
+    {
+        return _abilityOnCooldown;
+    }
+
+    public virtual bool isActive()
+    {
+        return _abilityActive;
     }
 }
