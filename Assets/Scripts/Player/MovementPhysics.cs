@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// This class handles collision detection and movement 
+// Add this class to a GameObject that needs to be moveable and use additional scripts to control movement
+
 [RequireComponent(typeof(BoxCollider2D))]
 public class MovementPhysics : MonoBehaviour
 {
 
     private LayerMask collisionMask;
-    const float skinWidth = .023f;
+    const float skinWidth = .023f; // I don't remember why this is the value that it is...
     RaycastOrigins raycastOrigins;
 
     public int horizontalRayCount = 5;

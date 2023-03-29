@@ -5801,6 +5801,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5142581790419600041, guid: 64ddf371c9423064baa5f4b756281ee0,
+        type: 3}
+      propertyPath: dashChargeCooldownTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5142581790419600044, guid: 64ddf371c9423064baa5f4b756281ee0,
         type: 3}
       propertyPath: m_RootOrder

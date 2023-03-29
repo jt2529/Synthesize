@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// This is the old ability controller, using the old input system. 
+// We should delete this eventually but leaving it in is easier right now so we don't have to fix a bunch of stuff that isn't actually being used.
 public class AbilityController : MonoBehaviour
 {
 
