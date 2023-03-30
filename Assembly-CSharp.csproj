@@ -115,6 +115,7 @@
     <Compile Include="Assets\Scripts\Interface\IHealable.cs" />
     <Compile Include="Assets\Scripts\Toggler.cs" />
     <Compile Include="Assets\Scripts\Enemy\BreakableStats.cs" />
+    <Compile Include="Assets\Scripts\Player\Abilities\Jump.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

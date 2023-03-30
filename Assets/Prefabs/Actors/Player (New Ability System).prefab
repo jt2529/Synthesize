@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 5142581790419600046}
   - component: {fileID: 5142581790419600040}
   - component: {fileID: 5142581790419600037}
+  - component: {fileID: 6164942045709753635}
   - component: {fileID: 5142581790419600033}
   m_Layer: 9
   m_Name: Player (New Ability System)
@@ -138,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimingDirection: {x: 0, y: 0}
   dashAbility: {fileID: 5142581790419600033}
+  jumpAbility: {fileID: 6164942045709753635}
   firstAbility: {fileID: 0}
   secondAbility: {fileID: 0}
   thirdAbility: {fileID: 0}
@@ -160,6 +162,7 @@ MonoBehaviour:
   timeToJumpApex: 0.45
   maxJumpVelocity: 0
   minJumpVelocity: 0
+  minDelayBeforeNextJump: 0.02
   numberOfDashes: 2
   numberOfDashesLeft: 2
   fullDashTime: 0.15
@@ -331,6 +334,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &6164942045709753635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5142581790419600045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a73810fa578616f4bad7935411815a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _beginAbilityEvent: {fileID: 11400000, guid: 29a616cbe9b829a4f9fca2c3340813ca, type: 2}
+  _endAbilityEvent: {fileID: 11400000, guid: c9e09669dab86764fa599eac117537f8, type: 2}
+  _usesCharges: 0
 --- !u!114 &5142581790419600033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,3 +363,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _beginAbilityEvent: {fileID: 0}
   _endAbilityEvent: {fileID: 0}
+  _usesCharges: 0
+  playerInvulnerableWhileDashing: 1

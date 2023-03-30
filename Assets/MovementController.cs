@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// The new player movement controller
+
 public class MovementController : MonoBehaviour
 {
 
     private PlayerStats stats;
     private MovementPhysics playerPhysics;
+    private PlayerInputController playerInput;
 
     private float hInput = 0;
     private bool jumpBuffered = false;
@@ -15,25 +18,36 @@ public class MovementController : MonoBehaviour
     // Physics?
     [HideInInspector] public float forceUpward;
 
+    public GameEventScriptableObject playerGroundedEvent;
+
     // Start is called before the first frame update
     void Start()
     {
         playerPhysics = GetComponent<MovementPhysics>();
+        playerInput = GetComponent<PlayerInputController>();
         stats = GetComponent<PlayerStats>();
+
+        
 
     }
 
     private void FixedUpdate()
     {
+
+        hInput = playerInput.getHorizontalInput();
+
         // Stop falling or rising when a collision is detected
         if (playerPhysics.collisions.above || playerPhysics.collisions.below)
         {
             stats.velocity.y = 0;
         }
 
+        // If we have received a jump input from PlayerInputController, add the Player's jump velocity this frame
         if (jumpBuffered)
         {
-            Jump();
+            stats.isGrounded = false;
+            stats.velocity.y = stats.maxJumpVelocity;
+            jumpBuffered = false;
         }
 
 
@@ -54,6 +68,7 @@ public class MovementController : MonoBehaviour
         }
         else if (stats.isDashingEnd) //Need this case to slow player down on dash finish
         {
+            Debug.Log("isDashingEnd");
             stats.velocity.x = hInput * stats.moveSpeed;
             stats.velocity.y += stats.gravity * Time.deltaTime;
             stats.isDashing = false;
@@ -74,29 +89,28 @@ public class MovementController : MonoBehaviour
 
         if (playerPhysics.collisions.below)
         {
-            stats.isGrounded = true;
-            stats.ResetJumps();
-
+            //stats.isGrounded = true;
+            playerGroundedEvent.Raise();
         }
     }
 
-    public void BufferJumpInput()
-    {
-        jumpBuffered = true;
-    }
-
+    // jumpBuffered toggles whether we add the Player's jump velocity to the next movement update.
+    // This is done in FixedUpdate() above. 
     public void Jump()
     {
-        stats.UseJump();
-        stats.velocity.y = stats.maxJumpVelocity;
-        jumpBuffered = false;
+        jumpBuffered = true;
+
     }
 
+    // PlayerInputController passes horizontal input here to determine movement direction.
+    // Movement is done in FixedUpdate() above.
     public void HorizontalInput(float input)
     {
         hInput = input;
     }
 
+    // Pulled these out as a function for clarity on what was happening in FixedUpdate()
+    //
     private void CalculateYVelocityWithGravity()
     {
         stats.velocity.y += stats.gravity * Time.deltaTime;

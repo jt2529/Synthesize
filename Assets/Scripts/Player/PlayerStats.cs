@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 
     [Header("Abilities")]
     public Ability dashAbility;
+    public Ability jumpAbility;
 
     public Ability firstAbility;
     public Ability secondAbility;
@@ -43,6 +44,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public float timeToJumpApex = 0.45f;
     public float maxJumpVelocity;
     public float minJumpVelocity;
+    public float minDelayBeforeNextJump = 0.02f;
     private bool jumpAllowed = false;
 
     [Space(10)]
@@ -93,8 +95,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         maxHealth = statProfile.physicalValue() * 30;
         numberOfDashes = statProfile.mentalBonus / 2;
         dashChargeCooldownTime = 16f - statProfile.mentalBonus;
-        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+        
     }
 
     //Set variable values here
@@ -109,7 +110,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         isAbleToAttack = true;
     }
 
-    // Use this for initialization
+
     void Start()
     {
         refreshCoreStats();
@@ -134,45 +135,9 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 
     void FixedUpdate()
     {
-        ////This block calculates the total time the player should be in the "Dashing" state and counts down until this time is reached to reset our dash state.
-        //if (isDashing) 
-        //{
-        //    dashTimeLeft -= Time.deltaTime;
-        //    if (dashTimeLeft <= 0) 
-        //    {
-        //        dashTimeLeft = 0;
-        //        isDashing = false;
-        //        isDashingEnd = true;
-        //    }
-        //}
-
-
-        //// Dash Cooldown
-        //// This dash charge reset code first checkes to see if we reached our cooldown time since last frame. If we have, the timer resets
-        //// If we didn't reach our cooldown time last frame, we subtract the time it took to reach our current frame
-        //// If we are now at or below our remaining cooldown time, we regain a dash charge. 
-        //// On the next frame the game will see that we are at or below 0 cooldown remaining and reset the cooldown.
-
-        //// If we have used a dash charge and it has not recharged yet
-        //if (numberOfDashesLeft < numberOfDashes) 
-        //{   
-        //    // Check to see if the cooldown for the dash charge has passed
-        //    if (dashChargeCooldownTimeLeft <= 0) // if it has...
-        //    {   
-        //        // Set the cooldown back to the maximum cooldown time
-        //        dashChargeCooldownTimeLeft = dashChargeCooldownTime;
-        //    }
-
-
-        //    // If we still have time left on our cooldown
-        //    dashChargeCooldownTimeLeft -= Time.deltaTime; // reduce the cooldown by time since our last frame
-        //    if (dashChargeCooldownTimeLeft <= 0) // if we are now at or below our cooldown time
-        //    {
-        //        numberOfDashesLeft++; // add a dash charge
-        //    }
-        //}
-
-        
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
     }
 
     public void Damage(float damageTaken)
@@ -222,26 +187,4 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         throw new System.NotImplementedException();
     }
 
-    public void UseJump()
-    {
-
-        isGrounded = false;
-        numberOfJumpsLeft -= 1;
-
-    }
-
-    public void ResetJumps()
-    {
-        numberOfJumpsLeft = maxNumberofJumps;
-    }
-
-    public bool JumpAllowed()
-    {
-        if (numberOfJumpsLeft > 0)
-        {
-            return true;
-        }
-        return false;
-    }
-    
 }

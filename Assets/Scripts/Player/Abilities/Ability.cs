@@ -8,10 +8,6 @@ using UnityEngine;
 public abstract class Ability : MonoBehaviour, IAbility
 {
 
-    protected PlayerStats _abilitySource;
-
-    protected CoreStatScriptableObject _abilityStat;
-
     [SerializeField] protected GameEventScriptableObject _beginAbilityEvent;
     [SerializeField] protected GameEventScriptableObject _endAbilityEvent;
 
@@ -22,8 +18,8 @@ public abstract class Ability : MonoBehaviour, IAbility
 
     // Charges (There are functions made to interact with charges, but the Ability class does not currently use charges when using an Ability.)
     [SerializeField] protected bool _usesCharges = false;
-    protected int _maxCharges;
-    protected int _currentCharges;
+    [SerializeField] protected int _maxCharges;
+    [SerializeField] protected int _currentCharges;
     protected float _chargeMaxCooldownTime;
     protected float _chargeCurrentCooldownTime;
 
@@ -39,14 +35,17 @@ public abstract class Ability : MonoBehaviour, IAbility
     public abstract void reload();
 
 
-
+    protected virtual void Start()
+    {
+        
+    }
 
     protected virtual void BeginCooldown(float cooldownTime)
     {
         StartCoroutine(CooldownTimer(cooldownTime));            
     }
 
-    protected virtual void BeginabilityDurationTimer(float abilityDuration)
+    protected virtual void BeginAbilityDurationTimer(float abilityDuration)
     {
         StartCoroutine(AbilityDurationTimer(abilityDuration));
     }
@@ -74,7 +73,6 @@ public abstract class Ability : MonoBehaviour, IAbility
         if (_currentCharges > 0)
         {
             _currentCharges -= 1;
-            BeginChargeCooldown(_cooldownTime);
         }
     }
 
@@ -109,5 +107,20 @@ public abstract class Ability : MonoBehaviour, IAbility
     public virtual bool isActive()
     {
         return _abilityActive;
+    }
+
+    public virtual void setAbilityActive(bool active)
+    {
+        _abilityActive = active;
+    }
+
+    public virtual int chargesRemaining()
+    {
+        return _currentCharges;
+    }
+
+    public virtual void RefreshAllCharges()
+    {
+        _currentCharges = _maxCharges;
     }
 }

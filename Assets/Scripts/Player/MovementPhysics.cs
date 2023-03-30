@@ -32,7 +32,9 @@ public class MovementPhysics : MonoBehaviour
         collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles");
     }
 
-    public void Move(Vector2 velocity)
+    // External Velocity is optional. It will default to a Vector2 of 0,0 if not provided when called. 
+    // Things like moving platforms should be able to add their velocity to a GameObject's move call
+    public void Move(Vector2 velocity, Vector2 externalVelocity = default(Vector2))
     {
         UpdateRaycastOrigins();
         collisions.Reset();
@@ -52,7 +54,8 @@ public class MovementPhysics : MonoBehaviour
             VerticalCollisions(ref velocity);
         }
 
-        transform.Translate(velocity);
+        // This is where the GameObject's velocity and the external force are combined.
+        transform.Translate(velocity + externalVelocity);
     }
 
 

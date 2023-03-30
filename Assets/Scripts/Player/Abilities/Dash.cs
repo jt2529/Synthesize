@@ -8,9 +8,7 @@ public class Dash : Ability
 {
 
     public bool playerInvulnerableWhileDashing = true;
-
     private PlayerStats stats;
-    private PlayerInputController playerInput;
 
     private void FixedUpdate()
     {
@@ -28,7 +26,7 @@ public class Dash : Ability
     {
         if(!_abilityActive && !_abilityOnCooldown)
         {
-            BeginabilityDurationTimer(_abilityMaxDuration);
+            BeginAbilityDurationTimer(_abilityMaxDuration);
             BeginCooldown(_cooldownTime);
 
             if (playerInvulnerableWhileDashing)
@@ -61,7 +59,6 @@ public class Dash : Ability
     void Start()
     {
         stats = GetComponent<PlayerStats>();
-        playerInput = GetComponent<PlayerInputController>();
         _cooldownTime = stats.dashChargeCooldownTime;
         _abilityMaxDuration = stats.fullDashTime;
     }
