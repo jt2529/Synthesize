@@ -8,6 +8,7 @@ public class StatBoost : MonoBehaviour , Interactable
 
     public StatType statType;
     public float statBoost;
+    public int cost;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,30 +43,34 @@ public class StatBoost : MonoBehaviour , Interactable
     public void Interact(GameObject playerObject) 
     {
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
-        switch(statType) 
+        if (playerStats.currency > cost) 
         {
-            case StatType.JumpHeight:
-                playerStats.ChangeJumpHeight(statBoost);
-                break;
-            case StatType.MoveSpeed:
-                playerStats.ChangeMoveSpeed(statBoost);
-                break;
-            case StatType.Health:
-                playerStats.ChangeMaxHealth(statBoost);
-                break;
-            case StatType.MeleeDamage:
-                playerStats.ChangeMeleeDamage(statBoost);
-                break;
-            case StatType.RangedDamage:
-                playerStats.ChangeRangedDamage(statBoost);
-                break;
-            case StatType.Knockback:
-                playerStats.ChangeKnockback(statBoost);
-                break;
-            case StatType.Jumps:
-                playerStats.ChangeJumps(statBoost);
-                break;
+            playerStats.ModifyCurrency(cost * -1);
+            switch(statType) 
+            {
+                case StatType.JumpHeight:
+                    playerStats.ChangeJumpHeight(statBoost);
+                    break;
+                case StatType.MoveSpeed:
+                    playerStats.ChangeMoveSpeed(statBoost);
+                    break;
+                case StatType.Health:
+                    playerStats.ChangeMaxHealth(statBoost);
+                    break;
+                case StatType.MeleeDamage:
+                    playerStats.ChangeMeleeDamage(statBoost);
+                    break;
+                case StatType.RangedDamage:
+                    playerStats.ChangeRangedDamage(statBoost);
+                    break;
+                case StatType.Knockback:
+                    playerStats.ChangeKnockback(statBoost);
+                    break;
+                case StatType.Jumps:
+                    playerStats.ChangeJumps(statBoost);
+                    break;
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

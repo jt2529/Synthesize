@@ -8,6 +8,8 @@ public class EnemyStats : MonoBehaviour {
     public float moveSpeed;
     public int health;
     public int rewards;
+    public int baseCurrencyReward;
+    public int currencyReward;
     public float jumpHeight;
     public float timeToJumpApex;
     public float weight;
@@ -45,6 +47,11 @@ public class EnemyStats : MonoBehaviour {
         }
     }
 
+    public void SetCurrencyReward(float currencyRewardMultiplier) 
+    {
+        currencyReward = (int)(currencyRewardMultiplier * (float)baseCurrencyReward);
+    }
+
     public void ReceiveAttack(int damage, Vector2 knockbackForce, float stunTime) 
     {
         ChangeHealth(damage);   //Damage the enemy
@@ -79,6 +86,11 @@ public class EnemyStats : MonoBehaviour {
             {
                 gameController.DropLoot(transform.position);
             }
+        }
+
+        if (currencyReward > 0) 
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().ModifyCurrency(currencyReward);
         }
         
     }

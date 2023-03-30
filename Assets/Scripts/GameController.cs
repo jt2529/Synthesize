@@ -12,10 +12,13 @@ public class GameController : MonoBehaviour
 
     public List<Transform> enemySpawnPoints;
     public List<Transform> keySpawnPoints;
+    public List<Transform> shopPortalSpawnPoints;
+    public List<Transform> shopItemSpawnPoints;
     public List<GameObject> enemyPrefabs;
     public List<GameObject> lootPrefabs;
     public GameObject keyPrefab;
     public PlayerStats playerStats;
+    public Portal shopPortal;
     //Fields needed for save/load functionality and scene changes
     public GameData gameData;
 
@@ -24,6 +27,7 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        shopPortal = GameObject.FindGameObjectWithTag("ShopPortal").GetComponentInChildren<Portal>();
         if (controllerInstance == null) 
         {
             controllerInstance = this;
@@ -37,6 +41,8 @@ public class GameController : MonoBehaviour
         gameData.activeSceneName = SceneManager.GetActiveScene().name;
         SpawnEnemies();
         SpawnKeys();
+        SpawnShopPortal();
+        SpawnShopItems();
     }
 
     private void Start()
@@ -59,10 +65,12 @@ public class GameController : MonoBehaviour
 
             GameObject enemy = Instantiate(enemyPrefabs[randEnemy], enemySpawnPoints[randSpawnPoint].position, transform.rotation);
             float getLootNumber = Random.Range((float)0, (float)1);
+            EnemyStats enemyStats = enemy.GetComponent<EnemyStats>();
             if (getLootNumber < gameData.lootOdds)
             {
-                enemy.GetComponent<EnemyStats>().rewards = 1;
+                enemyStats.rewards = 1;
             }
+            enemyStats.SetCurrencyReward(gameData.currencyRewardMultiplier);
             enemySpawnPoints.RemoveAt(randSpawnPoint);
         }
     }
@@ -79,11 +87,35 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void SpawnShopPortal() 
+    { 
+        int randSpawnPoint = Random.Range(0, shopPortalSpawnPoints.Count);
+
+        shopPortal.transform.position = shopPortalSpawnPoints[randSpawnPoint].position;
+    }
+
+    public void SpawnShopItems()
+    {
+        for (int i = 0; i < shopItemSpawnPoints.Count; i++) 
+        {
+            DropLoot(shopItemSpawnPoints[i].position, gameData.shopItemCost);
+        }
+
+    }
+
     public void DropLoot(Vector3 lootPosition) 
     {
         int randLoot = Random.Range(0, lootPrefabs.Count);
 
-        Instantiate(lootPrefabs[randLoot], lootPosition , transform.rotation);
+       Instantiate(lootPrefabs[randLoot], lootPosition , transform.rotation);
+    }
+
+    public void DropLoot(Vector3 lootPosition, int cost)
+    {
+        int randLoot = Random.Range(0, lootPrefabs.Count);
+
+        GameObject loot = Instantiate(lootPrefabs[randLoot], lootPosition, transform.rotation);
+        loot.GetComponent<StatBoost>().cost = cost;
     }
 
     public void Save()
@@ -154,6 +186,7 @@ public class GameController : MonoBehaviour
 
         gameData.meleeDamageMultiplier  = playerStats.meleeDamageMultiplier;
         gameData.rangedDamageMultiplier = playerStats.rangedDamageMultiplier;
+        gameData.currency               = playerStats.currency;
     }
 
     public void SetCurrentPlayerData()
@@ -191,6 +224,8 @@ public class GameController : MonoBehaviour
 
         playerStats.meleeDamageMultiplier   = gameData.meleeDamageMultiplier;
         playerStats.rangedDamageMultiplier  = gameData.rangedDamageMultiplier;
+
+        playerStats.currency                = gameData.currency;
     }   
 }
 

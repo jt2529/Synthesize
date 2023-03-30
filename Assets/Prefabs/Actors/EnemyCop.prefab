@@ -199,6 +199,8 @@ MonoBehaviour:
   moveSpeed: 2
   health: 100
   rewards: 0
+  baseCurrencyReward: 50
+  currencyReward: 0
   jumpHeight: 0
   timeToJumpApex: 0
   weight: 10

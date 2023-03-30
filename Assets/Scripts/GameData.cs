@@ -40,9 +40,13 @@ public class GameData
     public float meleeDamageMultiplier;
     public float rangedDamageMultiplier;
 
+    public int currency;
+
     //Current Game Data
     public int numberOfEnemies;
     public int numberOfKeys;
+    public int shopItemCost;
     public float lootOdds;
+    public float currencyRewardMultiplier;
     public string activeSceneName;
 }

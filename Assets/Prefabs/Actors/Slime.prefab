@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5807330127163456923}
   - component: {fileID: 5807330127163456992}
   - component: {fileID: 5807330127163456997}
+  - component: {fileID: 3428941083582046910}
   m_Layer: 12
   m_Name: Slime
   m_TagString: Untagged
@@ -139,11 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 068e2871ffc5cb6468a7057dca8345d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 65536
   horizontalRayCount: 5
   verticalRayCount: 5
+  currentVelocity: {x: 0, y: 0}
   maxClimbAngle: 60
   maxDescendAngle: 75
 --- !u!114 &5807330127163456996
@@ -158,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898927d930a00a545a05ad755d58affe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 0
   damage: 50
   objectHitBox: {fileID: 5807330127163456992}
   destructable: 0
@@ -176,8 +176,19 @@ MonoBehaviour:
   maxHealth: 200
   moveSpeed: 3
   health: 200
+  rewards: 0
+  baseCurrencyReward: 30
+  currencyReward: 0
   jumpHeight: 0
   timeToJumpApex: 0
+  weight: 0
+  fireRate: 0
+  aggroDistance: 0
+  healthBar: {fileID: 3428941083582046910}
+  force: {x: 0, y: 0}
+  stunTimer: 0
+  isStunned: 0
+  anim: {fileID: 0}
 --- !u!61 &5807330127163456992
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -212,7 +223,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5807330127163457004}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -225,3 +236,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3428941083582046910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5807330127163457004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a10a396d2b1528148b55f14bb561da00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 5807330127163456994}
+  stats: {fileID: 5807330127163456923}
+  fullDisplayTime: 0

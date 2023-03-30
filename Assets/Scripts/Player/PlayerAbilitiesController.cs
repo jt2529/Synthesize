@@ -106,7 +106,7 @@ public class PlayerAbilitiesController : MonoBehaviour {
 
     void OnFireMouse(InputValue value) 
     {
-        stats.aimingDirection = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()); 
+        stats.aimingDirection = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position; 
         primary.FireBullet();
     }
 

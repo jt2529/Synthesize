@@ -8,6 +8,7 @@ TagManager:
   - Music
   - MenuItem
   - Interactable
+  - ShopPortal
   layers:
   - Default
   - TransparentFX

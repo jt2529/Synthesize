@@ -12,7 +12,6 @@ public class Hurtbox : MonoBehaviour {
         if (col.tag == "Player")
         {
             PlayerStats ps = col.GetComponent<PlayerStats>();
-            Debug.Log(ps.name + " entered the killbox.");
             ps.hurt(damage);
         }
 

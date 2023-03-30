@@ -56,11 +56,13 @@ public class PlayerStats : MonoBehaviour
 
     public List<GameObject> currentInteractableObjects;
     public Interactable currentInteractableObjectLocked;
-    public List<int> keyItems;
     public GameObject objectTouchingLeft;
     public GameObject objectTouchingRight;
     public GameObject objectTouchingAbove;
     public GameObject objectTouchingBelow;
+
+    public int currency;
+    public List<int> keyItems;
 
     [SerializeField]
     public bool playerAlive;
@@ -179,8 +181,11 @@ public class PlayerStats : MonoBehaviour
             }
 
         }
+    }
 
-
+    public void ModifyCurrency(int changeAmount) 
+    {
+        currency += changeAmount;
     }
 
     public void SetNumberOfJumps(int jumps)
