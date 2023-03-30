@@ -83,5 +83,12 @@ UserSettings/Layouts/default-2021.dwlt
 Logs/shadercompiler-UnityShaderCompiler.exe0.log
 *.log
 *.log
-UserSettings/EditorUserSettings.asset
 UserSettings/Layouts/default-2021.dwlt
+Logs/shadercompiler-UnityShaderCompiler.exe0.log
+*.meta
+*.csproj
+ProjectSettings/EditorBuildSettings.asset
+UserSettings/EditorUserSettings.asset
+UserSettings/EditorUserSettings.asset
+Assembly-CSharp.csproj
+*.meta

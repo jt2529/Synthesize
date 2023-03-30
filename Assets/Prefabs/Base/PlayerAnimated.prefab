@@ -908,12 +908,13 @@ GameObject:
   - component: {fileID: 114381028208120922}
   - component: {fileID: 114458309758543022}
   - component: {fileID: 212993716914771212}
-  - component: {fileID: 61258424950798130}
   - component: {fileID: 114317022110262230}
   - component: {fileID: 95825001097776616}
   - component: {fileID: 114888325783106864}
   - component: {fileID: 82624993607084452}
+  - component: {fileID: 61258424950798130}
   - component: {fileID: 50202372968075292}
+  - component: {fileID: 3292903417091382425}
   m_Layer: 8
   m_Name: PlayerAnimated
   m_TagString: Player
@@ -951,16 +952,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimingDirection: {x: 1, y: 0}
-  maxHealth: 100
   health: 100
-  maxJumpHeight: 2.2
-  timeToJumpApex: 0.45
+  baseMaxHealth: 1000
+  maxHealthMultiplier: 1
+  maxHealth: 1000
+  baseMoveSpeed: 4
+  moveSpeedMultipler: 1
   moveSpeed: 4
+  baseMaxJumpHeight: 2.2
+  jumpHeightMultipler: 1
+  minJumpHeight: 0.4
+  maxJumpHeight: 2.2
+  numberOfJumps: 3
+  numberOfJumpsLeft: 0
+  timeToJumpApex: 0.45
+  numberOfDashes: 2
+  numberOfDashesLeft: 0
+  fullDashTime: 0.15
+  dashTimeLeft: 0
+  dashSpeedMultiplier: 4
+  dashChargeCooldownTime: 2
+  dashChargeCooldownTimeLeft: 0
+  damageMultipler: 1
+  knockbackMultiplier: 1
+  meleeDamageMultiplier: 1
+  rangedDamageMultiplier: 1
+  playerInvulnerable: 0
   isTeleporting: 0
+  isAbleToAttack: 0
+  isGrounded: 0
+  isRunning: 0
+  isDashing: 0
+  isDashingEnd: 0
   currentInteractableObject: {fileID: 0}
   isCurrentInteractableObjectLocked: 0
   keyItems: 
   playerAlive: 1
+  facingRight: 0
   currentSpeed: {x: 0, y: 0}
 --- !u!114 &114458309758543022
 MonoBehaviour:
@@ -977,8 +1005,6 @@ MonoBehaviour:
   accelerationTimeAirborne: 0.2
   accelerationTimeGrounded: 0.05
   gravity: -21.728397
-  isGrounded: 1
-  isRunning: 0
   forceUpward: 0
 --- !u!212 &212993716914771212
 SpriteRenderer:
@@ -1032,32 +1058,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &61258424950798130
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1879330043376860}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.15}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.26, y: 0.68}
-  m_EdgeRadius: 0
 --- !u!114 &114317022110262230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,11 +1070,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0cb02dbf87645459236bd27c48aa7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 114762134206098008}
+  primary: {fileID: 0}
+  secondary: {fileID: 0}
   stats: {fileID: 114381028208120922}
   keytar: {fileID: 114963474305839130}
   lastThreeNotes: 
   menu: {fileID: 0}
+  mainCamera: {fileID: 0}
 --- !u!95 &95825001097776616
 Animator:
   serializedVersion: 5
@@ -1208,6 +1210,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!61 &61258424950798130
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879330043376860}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.15}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.26, y: 0.68}
+  m_EdgeRadius: 0
 --- !u!50 &50202372968075292
 Rigidbody2D:
   serializedVersion: 4
@@ -1229,3 +1257,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &3292903417091382425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879330043376860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3cbc7003f9b3bba458937281ceebe988,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

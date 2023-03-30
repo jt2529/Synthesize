@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99bd2697329fa234588e369d2dc5fbda, type: 3}
+  m_Name: Basic Physical
+  m_EditorClassIdentifier: 
+  mentalStat: {fileID: 11400000, guid: b2734a1c6256f5246817bce5deebb8d5, type: 2}
+  socialStat: {fileID: 11400000, guid: 9d0ce6235da16584d9a2c0bfe2c36579, type: 2}
+  physicalStat: {fileID: 11400000, guid: 9d0ce6235da16584d9a2c0bfe2c36579, type: 2}
+  luckStat: {fileID: 11400000, guid: 5dcda26b3d34f0248ae0e3a19414c61d, type: 2}
+  profileName: Basic Physical
+  mentalBonus: 6
+  socialBonus: 1
+  physicalBonus: 9
+  luckBonus: 2

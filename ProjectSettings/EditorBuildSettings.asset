@@ -8,4 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GroundPlay.unity
     guid: 231887bf1fa1867449fcd97b4c51b264
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: ba6a2b16a544e6445b8ee3cc7928908c,
+      type: 2}
