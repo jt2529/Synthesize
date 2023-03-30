@@ -43,7 +43,7 @@ public class StatBoost : MonoBehaviour , Interactable
     public void Interact(GameObject playerObject) 
     {
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
-        if (playerStats.currency > cost) 
+        if (playerStats.currency >= cost) 
         {
             playerStats.ModifyCurrency(cost * -1);
             switch(statType) 
