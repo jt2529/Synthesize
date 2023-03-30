@@ -179,12 +179,35 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     }
 
 
+    public void setPlayerAirborne()
+    {
+        isGrounded = false;
+    }
 
+    public void setPlayerGrounded()
+    {
+        isGrounded = true;
+    }
 
 
     public void Heal(float healAmount)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void setPlayerIsDashing()
+    {
+        isDashing = true;
+    }
+
+    public void setPlayerDashEnding()
+    {
+        isDashingEnd = true;
+    }
+
+    public void setPlayerNotDashing()
+    {
+        isDashing = false;
     }
 
 }

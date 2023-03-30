@@ -14,10 +14,10 @@ public class Dash : Ability
     {
         if (_abilityActive)
         {
-            stats.isDashing = true;
+            stats.setPlayerIsDashing();
         }else
         {
-            stats.isDashing = false;
+            stats.setPlayerNotDashing();
         }
          
     }
@@ -29,6 +29,8 @@ public class Dash : Ability
             BeginAbilityDurationTimer(_abilityMaxDuration);
             BeginCooldown(_cooldownTime);
 
+            _beginAbilityEvent.Raise();
+
             if (playerInvulnerableWhileDashing)
             {
                 stats.playerInvulnerable = true;
@@ -38,7 +40,7 @@ public class Dash : Ability
 
     public override void endAbility()
     {
-        stats.isDashingEnd = true;
+        _endAbilityEvent.Raise();
 
         if (playerInvulnerableWhileDashing)
         {

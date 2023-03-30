@@ -18,7 +18,10 @@ public class MovementController : MonoBehaviour
     // Physics?
     [HideInInspector] public float forceUpward;
 
+    [Header("Events")]
+    public GameEventScriptableObject playerJumpEvent;
     public GameEventScriptableObject playerGroundedEvent;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +48,7 @@ public class MovementController : MonoBehaviour
         // If we have received a jump input from PlayerInputController, add the Player's jump velocity this frame
         if (jumpBuffered)
         {
-            stats.isGrounded = false;
+            playerJumpEvent.Raise(); // Let anything that cares know we jumped
             stats.velocity.y = stats.maxJumpVelocity;
             jumpBuffered = false;
         }
@@ -68,7 +71,6 @@ public class MovementController : MonoBehaviour
         }
         else if (stats.isDashingEnd) //Need this case to slow player down on dash finish
         {
-            Debug.Log("isDashingEnd");
             stats.velocity.x = hInput * stats.moveSpeed;
             stats.velocity.y += stats.gravity * Time.deltaTime;
             stats.isDashing = false;
@@ -89,7 +91,6 @@ public class MovementController : MonoBehaviour
 
         if (playerPhysics.collisions.below)
         {
-            //stats.isGrounded = true;
             playerGroundedEvent.Raise();
         }
     }

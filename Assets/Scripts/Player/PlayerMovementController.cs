@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using System;
 
-
+// This is the OLD MOVEMENT CONTROLLER
+// Do not use!
 public class PlayerMovementController : MonoBehaviour
 {
 
