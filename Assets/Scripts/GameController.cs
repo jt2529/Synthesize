@@ -179,10 +179,10 @@ public class GameController : MonoBehaviour
 
         gameData.knockbackMultiplier    = playerStats.knockbackMultiplier;
 
-        gameData.health                 = playerStats.health;
+        gameData.health                 = playerStats.GetHealth();
         gameData.baseMaxHealth          = playerStats.baseMaxHealth;
         gameData.maxHealthMultiplier    = playerStats.maxHealthMultiplier;
-        gameData.maxHealth              = playerStats.maxHealth;
+        gameData.maxHealth              = playerStats.GetMaxHealth();
 
         gameData.meleeDamageMultiplier  = playerStats.meleeDamageMultiplier;
         gameData.rangedDamageMultiplier = playerStats.rangedDamageMultiplier;
@@ -216,11 +216,10 @@ public class GameController : MonoBehaviour
         playerStats.damageMultipler         = gameData.damageMultipler;
 
         playerStats.knockbackMultiplier     = gameData.knockbackMultiplier;
-            
-        playerStats.health                  = gameData.health;
         playerStats.baseMaxHealth           = gameData.baseMaxHealth;
         playerStats.maxHealthMultiplier     = gameData.maxHealthMultiplier;
-        playerStats.maxHealth               = gameData.maxHealth;
+        playerStats.SetMaxHealth(gameData.maxHealth);
+        playerStats.SetHealth(gameData.health);
 
         playerStats.meleeDamageMultiplier   = gameData.meleeDamageMultiplier;
         playerStats.rangedDamageMultiplier  = gameData.rangedDamageMultiplier;

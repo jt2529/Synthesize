@@ -14,6 +14,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     public StatProfileScriptableObject statProfile;
     private int health;
     public float maxHealthMultiplier;
+    public int baseMaxHealth;
     private int maxHealth;
     public float baseMoveSpeed;
     public float moveSpeedMultipler;
@@ -81,7 +82,6 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     [SerializeField]
     public bool playerAlive;
     public bool facingRight;
-    private Transform currentTransform;
     private Vector3 oldPosition;
     public Vector2 currentSpeed;
 
@@ -111,11 +111,9 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     // Use this for initialization
     void Start()
     {
-        refreshCoreStats();
+        //refreshCoreStats();
         numberOfDashesLeft = numberOfDashes;
-
-        currentTransform = GetComponent<Transform>();
-        oldPosition = currentTransform.position;
+        oldPosition = transform.position;
         currentSpeed.x = 0;
         currentSpeed.y = 0;
     }
@@ -132,9 +130,9 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
 
     void FixedUpdate()
     {
-        currentSpeed.x = Mathf.Abs(currentTransform.position.x - oldPosition.x);
-        currentSpeed.y = Mathf.Abs(currentTransform.position.x - oldPosition.x);
-        oldPosition = currentTransform.position;
+        currentSpeed.x = Mathf.Abs(transform.position.x - oldPosition.x);
+        currentSpeed.y = Mathf.Abs(transform.position.y - oldPosition.y);
+        oldPosition = transform.position;
         if (isDashing) 
         {
             dashTimeLeft -= Time.deltaTime;
@@ -189,8 +187,6 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
             health += (int)(newMaxHealth - maxHealth);
         }
         maxHealth = (int)newMaxHealth;
-       
-        
     }
 
     public void ChangeHealth(int changeAmount)
@@ -253,6 +249,11 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     public void SetPlayerVulnerable()
     {
         playerInvulnerable = false;
+    }
+
+    public void SetHealth(int newHealth) 
+    {
+        health = newHealth;
     }
 
     public int GetMaxHealth()
@@ -360,6 +361,12 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     public void ChangeJumps(float statMultiplier)
     {
         numberOfJumps = numberOfJumps + 1;
+    }
+
+    public void ChangeMaxHealth(float amount)
+    {
+        maxHealthMultiplier += amount;
+        SetMaxHealth(maxHealthMultiplier * baseMaxHealth);
     }
 
 
