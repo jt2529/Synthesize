@@ -10,7 +10,7 @@ public class Jump : Ability
 {
 
     private MovementController playerMovement;
-    public GameEventListener playerGroundedListener;
+    
     private PlayerStats stats;
 
     public override void beginAbility()

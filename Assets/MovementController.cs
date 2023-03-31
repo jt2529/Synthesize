@@ -26,6 +26,7 @@ public class MovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         playerPhysics = GetComponent<MovementPhysics>();
         playerInput = GetComponent<PlayerInputController>();
         stats = GetComponent<PlayerStats>();
