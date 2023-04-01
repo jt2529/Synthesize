@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 5142581790419600040}
   - component: {fileID: 5142581790419600037}
   - component: {fileID: 1986375933066881071}
+  - component: {fileID: 4619676240797073298}
   m_Layer: 9
   m_Name: Player (New Ability System)
   m_TagString: Untagged
@@ -164,6 +165,7 @@ MonoBehaviour:
   maxJumpVelocity: 0
   minJumpVelocity: 0
   minDelayBeforeNextJump: 0.02
+  dropDuration: 0.1
   numberOfDashes: 2
   numberOfDashesLeft: 2
   fullDashTime: 0.15
@@ -183,6 +185,7 @@ MonoBehaviour:
   isRunning: 0
   isDashing: 0
   isDashingEnd: 0
+  isDropping: 0
   currentInteractableObject: {fileID: 0}
   isCurrentInteractableObjectLocked: 0
   keyItems: 
@@ -376,6 +379,27 @@ MonoBehaviour:
     type: 2}
   playerRisingEvent: {fileID: 11400000, guid: 51726cc2856cdad43bf1a290da3a58ed, type: 2}
   playerFallingEvent: {fileID: 11400000, guid: 7269cec6f9bd78e4b83c5230e45d2bf2, type: 2}
+--- !u!50 &4619676240797073298
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5142581790419600045}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6739443517596392831
 GameObject:
   m_ObjectHideFlags: 0
