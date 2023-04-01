@@ -54,7 +54,7 @@ public class Jump : Ability
     {
         stats.SetIsDropping(true);
         playerMovement.RemoveCollisionWithOneWayObstacles();
-        //StartCoroutine(DropDelay(stats.minDelayBeforeNextJump));
+        StartCoroutine(DropDelay(stats.minDelayBeforeNextJump));
     }
 
     protected IEnumerator DropDelay(float durationTime)
@@ -66,7 +66,7 @@ public class Jump : Ability
     public void StopDropping()
     {
         stats.SetIsDropping(false);
-        playerMovement.ResumeCollisionWithOneWayObstacles();
+        //playerMovement.ResumeCollisionWithOneWayObstacles();
         
     }
 

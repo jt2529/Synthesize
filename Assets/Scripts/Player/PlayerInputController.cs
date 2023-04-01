@@ -103,8 +103,9 @@ public class PlayerInputController : MonoBehaviour
     // 
     public void OnDrop(InputAction.CallbackContext context)
     {
-        jumpAbility.Drop();
         dropBuffered = true;
+        jumpAbility.Drop();
+        
     }
 
 
@@ -112,7 +113,6 @@ public class PlayerInputController : MonoBehaviour
     {
         if (!jumpAbility.isOnCooldown() && jumpAbility.chargesRemaining() > 0)
         {
-            UnityEngine.Debug.Log("Jump");
             jumpAbility.beginAbility();
         }
         
@@ -122,6 +122,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (dropBuffered)
         {
+            UnityEngine.Debug.Log("Crouch Cancel");
             dropBuffered = false;
             jumpAbility.StopDropping();
         }

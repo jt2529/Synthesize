@@ -8,7 +8,8 @@ using System.Collections;
 public class MovementPhysics : MonoBehaviour
 {
 
-    private LayerMask collisionMask;
+    private LayerMask defaultCollisionMask;
+    private LayerMask oneWayCollisionMask;
     const float skinWidth = .023f; // I don't remember why this is the value that it is...
     RaycastOrigins raycastOrigins;
 
@@ -29,7 +30,8 @@ public class MovementPhysics : MonoBehaviour
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles", "OneWayObstacles");
+        defaultCollisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles", "OneWayObstacles");
+        oneWayCollisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles");
     }
 
     // External Velocity is optional. It will default to a Vector2 of 0,0 if not provided when called. 
@@ -69,7 +71,7 @@ public class MovementPhysics : MonoBehaviour
         {
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, defaultCollisionMask);
 
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
@@ -140,7 +142,7 @@ public class MovementPhysics : MonoBehaviour
         {
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, defaultCollisionMask);
 
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
@@ -177,7 +179,7 @@ public class MovementPhysics : MonoBehaviour
             float directionX = Mathf.Sign(velocity.x);
             rayLength = Mathf.Abs(velocity.x) + skinWidth;
             Vector2 rayOrigin = ((directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight) + Vector2.up * velocity.y;
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, defaultCollisionMask);
 
             if (hit)
             {
@@ -210,7 +212,7 @@ public class MovementPhysics : MonoBehaviour
     {
         float directionX = Mathf.Sign(velocity.x);
         Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, defaultCollisionMask);
 
         if (hit)
         {
@@ -288,6 +290,6 @@ public class MovementPhysics : MonoBehaviour
 
     public void ApplyNewCollisionMask(LayerMask newMask)
     {
-        collisionMask = newMask;
+        defaultCollisionMask = newMask;
     }
 }

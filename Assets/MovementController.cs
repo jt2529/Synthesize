@@ -101,8 +101,7 @@ public class MovementController : MonoBehaviour
             }
             
         }
-
-
+        
         playerPhysics.Move(stats.velocity * Time.deltaTime);
 
         

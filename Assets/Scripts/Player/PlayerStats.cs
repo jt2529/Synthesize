@@ -76,7 +76,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public bool isRunning = false;
     public bool isDashing = false;
     public bool isDashingEnd = false;
-    private bool isDropping = false;
+    [SerializeField] private bool isDropping = false;
     public GameObject currentInteractableObject;
     public bool isCurrentInteractableObjectLocked;
     public List<int> keyItems;
