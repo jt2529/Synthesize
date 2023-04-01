@@ -10,8 +10,10 @@ public class Jump : Ability
 {
 
     private MovementController playerMovement;
-    
     private PlayerStats stats;
+
+    public GameEventScriptableObject playerDropBegin;
+    public GameEventScriptableObject playerDropEnd;
 
     public override void beginAbility()
     {
@@ -44,6 +46,27 @@ public class Jump : Ability
 
         _maxCharges = stats.maxNumberofJumps;
         _currentCharges = _maxCharges;
+        
+    }
+
+    // This ability causes the player to fall through one way platforms.
+    public void Drop()
+    {
+        stats.SetIsDropping(true);
+        playerMovement.RemoveCollisionWithOneWayObstacles();
+        //StartCoroutine(DropDelay(stats.minDelayBeforeNextJump));
+    }
+
+    protected IEnumerator DropDelay(float durationTime)
+    {
+        yield return new WaitForSeconds(durationTime);
+        StopDropping();
+    }
+
+    public void StopDropping()
+    {
+        stats.SetIsDropping(false);
+        playerMovement.ResumeCollisionWithOneWayObstacles();
         
     }
 

@@ -21,6 +21,8 @@ public class MovementController : MonoBehaviour
     [Header("Events")]
     public GameEventScriptableObject playerJumpEvent;
     public GameEventScriptableObject playerGroundedEvent;
+    public GameEventScriptableObject playerRisingEvent;
+    public GameEventScriptableObject playerFallingEvent;
 
 
     // Start is called before the first frame update
@@ -30,8 +32,6 @@ public class MovementController : MonoBehaviour
         playerPhysics = GetComponent<MovementPhysics>();
         playerInput = GetComponent<PlayerInputController>();
         stats = GetComponent<PlayerStats>();
-
-        
 
     }
 
@@ -87,12 +87,30 @@ public class MovementController : MonoBehaviour
             CalculateYVelocityWithGravity();
         }
 
+        if(stats.velocity.y > 0)
+        {
+            playerRisingEvent.Raise();
+            RemoveCollisionWithOneWayObstacles();
+        }
+        else if(stats.velocity.y < 0)
+        {
+            playerFallingEvent.Raise();
+            if (!stats.IsDropping())
+            {
+                ResumeCollisionWithOneWayObstacles();
+            }
+            
+        }
+
+
         playerPhysics.Move(stats.velocity * Time.deltaTime);
 
+        
 
         if (playerPhysics.collisions.below)
         {
             playerGroundedEvent.Raise();
+            ResumeCollisionWithOneWayObstacles();
         }
     }
 
@@ -130,5 +148,13 @@ public class MovementController : MonoBehaviour
         stats.velocity.x = Mathf.SmoothDamp(stats.velocity.x, targetVelocityX, ref stats.velocityXSmoothing, (playerPhysics.collisions.below) ? stats.groundAccelerationTime : stats.airAccelerationTime);
     }
 
+    public void RemoveCollisionWithOneWayObstacles()
+    {
+        playerPhysics.ApplyNewCollisionMask(LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles"));
+    }
 
+    public void ResumeCollisionWithOneWayObstacles()
+    {
+        playerPhysics.ApplyNewCollisionMask(LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles", "OneWayObstacles"));
+    }
 }

@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 
     [Header("Abilities")]
     public Ability dashAbility;
-    public Ability jumpAbility;
+    public Jump jumpAbility;
 
     public Ability firstAbility;
     public Ability secondAbility;
@@ -47,6 +47,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public float minDelayBeforeNextJump = 0.02f;
     private bool jumpAllowed = false;
 
+
     [Space(10)]
 
     [Header("Dash")]
@@ -75,7 +76,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public bool isRunning = false;
     public bool isDashing = false;
     public bool isDashingEnd = false;
-
+    private bool isDropping = false;
     public GameObject currentInteractableObject;
     public bool isCurrentInteractableObjectLocked;
     public List<int> keyItems;
@@ -208,6 +209,25 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public void setPlayerNotDashing()
     {
         isDashing = false;
+    }
+
+    public bool isFalling()
+    {
+        if(velocity.y < 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsDropping()
+    {
+        return isDropping;
+    }
+
+    public void SetIsDropping(bool dropping)
+    {
+        isDropping = dropping;
     }
 
 }

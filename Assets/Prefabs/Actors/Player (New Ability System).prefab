@@ -203,9 +203,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceUpward: 0
-  playerJumped: {fileID: 0}
-  playerAirborne: {fileID: 0}
-  playerGrounded: {fileID: 0}
+  playerJumped: {fileID: 11400000, guid: 29a616cbe9b829a4f9fca2c3340813ca, type: 2}
+  playerAirborne: {fileID: 11400000, guid: 1a38af400bbdfa94fa18509811016cef, type: 2}
+  playerGrounded: {fileID: 11400000, guid: 3fd58e21e11ab8944979c5182cb6ab71, type: 2}
 --- !u!114 &5142581790419600047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +240,8 @@ MonoBehaviour:
   _usesCharges: 1
   _maxCharges: 2
   _currentCharges: 2
+  playerDropBegin: {fileID: 11400000, guid: 50239476bc562ff4fad3296ea789cd22, type: 2}
+  playerDropEnd: {fileID: 11400000, guid: 9556f5fb22ba9fd43b82307777fce162, type: 2}
 --- !u!114 &3719319769028213551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +374,8 @@ MonoBehaviour:
   playerJumpEvent: {fileID: 11400000, guid: 29a616cbe9b829a4f9fca2c3340813ca, type: 2}
   playerGroundedEvent: {fileID: 11400000, guid: 3fd58e21e11ab8944979c5182cb6ab71,
     type: 2}
+  playerRisingEvent: {fileID: 11400000, guid: 51726cc2856cdad43bf1a290da3a58ed, type: 2}
+  playerFallingEvent: {fileID: 11400000, guid: 7269cec6f9bd78e4b83c5230e45d2bf2, type: 2}
 --- !u!1 &6739443517596392831
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +470,18 @@ MonoBehaviour:
       - m_Target: {fileID: 5142581790419600041}
         m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
         m_MethodName: setPlayerGrounded
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1986375933066881071}
+        m_TargetAssemblyTypeName: MovementController, Assembly-CSharp
+        m_MethodName: ResumeCollisionWithOneWayObstacles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

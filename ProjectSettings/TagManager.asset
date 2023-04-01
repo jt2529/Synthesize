@@ -29,7 +29,7 @@ TagManager:
   - Breakables
   - MovingObstacles
   - MovableObstacles
-  - 
+  - OneWayObstacles
   - Backsplash
   - ShootableSwitch
   - Interactable

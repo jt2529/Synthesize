@@ -1083,7 +1083,7 @@ TextureImporter:
       213: 21300718
     second: industrial.v1_359
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -1143,6 +1143,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -1170,6 +1171,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 1
   - serializedVersion: 3
     buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1860,10 +1873,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: 3}
-        - {x: 1, y: -1}
-        - {x: 5, y: -3}
-        - {x: 8, y: 1}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
@@ -1887,9 +1898,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: 1}
-        - {x: -3, y: -4}
-        - {x: 8, y: -5}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
@@ -1913,10 +1923,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: -4}
-        - {x: -3, y: -3}
-        - {x: 3, y: -3}
-        - {x: 8, y: 2}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
@@ -1938,7 +1946,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: ea7c2f32426c09c4da534b34f43464c9
@@ -1961,10 +1973,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: 2}
-        - {x: -2, y: -8}
-        - {x: 2, y: -8}
-        - {x: 8, y: -3}
+        - {x: -8, y: 4}
+        - {x: 8, y: 4}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
@@ -1988,9 +1998,7 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: -1}
-        - {x: -2, y: -2}
-        - {x: 5, y: 2}
+        - {x: -8, y: 4}
         - {x: 8, y: 4}
         - {x: 8, y: 8}
       tessellationDetail: 0
@@ -9147,14 +9155,14 @@ TextureImporter:
       industrial.v1_226: 21300452
       industrial.v1_243: 21300486
       industrial.v1_175: 21300350
-      industrial.v1_300: 21300600
       industrial.v1_352: 21300704
       industrial.v1_14: 21300028
       industrial.v1_131: 21300262
       industrial.v1_102: 21300204
-      industrial.v1_325: 21300650
+      industrial.v1_300: 21300600
       industrial.v1_20: 21300040
       industrial.v1_273: 21300546
+      industrial.v1_325: 21300650
       industrial.v1_89: 21300178
       industrial.v1_83: 21300166
       industrial.v1_328: 21300656
@@ -9182,16 +9190,16 @@ TextureImporter:
       industrial.v1_55: 21300110
       industrial.v1_48: 21300096
       industrial.v1_138: 21300276
-      industrial.v1_40: 21300080
-      industrial.v1_52: 21300104
-      industrial.v1_191: 21300382
       industrial.v1_249: 21300498
+      industrial.v1_40: 21300080
+      industrial.v1_191: 21300382
+      industrial.v1_52: 21300104
       industrial.v1_354: 21300708
       industrial.v1_84: 21300168
-      industrial.v1_90: 21300180
       industrial.v1_189: 21300378
-      industrial.v1_287: 21300574
       industrial.v1_214: 21300428
+      industrial.v1_90: 21300180
+      industrial.v1_287: 21300574
       industrial.v1_133: 21300266
       industrial.v1_134: 21300268
       industrial.v1_334: 21300668

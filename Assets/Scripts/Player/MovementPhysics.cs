@@ -29,7 +29,7 @@ public class MovementPhysics : MonoBehaviour
     {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles");
+        collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles", "OneWayObstacles");
     }
 
     // External Velocity is optional. It will default to a Vector2 of 0,0 if not provided when called. 
@@ -284,5 +284,10 @@ public class MovementPhysics : MonoBehaviour
             slopeAngleOld = slopeAngle;
             slopeAngle = 0;
         }
+    }
+
+    public void ApplyNewCollisionMask(LayerMask newMask)
+    {
+        collisionMask = newMask;
     }
 }

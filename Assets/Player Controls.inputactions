@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "854665b0-acaa-484d-a5b4-c1a9501a53d3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "MultiTap",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "16493af3-a7a9-44ee-b65a-8e3ff2886e85",
@@ -63,6 +72,15 @@
                     "name": "Fire Secondary",
                     "type": "Button",
                     "id": "03265a96-cbd6-4965-a2a4-71b8b7a91c31",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "46645b08-34ab-4b6b-9ad0-0319d9f5569e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -375,6 +393,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Fire Primary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f55893f-4950-4ff7-943c-9e8e427ec883",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b9fada45-0c20-4fa6-b953-39e30a873c16",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
