@@ -46,6 +46,7 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public float minJumpVelocity;
     public float minDelayBeforeNextJump = 0.02f;
     private bool jumpAllowed = false;
+    public float dropDuration = 0.1f;
 
 
     [Space(10)]
