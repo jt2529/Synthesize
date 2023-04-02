@@ -25,7 +25,7 @@ public class KeyItem : MonoBehaviour , Interactable
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
         if (!playerStats.isCurrentInteractableObjectLocked) 
         {
-            playerStats.currentInteractableObjects.Add(this.gameObject);
+            playerStats.AddNearbyInteractableObject(this.gameObject);
         }
     }
 
@@ -34,14 +34,14 @@ public class KeyItem : MonoBehaviour , Interactable
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
         if (playerStats != null)
         {
-            playerStats.currentInteractableObjects.RemoveAt(playerStats.currentInteractableObjects.IndexOf(this.gameObject));
+            playerStats.RemoveNearbyInteractableObject(this.gameObject);
         }
     }
 
     public void Interact(GameObject playerObject) 
     {
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
-        playerStats.keyItems.Add(keyItemNumber);
+        playerStats.AddKeyItem(keyItemNumber);
         Destroy(gameObject);
     }
 }

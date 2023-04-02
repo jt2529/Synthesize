@@ -95,7 +95,8 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 
     // Events
     public GameEventScriptableObject playerDeathEvent;
-
+    public GameEventScriptableObject playerNearInteractableObjectEvent;
+    public GameEventScriptableObject playerLeftRangeOfInteractableObjectEvent;
 
     public void refreshCoreStats()
     {
@@ -242,5 +243,38 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     {
         return keyItems.Count;
     }
+
+    public void AddNearbyInteractableObject(GameObject interactable)
+    {
+        currentInteractableObjects.Add(interactable);
+        playerNearInteractableObjectEvent.Raise();
+    }
+
+    public void RemoveNearbyInteractableObject(GameObject interactable)
+    {
+        currentInteractableObjects.RemoveAt(currentInteractableObjects.IndexOf(interactable));
+
+        if(currentInteractableObjects.Count == 0)
+        {
+            playerLeftRangeOfInteractableObjectEvent.Raise();
+        }
+    }
+
+    public bool IsNearInteractableObject()
+    {
+        if(currentInteractableObjects.Count > 0)
+        {
+            return true;
+        }
+        
+        return false;
+        
+    }
+
+    public void AddKeyItem(int keyItemNumber)
+    {
+        keyItems.Add(keyItemNumber);
+    }
+    
 
 }
