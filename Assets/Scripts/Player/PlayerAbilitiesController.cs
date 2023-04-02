@@ -104,14 +104,14 @@ public class PlayerAbilitiesController : MonoBehaviour {
 
     void TriggerInteract() 
     {
-        if (stats.currentInteractableObject != null) 
-        {
-            Interactable[] interactableObjects = stats.currentInteractableObject.GetComponents<Interactable>();
-            foreach (Interactable interactableObject in interactableObjects)
-            {
-                interactableObject.Interact(this.gameObject);
-            }
-        }
+        //if (stats.currentInteractableObject != null) 
+        //{
+        //    Interactable[] interactableObjects = stats.currentInteractableObject.GetComponents<Interactable>();
+        //    foreach (Interactable interactableObject in interactableObjects)
+        //    {
+        //        interactableObject.Interact(stats);
+        //    }
+        //}
     }
     
 }

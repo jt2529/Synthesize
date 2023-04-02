@@ -14,6 +14,7 @@ public class PlayerInputController : MonoBehaviour
     private InputAction dashInput;
     private InputAction dropInput;
     private InputAction crouchInput;
+    private InputAction interactInput;
     
 
     private PlayerStats stats;
@@ -62,6 +63,10 @@ public class PlayerInputController : MonoBehaviour
         dashInput = playerControls.Player.Dash;
         dashInput.Enable();
         dashInput.performed += OnDash;
+
+        interactInput = playerControls.Player.Interact;
+        interactInput.Enable();
+        interactInput.performed += OnInteract;
 
         //crouchInput = playerControls.Player.Crouch;
         //crouchInput.Enable();
@@ -126,6 +131,29 @@ public class PlayerInputController : MonoBehaviour
             dropBuffered = false;
             jumpAbility.StopDropping();
         }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (stats.currentInteractableObjects.Count > 0)
+        {
+            if (stats.currentInteractableObjectLocked != null)
+            {
+                stats.currentInteractableObjectLocked.Interact(this.gameObject);
+            }
+            else
+            {
+                Interactable[] interactableObjects = stats.currentInteractableObjects[stats.currentInteractableObjects.Count - 1].GetComponents<Interactable>();
+                foreach (Interactable interactableObject in interactableObjects)
+                {
+                    if (stats.currentInteractableObjectLocked == null || stats.currentInteractableObjectLocked == interactableObject)
+                    {
+                        interactableObject.Interact(this.gameObject);
+                    }
+                }
+            }
+        }
+
     }
 
 

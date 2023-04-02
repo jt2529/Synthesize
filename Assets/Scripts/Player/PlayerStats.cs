@@ -62,10 +62,16 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
 
     [Space(10)]
     [Header("Combat")]
-    public float damageMultipler = 1;
+    public float damageMultipler = 1; 
     public float knockbackMultiplier = 1;
     public float meleeDamageMultiplier = 1;
     public float rangedDamageMultiplier = 1;
+
+    // A better inventory system will need to be built but idk what else to call this for now.
+    [Space(10)]
+    [Header("Inventory?")]
+    public List<GameObject> currentInteractableObjects;
+    public Interactable currentInteractableObjectLocked;
 
     [Space(10)]
     [Header("Status")]
@@ -78,7 +84,6 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public bool isDashing = false;
     public bool isDashingEnd = false;
     [SerializeField] private bool isDropping = false;
-    public GameObject currentInteractableObject;
     public bool isCurrentInteractableObjectLocked;
     public List<int> keyItems;
 
@@ -122,6 +127,8 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         velocity = Vector2.zero;
         velocity.x = 0;
         velocity.y = 0;
+
+        currentInteractableObjects = new List<GameObject>();
         
     }
 
@@ -229,6 +236,11 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public void SetIsDropping(bool dropping)
     {
         isDropping = dropping;
+    }
+
+    public int GetKeyItemsCount()
+    {
+        return keyItems.Count;
     }
 
 }

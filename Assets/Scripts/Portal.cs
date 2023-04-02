@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Portal : MonoBehaviour , Interactable
+public class Portal : MonoBehaviour, Interactable
 {
 
     public GameObject otherPortal;
@@ -27,11 +27,11 @@ public class Portal : MonoBehaviour , Interactable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
         if (playerStats != null)
         {
-            if (playerStats.keyItems.Count < keyItemsToUnlock)
+            if (playerStats.GetKeyItemsCount() < keyItemsToUnlock)
             {
                 unlocked = false;
             }
@@ -42,10 +42,7 @@ public class Portal : MonoBehaviour , Interactable
 
             if (isInteractable)
             {
-                if (!playerStats.isCurrentInteractableObjectLocked)
-                {
-                    playerStats.currentInteractableObject = this.gameObject;
-                }
+                playerStats.currentInteractableObjects.Add(this.gameObject);
             }
             else
             {
@@ -66,21 +63,21 @@ public class Portal : MonoBehaviour , Interactable
                     playerStats.isTeleporting = false;
                 }
             }
-            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
 
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
-        if (playerStats != null) 
+        if (playerStats != null)
         {
-            if (isInteractable && playerStats.currentInteractableObject == this.gameObject)
+            if (isInteractable)
             {
-                playerStats.currentInteractableObject = null;
+                playerStats.currentInteractableObjects.RemoveAt(playerStats.currentInteractableObjects.IndexOf(this.gameObject)); ;
             }
 
-            else 
+            else
             {
                 if (!playerStats.isTeleporting)
                 {
@@ -90,9 +87,9 @@ public class Portal : MonoBehaviour , Interactable
         }
     }
 
-    public void Interact(GameObject playerObject) 
+    public void Interact(GameObject playerObject)
     {
-        if (unlocked) 
+        if (unlocked)
         {
             playerObject.transform.position = otherPortal.transform.position;
         }
@@ -100,7 +97,7 @@ public class Portal : MonoBehaviour , Interactable
 
     public void DrawPortalLink(Vector2 start, Vector2 end, Color color)
     {
-        
+
     }
 
     private void OnDrawGizmosSelected()

@@ -25,19 +25,16 @@ public class KeyItem : MonoBehaviour , Interactable
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
         if (!playerStats.isCurrentInteractableObjectLocked) 
         {
-            playerStats.currentInteractableObject = this.gameObject;
+            playerStats.currentInteractableObjects.Add(this.gameObject);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         PlayerStats playerStats = collision.GetComponent<PlayerStats>();
-        if (playerStats != null) 
+        if (playerStats != null)
         {
-            if (playerStats.currentInteractableObject == this.gameObject)
-            {
-                playerStats.currentInteractableObject = null;
-            }
+            playerStats.currentInteractableObjects.RemoveAt(playerStats.currentInteractableObjects.IndexOf(this.gameObject));
         }
     }
 
