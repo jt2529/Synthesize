@@ -47,7 +47,9 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public float minDelayBeforeNextJump = 0.02f;
     private bool jumpAllowed = false;
     public float dropDuration = 0.1f;
-
+    
+    public float wallSlideSpeedDampener;
+    
 
     [Space(10)]
 
@@ -71,7 +73,10 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     [Space(10)]
     [Header("Inventory?")]
     public List<GameObject> currentInteractableObjects;
+    public List<int> keyItems;
     public Interactable currentInteractableObjectLocked;
+    public bool isCurrentInteractableObjectLocked;
+    
 
     [Space(10)]
     [Header("Status")]
@@ -83,9 +88,11 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public bool isRunning = false;
     public bool isDashing = false;
     public bool isDashingEnd = false;
+    public bool isWallSliding = false;
+    public bool isWallJumping = false;
     [SerializeField] private bool isDropping = false;
-    public bool isCurrentInteractableObjectLocked;
-    public List<int> keyItems;
+    
+    
 
     [SerializeField]
     public bool playerAlive;
@@ -276,5 +283,23 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         keyItems.Add(keyItemNumber);
     }
     
+    public bool IsWallSliding()
+    {
+        return isWallSliding;
+    }
 
+    public void SetWallSlide(bool isSliding)
+    {
+        isWallSliding = isSliding;
+    }
+
+    public void SetWallJumping(bool walling)
+    {
+        isWallJumping = walling;
+    }
+
+    public bool IsWallJumping()
+    {
+        return isWallJumping;
+    }
 }

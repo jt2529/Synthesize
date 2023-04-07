@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Enemy\HarmfulObject.cs" />
     <Compile Include="Assets\Scripts\EscapeMenu.cs" />
     <Compile Include="Assets\Scripts\Slimer.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerInteractIndicator.cs" />
     <Compile Include="Assets\Scripts\Interface\TextTyper.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAbilitiesController.cs" />
     <Compile Include="Assets\Scripts\SignController.cs" />
@@ -116,7 +117,6 @@
     <Compile Include="Assets\Scripts\Toggler.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovementController.cs" />
     <Compile Include="Assets\Scripts\Enemy\BreakableStats.cs" />
-    <Compile Include="Assets\Scripts\UI\PlayerInteractIndicator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

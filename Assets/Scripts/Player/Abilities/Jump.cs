@@ -17,10 +17,19 @@ public class Jump : Ability
 
     public override void beginAbility()
     {
-        UseCharge();
+        if (stats.IsWallSliding())
+        {
+            stats.isWallJumping = true;
+        }
+
+        if (!stats.isWallJumping)
+        {
+            UseCharge();
+        }
+        
         playerMovement.Jump();
         BeginCooldown(stats.minDelayBeforeNextJump); // A very short cooldown (0.1 seconds default) before jump becomes available again.
-                
+        
     }
 
     // Currently unused by the default jump ability. 

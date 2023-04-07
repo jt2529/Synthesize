@@ -100,7 +100,19 @@ public class PlayerInputController : MonoBehaviour
 
         // Continuously reads our "Move Input", getting the X value. This will be -1 through 1
         hInput = moveInput.ReadValue<Vector2>().x;
-        
+
+        if (playerMovement.CollisionLeft() && hInput < 0)
+        {
+            stats.isWallSliding = true;
+        }
+        else if(playerMovement.CollisionRight() && hInput > 0)
+        {
+            stats.isWallSliding = true;
+        }
+        else
+        {
+            stats.isWallSliding = false;
+        }
 
     }
 

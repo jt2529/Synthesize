@@ -14,7 +14,8 @@ public class MovementController : MonoBehaviour
 
     private float hInput = 0;
     private bool jumpBuffered = false;
-
+    private bool wallJumpBuffered = false;
+    private Vector2 externalForce;
     // Physics?
     [HideInInspector] public float forceUpward;
 
@@ -32,6 +33,8 @@ public class MovementController : MonoBehaviour
         playerPhysics = GetComponent<MovementPhysics>();
         playerInput = GetComponent<PlayerInputController>();
         stats = GetComponent<PlayerStats>();
+
+        externalForce = Vector2.zero;
 
     }
 
@@ -53,6 +56,7 @@ public class MovementController : MonoBehaviour
             stats.velocity.y = stats.maxJumpVelocity;
             jumpBuffered = false;
         }
+
 
 
 
@@ -85,6 +89,11 @@ public class MovementController : MonoBehaviour
         if (stats.gravityEnabled)
         {
             CalculateYVelocityWithGravity();
+
+            if (stats.IsWallSliding() && !stats.IsWallJumping())
+            {
+                stats.velocity.y = stats.velocity.y * stats.wallSlideSpeedDampener;
+            }
         }
 
         if(stats.velocity.y > 0)
@@ -102,7 +111,7 @@ public class MovementController : MonoBehaviour
             
         }
         
-        playerPhysics.Move(stats.velocity * Time.deltaTime);
+        playerPhysics.Move((stats.velocity + externalForce) * Time.deltaTime);
 
         
 
@@ -119,6 +128,12 @@ public class MovementController : MonoBehaviour
     {
         jumpBuffered = true;
 
+    }
+
+    public void WallJump(float xForce)
+    {
+        wallJumpBuffered = true;
+        externalForce.x = xForce * -hInput;
     }
 
     // PlayerInputController passes horizontal input here to determine movement direction.
@@ -156,4 +171,21 @@ public class MovementController : MonoBehaviour
     {
         playerPhysics.ApplyNewCollisionMask(LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles", "OneWayObstacles"));
     }
+
+    public bool CollisionLeft()
+    {
+        return playerPhysics.collisions.left;
+    }
+
+    public bool CollisionRight()
+    {
+        return playerPhysics.collisions.right;
+    }
+
+    public void applyExternalForce(Vector2 force)
+    {
+        externalForce = force;
+    }
+
+    
 }
