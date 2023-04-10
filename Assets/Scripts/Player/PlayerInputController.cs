@@ -113,10 +113,12 @@ public class PlayerInputController : MonoBehaviour
         if (playerMovement.CollisionLeft() && hInput < 0)
         {
             stats.isWallSliding = true;
+            stats.isWallJumping = false;
         }
         else if(playerMovement.CollisionRight() && hInput > 0)
         {
             stats.isWallSliding = true;
+            stats.isWallJumping = false;
         }
         else
         {

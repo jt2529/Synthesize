@@ -61,7 +61,7 @@ public class MovementController : MonoBehaviour
         {
             playerWallJumpEvent.Raise();
             stats.velocity.y = stats.maxJumpVelocity;
-            stats.velocity.x = stats.maxJumpVelocity * -stats.PlayerFacingDirection();
+            stats.velocity.x = stats.wallJumpHorizontalForce * -stats.PlayerFacingDirection();
             wallJumpBuffered = false;
             
         }
