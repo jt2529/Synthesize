@@ -168,7 +168,8 @@ MonoBehaviour:
   minJumpVelocity: 0
   minDelayBeforeNextJump: 0.02
   dropDuration: 0.1
-  wallSlideSpeedDampener: 0.7
+  wallJumpHorizontalForce: 12
+  wallSlideSpeedDampener: 0.85
   numberOfDashes: 2
   numberOfDashesLeft: 2
   fullDashTime: 0.15
@@ -233,6 +234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceUpward: 0
   playerJumpEvent: {fileID: 11400000, guid: 29a616cbe9b829a4f9fca2c3340813ca, type: 2}
+  playerWallJumpEvent: {fileID: 11400000, guid: 79f7295c47408954f8f29c8ba61a1e77,
+    type: 2}
   playerGroundedEvent: {fileID: 11400000, guid: 3fd58e21e11ab8944979c5182cb6ab71,
     type: 2}
   playerRisingEvent: {fileID: 11400000, guid: 51726cc2856cdad43bf1a290da3a58ed, type: 2}
@@ -422,8 +425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6b1908b226034469ce860dd563772a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 313223790767239756}
-  stats: {fileID: 313223790767239744}
 --- !u!1 &1194376514657654300
 GameObject:
   m_ObjectHideFlags: 0
