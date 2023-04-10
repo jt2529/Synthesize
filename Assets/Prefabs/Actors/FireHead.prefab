@@ -181,7 +181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8400655132294538400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.44, y: 3.8, z: 9.893425}
+  m_LocalPosition: {x: -2.44, y: 3.8, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -280,6 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898927d930a00a545a05ad755d58affe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 0
   damage: 50
   objectHitBox: {fileID: 8379519939015996364}
   destructable: 0
@@ -298,6 +299,7 @@ MonoBehaviour:
   maxHealth: 300
   moveSpeed: 0.5
   health: 400
+  rewards: 0
   jumpHeight: 4
   timeToJumpApex: 4
   weight: 10
@@ -337,7 +339,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 8432235218209979008}
-  moveTowardsObject: {fileID: 0}
+  moveTowardsObject: {fileID: 313223790767239748, guid: 6df2ad8665787a845b1f4cdb3b94f0c7,
+    type: 3}
   xDistanceFromObject: 3
   yDistanceFromObject: 1
   accelerationTimeAirborne: 0.1

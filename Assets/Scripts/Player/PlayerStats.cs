@@ -91,8 +91,10 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public bool isWallSliding = false;
     public bool isWallJumping = false;
     [SerializeField] private bool isDropping = false;
-    
-    
+    public bool horizontalInput = false;
+    private int playerFacingDirection = 1;
+
+
 
     [SerializeField]
     public bool playerAlive;
@@ -155,6 +157,15 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+
+        if(velocity.x > 0)
+        {
+            playerFacingDirection = 1;
+        }
+        else if(velocity.x < 0)
+        {
+            playerFacingDirection = -1;
+        }
     }
 
     public void Damage(float damageTaken)
@@ -301,5 +312,15 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public bool IsWallJumping()
     {
         return isWallJumping;
+    }
+
+    public void HorizontalInputReceived()
+    {
+        horizontalInput = true;
+    }
+
+    public int PlayerFacingDirection()
+    {
+        return playerFacingDirection;
     }
 }
