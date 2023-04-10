@@ -112,11 +112,11 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyGun.cs" />
     <Compile Include="Assets\Scripts\PlatformNodeManager.cs" />
     <Compile Include="Assets\Scripts\Environment\JumpPad.cs" />
+    <Compile Include="Assets\PlayerAnimationController.cs" />
     <Compile Include="Assets\Scripts\Interface\IHealable.cs" />
     <Compile Include="Assets\Scripts\Toggler.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovementController.cs" />
     <Compile Include="Assets\Scripts\Enemy\BreakableStats.cs" />
-    <Compile Include="Assets\PlayerAnimationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

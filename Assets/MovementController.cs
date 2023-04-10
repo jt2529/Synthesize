@@ -21,6 +21,7 @@ public class MovementController : MonoBehaviour
 
     [Header("Events")]
     public GameEventScriptableObject playerJumpEvent;
+    public GameEventScriptableObject playerWallJumpEvent;
     public GameEventScriptableObject playerGroundedEvent;
     public GameEventScriptableObject playerRisingEvent;
     public GameEventScriptableObject playerFallingEvent;
@@ -56,11 +57,14 @@ public class MovementController : MonoBehaviour
             stats.velocity.y = stats.maxJumpVelocity;
             jumpBuffered = false;
         }
-
-
-
-
-
+        else if(wallJumpBuffered)
+        {
+            playerWallJumpEvent.Raise();
+            stats.velocity.y = stats.maxJumpVelocity;
+            stats.velocity.x = stats.maxJumpVelocity * -stats.PlayerFacingDirection();
+            wallJumpBuffered = false;
+            
+        }
 
         if (stats.isDashing)
         {
@@ -112,7 +116,7 @@ public class MovementController : MonoBehaviour
         }
         
         playerPhysics.Move((stats.velocity + externalForce) * Time.deltaTime);
-
+        
         
 
         if (playerPhysics.collisions.below)
@@ -133,7 +137,7 @@ public class MovementController : MonoBehaviour
     public void WallJump(float xForce)
     {
         wallJumpBuffered = true;
-        externalForce.x = xForce * -hInput;
+        //externalForce.x = xForce * -stats.PlayerFacingDirection(); //apply a force on the X axis that is opposite of the direction of the surface we are wall sliding on.
     }
 
     // PlayerInputController passes horizontal input here to determine movement direction.

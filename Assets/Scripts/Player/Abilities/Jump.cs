@@ -20,21 +20,20 @@ public class Jump : Ability
         if (stats.IsWallSliding())
         {
             stats.isWallJumping = true;
+            playerMovement.WallJump(stats.wallJumpHorizontalForce);
         }
-
-        if (!stats.isWallJumping)
+        else
         {
             UseCharge();
+            playerMovement.Jump();
         }
         
-        playerMovement.Jump();
+        
         BeginCooldown(stats.minDelayBeforeNextJump); // A very short cooldown (0.1 seconds default) before jump becomes available again.
         
     }
 
-    // Currently unused by the default jump ability. 
-    // In theory you could do something like BeginAbilityDuration() with a time equal to the player's time to the Apex 
-    // of their jump (or some other point of the jump) and then do something here like hover or do a slam down.
+
     public override void endAbility()
     {
         RefreshAllCharges();

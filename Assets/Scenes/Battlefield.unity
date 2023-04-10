@@ -248,6 +248,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 313223790767239744, guid: 6df2ad8665787a845b1f4cdb3b94f0c7,
+        type: 3}
+      propertyPath: velocityXSmoothing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 313223790767239745, guid: 6df2ad8665787a845b1f4cdb3b94f0c7,
         type: 3}
       propertyPath: m_Color.b

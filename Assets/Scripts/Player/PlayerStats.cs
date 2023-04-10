@@ -47,7 +47,8 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>, IHealable<float>
     public float minDelayBeforeNextJump = 0.02f;
     private bool jumpAllowed = false;
     public float dropDuration = 0.1f;
-    
+    public float wallJumpHorizontalForce = 12f;
+    [Range(0f, 1f)]
     public float wallSlideSpeedDampener;
     
 
