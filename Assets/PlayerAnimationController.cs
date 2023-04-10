@@ -20,13 +20,8 @@ public class PlayerAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
-    private void FixedUpdate()
-    {
-
-        if(stats.PlayerFacingDirection() < 0)
+        if (stats.PlayerFacingDirection() < 0)
         {
             spriteRenderer.flipX = true;
         }
@@ -40,6 +35,11 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetBool("isGrounded", stats.isGrounded);
         animator.SetBool("isRunning", stats.horizontalInput);
         animator.SetBool("WallSlide", stats.IsWallSliding());
+    }
+
+    private void FixedUpdate()
+    {
+
             
     }
 }
