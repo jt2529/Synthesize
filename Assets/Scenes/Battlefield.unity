@@ -250,6 +250,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 313223790767239744, guid: 6df2ad8665787a845b1f4cdb3b94f0c7,
         type: 3}
+      propertyPath: fullDashTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 313223790767239744, guid: 6df2ad8665787a845b1f4cdb3b94f0c7,
+        type: 3}
       propertyPath: velocityXSmoothing
       value: 0
       objectReference: {fileID: 0}
@@ -260,6 +265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 313223790767239744, guid: 6df2ad8665787a845b1f4cdb3b94f0c7,
         type: 3}
+      propertyPath: dashChargeCooldownTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 313223790767239744, guid: 6df2ad8665787a845b1f4cdb3b94f0c7,
+        type: 3}
       propertyPath: groundAccelerationTime
       value: 0.07
       objectReference: {fileID: 0}
@@ -267,6 +277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: wallSlideSpeedDampener
       value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 313223790767239744, guid: 6df2ad8665787a845b1f4cdb3b94f0c7,
+        type: 3}
+      propertyPath: dashChargeCooldownTimeLeft
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 313223790767239745, guid: 6df2ad8665787a845b1f4cdb3b94f0c7,
         type: 3}

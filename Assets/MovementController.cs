@@ -50,22 +50,6 @@ public class MovementController : MonoBehaviour
             stats.velocity.y = 0;
         }
 
-        // If we have received a jump input from PlayerInputController, add the Player's jump velocity this frame
-        if (jumpBuffered)
-        {
-            playerJumpEvent.Raise(); // Let anything that cares know we jumped
-            stats.velocity.y = stats.maxJumpVelocity;
-            jumpBuffered = false;
-        }
-        else if(wallJumpBuffered)
-        {
-            playerWallJumpEvent.Raise();
-            stats.velocity.y = stats.maxJumpVelocity;
-            stats.velocity.x = stats.wallJumpHorizontalForce * -stats.PlayerFacingDirection();
-            wallJumpBuffered = false;
-            
-        }
-
         if (stats.isDashing)
         {
             stats.velocity.x = stats.dashSpeedMultiplier * hInput * stats.moveSpeed;
@@ -88,7 +72,25 @@ public class MovementController : MonoBehaviour
         else
         {
             calculateXVelocity();
+        }   
+
+        // If we have received a jump input from PlayerInputController, add the Player's jump velocity this frame
+        if (jumpBuffered)
+        {
+            playerJumpEvent.Raise(); // Let anything that cares know we jumped
+            stats.velocity.y = stats.maxJumpVelocity;
+            jumpBuffered = false;
         }
+        else if(wallJumpBuffered)
+        {
+            playerWallJumpEvent.Raise();
+            stats.velocity.y = stats.maxJumpVelocity;
+            stats.velocity.x = stats.wallJumpHorizontalForce * -stats.PlayerFacingDirection();
+            wallJumpBuffered = false;
+            
+        }
+
+
 
         if (stats.gravityEnabled)
         {

@@ -139,7 +139,12 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (!jumpAbility.isOnCooldown() && jumpAbility.chargesRemaining() > 0)
+        if (stats.isDashing)
+        {
+            dashAbility.endAbility();
+            jumpAbility.beginAbility();
+        }
+        else if (!jumpAbility.isOnCooldown() && jumpAbility.chargesRemaining() > 0)
         {
             jumpAbility.beginAbility();
         }
