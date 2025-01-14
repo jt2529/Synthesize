@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SpawnEnemies() 
@@ -63,15 +63,18 @@ public class GameController : MonoBehaviour
             int randEnemy = Random.Range(0, enemyPrefabs.Count);
             int randSpawnPoint = Random.Range(0, enemySpawnPoints.Count);
 
-            GameObject enemy = Instantiate(enemyPrefabs[randEnemy], enemySpawnPoints[randSpawnPoint].position, transform.rotation);
-            float getLootNumber = Random.Range((float)0, (float)1);
-            EnemyStats enemyStats = enemy.GetComponent<EnemyStats>();
-            if (getLootNumber < gameData.lootOdds)
-            {
-                enemyStats.rewards = 1;
+            if (enemySpawnPoints.Count > 0) 
+            { 
+                GameObject enemy = Instantiate(enemyPrefabs[randEnemy], enemySpawnPoints[randSpawnPoint].position, transform.rotation);
+                float getLootNumber = Random.Range((float)0, (float)1);
+                EnemyStats enemyStats = enemy.GetComponent<EnemyStats>();
+                if (getLootNumber < gameData.lootOdds)
+                {
+                    enemyStats.rewards = 1;
+                }
+                enemyStats.SetCurrencyReward(gameData.currencyRewardMultiplier);
+                enemySpawnPoints.RemoveAt(randSpawnPoint);
             }
-            enemyStats.SetCurrencyReward(gameData.currencyRewardMultiplier);
-            enemySpawnPoints.RemoveAt(randSpawnPoint);
         }
     }
 
@@ -79,11 +82,14 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < gameData.numberOfKeys; i++)
         {
-            int randSpawnPoint = Random.Range(0, keySpawnPoints.Count);
+            if (keySpawnPoints.Count > 0) 
+            {
+                int randSpawnPoint = Random.Range(0, keySpawnPoints.Count);
 
-            GameObject key = Instantiate(keyPrefab, keySpawnPoints[randSpawnPoint].position, transform.rotation);
-            key.GetComponent<KeyItem>().keyItemNumber = i;
-            keySpawnPoints.RemoveAt(randSpawnPoint);
+                GameObject key = Instantiate(keyPrefab, keySpawnPoints[randSpawnPoint].position, transform.rotation);
+                key.GetComponent<KeyItem>().keyItemNumber = i;
+                keySpawnPoints.RemoveAt(randSpawnPoint);
+            }
         }
     }
 
@@ -118,6 +124,11 @@ public class GameController : MonoBehaviour
         loot.GetComponent<StatBoost>().cost = cost;
     }
 
+    public void EnemyKilled() 
+    {
+        gameData.numberOfEnemies -= 1;
+    }
+
     public void Save()
     {
         GetCurrentPlayerData();
@@ -150,6 +161,16 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
         Scene scene = SceneManager.GetSceneByName(sceneName);
         SceneManager.LoadScene(scene.name);
+    }
+
+    public void LoadNextLevel() 
+    {
+        gameData.numberOfTotalEnemies = (int)(gameData.numberOfTotalEnemies * gameData.endOfLevelMultiplier);
+        gameData.numberOfTotalKeys = (int)(gameData.numberOfTotalKeys * gameData.endOfLevelMultiplier);
+        gameData.numberOfEnemies = gameData.numberOfTotalEnemies;
+        gameData.numberOfKeys = gameData.numberOfTotalKeys;
+        Save();
+        LoadScene("GroundPlay", true);
     }
 
     public void GetCurrentPlayerData() 

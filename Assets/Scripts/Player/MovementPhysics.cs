@@ -21,7 +21,8 @@ public class MovementPhysics : MonoBehaviour
     public float maxDescendAngle = 75;
 
     BoxCollider2D collider;
-    public CollisionInfo collisions; 
+    public CollisionInfo collisions;
+    PushableBoxController pushableBoxController;
 
     // Use this for initialization
     void Awake()
@@ -113,7 +114,7 @@ public class MovementPhysics : MonoBehaviour
     {
         float directionX = Mathf.Sign(velocity.x);
         float rayLength = Mathf.Abs(velocity.x) + skinWidth;
-        PushableBoxController pushableBoxController = new PushableBoxController();
+        pushableBoxController = null;
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
@@ -303,10 +304,14 @@ public class MovementPhysics : MonoBehaviour
         Bounds bounds = collider.bounds;
         bounds.Expand(skinWidth * -2);
 
-        raycastOrigins.bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
-        raycastOrigins.bottomRight = new Vector2(bounds.max.x, bounds.min.y);
-        raycastOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y);
-        raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
+        raycastOrigins.bottomLeft.x = bounds.min.x;
+        raycastOrigins.bottomLeft.y = bounds.min.y;
+        raycastOrigins.bottomRight.x = bounds.max.x;
+        raycastOrigins.bottomRight.y = bounds.min.y;
+        raycastOrigins.topLeft.x = bounds.min.x;
+        raycastOrigins.topLeft.y = bounds.max.y;
+        raycastOrigins.topRight.x = bounds.max.x;
+        raycastOrigins.topRight.y = bounds.max.y;
 
     }
 

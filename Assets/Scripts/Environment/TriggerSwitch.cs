@@ -31,6 +31,7 @@ public class TriggerSwitch : MonoBehaviour {
         
         if(animator != null)
         {
+            isOccupied = true;
             animator.SetBool("toggle", true);
         }
         
@@ -46,6 +47,7 @@ public class TriggerSwitch : MonoBehaviour {
 
         if (animator != null)
         {
+            isOccupied = false;
             animator.SetBool("toggle", false);
         }
     }

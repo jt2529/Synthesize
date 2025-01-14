@@ -43,6 +43,10 @@ public class GameData
     public int currency;
 
     //Current Game Data
+
+    public int numberOfTotalEnemies;
+    public int numberOfTotalKeys;
+    public float endOfLevelMultiplier;
     public int numberOfEnemies;
     public int numberOfKeys;
     public int shopItemCost;

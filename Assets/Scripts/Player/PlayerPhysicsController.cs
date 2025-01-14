@@ -135,7 +135,9 @@ public class PlayerPhysicsController : MonoBehaviour
             }
         }
 
-        Vector2 input = new Vector2(hInput, Input.GetAxisRaw("Vertical"));
+        Vector2 input;
+        input.x = hInput;
+        input.y = Input.GetAxisRaw("Vertical");
         
         // hInput is NOT buffered
         if (!hInputBuffered)

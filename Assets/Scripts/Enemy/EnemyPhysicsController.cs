@@ -17,10 +17,14 @@ public class EnemyPhysicsController : MonoBehaviour {
     float jumpVelocity; 
     float velocityXSmoothing;
     float velocityYSmoothing;
+    private Vector2 direction;
     Vector3 velocity;
     MovementPhysics physics;
-    BoxCollider2D collider;
+    private BoxCollider2D collider;
     Vector2 targetLocation;
+    GameController gameController;
+    [SerializeField]
+    private float forceThreshold = .01f;
 
     // Use this for initialization
     void Start () {
@@ -56,7 +60,7 @@ public class EnemyPhysicsController : MonoBehaviour {
                 targetVelocityX = stats.moveSpeed;
             }
 
-            if (canJump && targetLocation.y < collider.bounds.min.y && physics.collisions.below)
+            if (canJump && targetLocation.y > collider.bounds.min.y && physics.collisions.below)
             {
                 velocity.y = jumpVelocity;
             }
@@ -74,17 +78,46 @@ public class EnemyPhysicsController : MonoBehaviour {
             }
         }
 
+
+
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y = Mathf.SmoothDamp(velocity.y, targetVelocityY, ref velocityYSmoothing, accelerationTimeAirborne);
 
-        if (canFly != true)
+        /*if (!canFly)
         {
+            
             velocity.y += gravity * Time.deltaTime;
         }
 
-        if (velocity.y < gravity)
+        else 
         {
-            velocity.y = gravity;
+            if (targetVelocityX > velocity.x)
+            {
+                velocity.x += Time.deltaTime * ((physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            }
+            else 
+            {
+                velocity.x -= Time.deltaTime * ((physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            }
+
+            if (targetVelocityY > velocity.y)
+            {
+                velocity.y += Time.deltaTime * ((physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            }
+            else
+            {
+                velocity.y -= Time.deltaTime * ((physics.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+            }
+        }
+        */
+
+        if (!canFly)
+        { 
+            velocity.y += gravity * Time.deltaTime; 
+            if (velocity.y < gravity)
+            {
+                velocity.y = gravity;
+            }
         }
 
         //Add current force to velocity, and decrement the force stat value by object weight * time
@@ -92,57 +125,66 @@ public class EnemyPhysicsController : MonoBehaviour {
         {
             velocity.x += stats.force.x;
             velocity.y += stats.force.y;
-            
+
             //Force is always trying to get to 0
             if (stats.force.y < 0)
             {
                 stats.force.y += stats.weight * Time.deltaTime * Mathf.Abs(stats.force.y);
-                if (stats.force.y > 0) 
-                {
-                    stats.force.y = 0;
-                }
             }
-            else 
+            else
             {
                 stats.force.y -= stats.weight * Time.deltaTime * Mathf.Abs(stats.force.y);
-                if (stats.force.y < 0)
-                {
-                    stats.force.y = 0;
-                }
+            }
+
+            if (Mathf.Abs(stats.force.y) < forceThreshold)
+            {
+                stats.force.y = 0;
             }
 
             if (stats.force.x < 0)
             {
                 stats.force.x += stats.weight * Time.deltaTime * Mathf.Abs(stats.force.x);
-                if (stats.force.x > 0)
-                {
-                    stats.force.x = 0;
-                }
             }
             else
             {
                 stats.force.x -= stats.weight * Time.deltaTime * Mathf.Abs(stats.force.x);
-                if (stats.force.x < 0)
-                {
-                    stats.force.x = 0;
-                }
+            }
+
+            if (Mathf.Abs(stats.force.x) < forceThreshold)
+            {
+                stats.force.x = 0;
             }
         }
 
-        physics.Move(velocity * Time.deltaTime);
+        Vector2 movementVelocity = velocity;
+        if (canFly)
+        {
+            movementVelocity.y *= stats.movementDampener;
+            movementVelocity.x *= stats.movementDampener;
+        }
+        else
+        {
+            movementVelocity.x *= stats.movementDampener;
+        }
+
+
+        physics.Move(movementVelocity * Time.deltaTime);
     }
 
     private void FindTargetLocation() 
     {
-        Vector2 direction = moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min - collider.bounds.min;
+        direction = moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min - collider.bounds.min;
         Vector2 positionTo;
         if (direction.x >= 0)
         {
-            positionTo = new Vector2(moveTowardsObject.GetComponent<BoxCollider2D>().bounds.max.x, moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.y);
+            positionTo.x = moveTowardsObject.GetComponent<BoxCollider2D>().bounds.max.x;
+            positionTo.y = moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.y;
         }
         else
         {
-            positionTo = new Vector2(moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.x, moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.y);
+            positionTo.x = moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.x;
+            positionTo.y = moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.y;
+            //positionTo = new Vector2(moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.x, moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min.y);
         }
 
         float distance = Vector2.Distance(positionTo, transform.position);
@@ -150,18 +192,18 @@ public class EnemyPhysicsController : MonoBehaviour {
         {
             stats.isStunned = true;
         }
-        else 
+        else
         {
             stats.isStunned = false;
         }
 
         if (direction.x >= 0)
         {
-            targetLocation.x = positionTo.x - xDistanceFromObject;
+            targetLocation.x = positionTo.x + xDistanceFromObject;
         }
         else
         {
-            targetLocation.x = positionTo.x + xDistanceFromObject;
+            targetLocation.x = positionTo.x - xDistanceFromObject;
         }
         if (direction.y >= 0)
         {
@@ -171,5 +213,6 @@ public class EnemyPhysicsController : MonoBehaviour {
         {
             targetLocation.y = positionTo.y + yDistanceFromObject + targetVerticalOffset;
         }
+        
     }
 }
