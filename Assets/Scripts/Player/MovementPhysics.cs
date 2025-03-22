@@ -113,7 +113,7 @@ public class MovementPhysics : MonoBehaviour
     {
         float directionX = Mathf.Sign(velocity.x);
         float rayLength = Mathf.Abs(velocity.x) + skinWidth;
-        PushableBoxController pushableBoxController = new PushableBoxController();
+        PushableBoxController pushableBoxController;
 
         for (int i = 0; i < horizontalRayCount; i++)
         {
@@ -129,6 +129,10 @@ public class MovementPhysics : MonoBehaviour
                 if ((LayerMask.GetMask("MovableObstacles") & (1 << hit.transform.gameObject.layer)) != 0)
                 {
                     pushableBoxController = hit.transform.gameObject.GetComponent<PushableBoxController>();
+                    if (pushableBoxController.isInteractable == false)
+                    {
+                        pushableBoxController.Push(velocity);
+                    }
                 }
                 else {
 
@@ -172,14 +176,6 @@ public class MovementPhysics : MonoBehaviour
                     gameObjectHit = hit.transform.gameObject;
                 }
                 
-            }
-        }
-
-        if (pushableBoxController != null)
-        {
-            if (pushableBoxController.isInteractable == false) 
-            {
-                pushableBoxController.Push(velocity);
             }
         }
     }

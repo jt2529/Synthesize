@@ -19,6 +19,7 @@ public class EnemyStats : MonoBehaviour {
     public Vector2 force;
     public float stunTimer;
     public bool isStunned;
+    public bool isAlive;
     public Animator anim;
 
     //Set variable values here
@@ -31,6 +32,7 @@ public class EnemyStats : MonoBehaviour {
     void Start() {
         stunTimer = 0;
         isStunned = false;
+        isAlive = true;
     }
 
     // Update is called once per frame
@@ -56,7 +58,7 @@ public class EnemyStats : MonoBehaviour {
     {
         ChangeHealth(damage);   //Damage the enemy
         force += knockbackForce; //Add a knockback force to the enemy (referenced by Enemy Physics Controller)
-        if (stunTime > stunTimer) //If enemy is not stunned for longer than this attack already, then set stunTimer
+        if (stunTime > stunTimer && isAlive) //If enemy is not stunned for longer than this attack already, then set stunTimer
         {
             stunTimer = stunTime;
             isStunned = true;
@@ -73,6 +75,7 @@ public class EnemyStats : MonoBehaviour {
         if (health < 1)
         {
             DropRewards();
+            isAlive = false;
             Destroy(gameObject);
         }
     }
