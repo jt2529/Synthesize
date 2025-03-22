@@ -162,7 +162,7 @@ MonoBehaviour:
   horizontalRayCount: 2
   verticalRayCount: 2
   playerBullet: 1
-  collider: {fileID: 61475930546555174}
+  myCollider: {fileID: 61475930546555174}
   playerSpeed: {x: 0, y: 0}
   speed: 7
   direction: {x: 0, y: 0}

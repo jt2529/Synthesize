@@ -55,7 +55,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimingDirection: {x: 1, y: 0}
-  health: 1000
+  statProfile: {fileID: 0}
+  maxHealthMultiplier: 1
+  baseMaxHealth: 1000
+  baseMoveSpeed: 4
+  moveSpeedMultipler: 1
+  moveSpeed: 4
   baseMaxJumpHeight: 2.2
   jumpHeightMultipler: 1
   minJumpHeight: 0
@@ -73,14 +78,8 @@ MonoBehaviour:
   dashSpeedMultiplier: 4
   dashChargeCooldownTime: 2
   dashChargeCooldownTimeLeft: 0
-  baseMoveSpeed: 4
-  moveSpeedMultipler: 1
-  moveSpeed: 4
   damageMultipler: 1
   knockbackMultiplier: 1
-  baseMaxHealth: 1000
-  maxHealthMultiplier: 1
-  maxHealth: 1000
   meleeDamageMultiplier: 1
   rangedDamageMultiplier: 1
   playerInvulnerable: 0
@@ -92,16 +91,17 @@ MonoBehaviour:
   isDashingEnd: 0
   isDropping: 0
   isWallSliding: 0
-  currentInteractableObject: {fileID: 0}
-  isCurrentInteractableObjectLocked: 0
-  keyItems: 
+  currentInteractableObjects: []
   objectTouchingLeft: {fileID: 0}
   objectTouchingRight: {fileID: 0}
   objectTouchingAbove: {fileID: 0}
   objectTouchingBelow: {fileID: 0}
+  currency: 0
+  keyItems: 
   playerAlive: 1
   facingRight: 1
   currentSpeed: {x: 0, y: 0}
+  playerDeathEvent: {fileID: 0}
 --- !u!114 &114377947367389776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   lastThreeNotes: 
   menu: {fileID: 0}
   mainCamera: {fileID: 0}
+  input: {fileID: 0}
 --- !u!95 &95204101157664156
 Animator:
   serializedVersion: 5
@@ -423,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f41dc1e35f83b41a2bedc30e7e9088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 1488565013525604552}
+  myCollider: {fileID: 1488565013525604552}
   enemyCollisions: []
   damage: -50
   stats: {fileID: 114882504612581846}

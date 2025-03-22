@@ -20,14 +20,14 @@ public class MovementPhysics : MonoBehaviour
     public float maxClimbAngle = 60;
     public float maxDescendAngle = 75;
 
-    BoxCollider2D collider;
+    BoxCollider2D myCollider;
     public CollisionInfo collisions;
     PushableBoxController pushableBoxController;
 
     // Use this for initialization
     void Awake()
     {
-        collider = GetComponent<BoxCollider2D>();
+        myCollider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
         collisionMask = LayerMask.GetMask("Breakables", "Obstacles", "MovingObstacles", "MovableObstacles", "OneWayObstacles" );
     }
@@ -297,7 +297,7 @@ public class MovementPhysics : MonoBehaviour
 
     void UpdateRaycastOrigins()
     {
-        Bounds bounds = collider.bounds;
+        Bounds bounds = myCollider.bounds;
         bounds.Expand(skinWidth * -2);
 
         raycastOrigins.bottomLeft.x = bounds.min.x;
@@ -313,7 +313,7 @@ public class MovementPhysics : MonoBehaviour
 
     void CalculateRaySpacing()
     {
-        Bounds bounds = collider.bounds;
+        Bounds bounds = myCollider.bounds;
         bounds.Expand(skinWidth * -2);
 
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);

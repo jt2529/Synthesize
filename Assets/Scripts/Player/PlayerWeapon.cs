@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
 
-    public Collider2D collider;
+    public Collider2D myCollider;
     public List<Collider2D> enemyCollisions;
     public int damage;
     private bool isAttacking;
@@ -27,7 +27,7 @@ public class PlayerWeapon : MonoBehaviour
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(LayerMask.GetMask("Enemy"));
         contactFilter.useLayerMask = true;
-        collider.enabled = false;
+        myCollider.enabled = false;
         knockbackVector = new Vector2(1, 0) * knockbackPower;
     }
 
@@ -36,7 +36,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (isAttacking) 
         {
-            int overlapCount = Physics2D.OverlapCollider(collider, contactFilter, enemyCollisions);
+            int overlapCount = Physics2D.OverlapCollider(myCollider, contactFilter, enemyCollisions);
             if (overlapCount <= 1)
             {
                 foreach (Collider2D enemyCollision in enemyCollisions)
@@ -61,13 +61,13 @@ public class PlayerWeapon : MonoBehaviour
     public void MeleeAttack()
     {
         isAttacking = true;
-        collider.enabled = true;
+        myCollider.enabled = true;
     }
 
     public void EndMeleeAttack() 
     {
         isAttacking = false;
-        collider.enabled = false;
+        myCollider.enabled = false;
         enemyCollisionTracker.Clear();
     }
 }

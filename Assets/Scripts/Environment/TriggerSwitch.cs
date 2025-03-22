@@ -14,12 +14,12 @@ public class TriggerSwitch : MonoBehaviour {
     public Toggler[] targets;
     private Animator animator;
 
-    private bool isOccupied;
+    //private bool isOccupied;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        isOccupied = false;
+        //isOccupied = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,7 +31,7 @@ public class TriggerSwitch : MonoBehaviour {
         
         if(animator != null)
         {
-            isOccupied = true;
+          //  isOccupied = true;
             animator.SetBool("toggle", true);
         }
         
@@ -47,7 +47,7 @@ public class TriggerSwitch : MonoBehaviour {
 
         if (animator != null)
         {
-            isOccupied = false;
+          //  isOccupied = false;
             animator.SetBool("toggle", false);
         }
     }

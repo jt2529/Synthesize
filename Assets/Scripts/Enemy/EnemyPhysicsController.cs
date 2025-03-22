@@ -20,7 +20,7 @@ public class EnemyPhysicsController : MonoBehaviour {
     private Vector2 direction;
     Vector3 velocity;
     MovementPhysics physics;
-    private BoxCollider2D collider;
+    private BoxCollider2D myCollider;
     Vector2 targetLocation;
     GameController gameController;
     [SerializeField]
@@ -28,7 +28,7 @@ public class EnemyPhysicsController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        collider = GetComponent<BoxCollider2D>();
+        myCollider = GetComponent<BoxCollider2D>();
         physics = GetComponent <MovementPhysics>();
         gravity = -(2 * stats.jumpHeight) / Mathf.Pow(stats.timeToJumpApex, 2);
         jumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * stats.jumpHeight);
@@ -60,7 +60,7 @@ public class EnemyPhysicsController : MonoBehaviour {
                 targetVelocityX = stats.moveSpeed;
             }
 
-            if (canJump && targetLocation.y > collider.bounds.min.y && physics.collisions.below)
+            if (canJump && targetLocation.y > myCollider.bounds.min.y && physics.collisions.below)
             {
                 velocity.y = jumpVelocity;
             }
@@ -173,7 +173,7 @@ public class EnemyPhysicsController : MonoBehaviour {
 
     private void FindTargetLocation() 
     {
-        direction = moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min - collider.bounds.min;
+        direction = moveTowardsObject.GetComponent<BoxCollider2D>().bounds.min - myCollider.bounds.min;
         Vector2 positionTo;
         if (direction.x >= 0)
         {

@@ -22,7 +22,7 @@ public class BulletPhysics : MonoBehaviour
     public int verticalRayCount = 2;
     public bool playerBullet;
 
-    public BoxCollider2D collider;
+    public BoxCollider2D myCollider;
     public CollisionInfo collisions;
     public Vector2 playerSpeed;
     public float speed;
@@ -231,7 +231,7 @@ public class BulletPhysics : MonoBehaviour
 
     void UpdateRaycastOrigins()
     {
-        Bounds bounds = collider.bounds;
+        Bounds bounds = myCollider.bounds;
         bounds.Expand(skinWidth * -2);
 
         raycastOrigins.bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
@@ -243,7 +243,7 @@ public class BulletPhysics : MonoBehaviour
 
     void CalculateRaySpacing()
     {
-        Bounds bounds = collider.bounds;
+        Bounds bounds = myCollider.bounds;
         bounds.Expand(skinWidth * -2);
 
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);

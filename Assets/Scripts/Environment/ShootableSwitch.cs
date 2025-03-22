@@ -13,13 +13,9 @@ public class ShootableSwitch : MonoBehaviour {
 
     public Toggler[] targets;
     private Animator animator;
-
-    private bool isOccupied;
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        isOccupied = false;
     }
 
     public void ToggleSwitch()

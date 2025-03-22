@@ -20,7 +20,7 @@ public class EnemyStats : MonoBehaviour {
     public HealthBar healthBar;
     public Vector2 force;
     public float stunTimer, attackCoolDown;
-    public bool isStunned, canAttack;
+    public bool isStunned, canAttack, isAlive;
     public Animator anim;
     public List<PatternSequencerMap> movementPatterns;
     public List<PatternSequencerMap> attackPatterns;
