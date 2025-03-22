@@ -149,6 +149,7 @@ MonoBehaviour:
     type: 3}
   aimAtObject: {fileID: 0}
   stats: {fileID: 8432235218209979008}
+  cooldown: 2
 --- !u!1 &8400655132294538400
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,21 +298,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 300
-  moveSpeed: 0.5
+  moveSpeed: 5
+  baseMovementDampener: 0.1
+  movementDampener: 0
+  smoothTime: 0
   health: 400
   rewards: 0
   baseCurrencyReward: 100
   currencyReward: 0
-  jumpHeight: 4
-  timeToJumpApex: 4
+  jumpHeight: 8
+  smoothing: 0
+  timeToJumpApex: 0.1
   weight: 8
   fireRate: 0.5
   aggroDistance: 10
   healthBar: {fileID: 382064299}
   force: {x: 0, y: 0}
   stunTimer: 0
+  attackCoolDown: 5
   isStunned: 0
+  canAttack: 0
   anim: {fileID: 8399255358855953328}
+  movementPatterns:
+  - startMeasure: 10
+    sequencer: 0100000009000000
+  attackPatterns:
+  - startMeasure: 1
+    sequencer: 0100000005000000090000000d000000
+  currentMovementPatternIndex: 0
+  currentAttackPatternIndex: 0
+  currentMovementSequencerIndex: 0
+  currentAttackSequencerIndex: 0
+  beatTimer: {fileID: 0}
 --- !u!114 &8432667960021252990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,15 +361,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 8432235218209979008}
   moveTowardsObject: {fileID: 0}
-  xDistanceFromObject: 3
+  xDistanceFromObject: 10
   yDistanceFromObject: 1
-  accelerationTimeAirborne: 0.1
-  accelerationTimeGrounded: 0.05
+  accelerationTimeAirborne: 1
+  accelerationTimeGrounded: 0.5
   canFly: 1
   canJump: 0
   jumpInterval: 0
   gravity: -1
   targetVerticalOffset: 1.5
+  forceThreshold: 0.01
 --- !u!95 &8399255358855953328
 Animator:
   serializedVersion: 5
