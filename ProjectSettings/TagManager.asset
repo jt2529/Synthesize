@@ -9,6 +9,7 @@ TagManager:
   - MenuItem
   - Interactable
   - ShopPortal
+  - PlayerJumpCamp
   layers:
   - Default
   - TransparentFX

@@ -325,6 +325,16 @@ public class PlayerPhysicsController : MonoBehaviour
     {
         return jumpBuffered;
     }
+
+    public int GetJumpsUsed()
+    {
+        return stats.numberOfJumps - stats.numberOfJumpsLeft;
+    }
+
+    public int getMaxJumps()
+    {
+        return stats.numberOfJumps;
+    }
 }
 
 
