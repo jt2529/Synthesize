@@ -26,7 +26,7 @@ public class EnemyGun : MonoBehaviour {
         {
             aimAtObject = GameObject.FindGameObjectWithTag("Player");
         }
-        if (aimAtObject != null && !stats.isStunned) {
+        if (aimAtObject != null) {
 
             GameObject bullet = (GameObject)Instantiate(EnemyBullet);
 

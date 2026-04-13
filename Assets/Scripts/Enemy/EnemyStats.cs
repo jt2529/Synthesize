@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Synthesize.CoreSystem;
 
 public class EnemyStats : MonoBehaviour {
 
     public int maxHealth;
     public float moveSpeed;
     public float baseMovementDampener, movementDampener, smoothTime;
-    public int health;
     public int rewards;
     public int baseCurrencyReward;
     public int currencyReward;
@@ -17,26 +17,28 @@ public class EnemyStats : MonoBehaviour {
     public float weight;
     public float fireRate;
     public float aggroDistance;
-    public HealthBar healthBar;
     public Vector2 force;
-    public float stunTimer, attackCoolDown;
-    public bool isStunned, canAttack, isAlive;
+    public float attackCoolDown;
+    public bool canAttack, isAlive;
     public Animator anim;
     public List<PatternSequencerMap> movementPatterns;
     public List<PatternSequencerMap> attackPatterns;
     public int currentMovementPatternIndex, currentAttackPatternIndex, currentMovementSequencerIndex, currentAttackSequencerIndex;
     public BeatTimer beatTimer;
+    public Core core;
+    public Stats stats;
 
     //Set variable values here
     private void Awake()
     {
-        health = maxHealth;
+        core = GetComponentInChildren<Core>();
     }
 
     // Use this for initialization
     void Start() {
-        stunTimer = 0;
-        isStunned = false;
+        stats = core.GetCoreComponent<Stats>();
+        stats.Health.MaxValue = maxHealth;
+        stats.Health.Init();
         attackCoolDown = 0;
         currentMovementPatternIndex = 0;
         currentAttackPatternIndex = 0;
@@ -46,16 +48,6 @@ public class EnemyStats : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (stunTimer > 0)
-        {
-            stunTimer -= Time.deltaTime;
-            if (stunTimer <= 0)
-            {
-                anim.SetBool("Stunned", false);
-                stunTimer = 0;
-                isStunned = false;
-            }
-        }
         if (attackCoolDown > 0) 
         {
             canAttack = false;
@@ -151,32 +143,6 @@ public class EnemyStats : MonoBehaviour {
     public void SetCurrencyReward(float currencyRewardMultiplier) 
     {
         currencyReward = (int)(currencyRewardMultiplier * (float)baseCurrencyReward);
-    }
-
-    public void ReceiveAttack(int damage, Vector2 knockbackForce, float stunTime) 
-    {
-        ChangeHealth(damage);   //Damage the enemy
-        force += knockbackForce; //Add a knockback force to the enemy (referenced by Enemy Physics Controller)
-        if (stunTime > stunTimer && isAlive) //If enemy is not stunned for longer than this attack already, then set stunTimer
-        {
-            stunTimer = stunTime;
-            isStunned = true;
-            anim.SetBool("Stunned", true);
-        }
-    }
-
-    public void ChangeHealth(int changeAmount)
-    {
-        Debug.Log("Modifying enemy health by " + changeAmount);
-        health = health + changeAmount;
-        healthBar.ShowHealthBar();
-
-        if (health < 1)
-        {
-            DropRewards();
-            isAlive = false;
-            Destroy(gameObject);
-        }
     }
 
     public void DropRewards() 

@@ -192,7 +192,6 @@ public class BulletPhysics : MonoBehaviour
             EnemyStats enemyStats = hit.collider.gameObject.GetComponent<EnemyStats>();
             if (enemyStats != null) 
             {
-                enemyStats.ReceiveAttack(-harmfulObject.damage, velocity * weight, stunTime );
                 harmfulObject.tryDestroy();
             }
         }

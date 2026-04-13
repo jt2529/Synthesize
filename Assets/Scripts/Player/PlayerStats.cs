@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Synthesize.Combat.Damage;
+using Synthesize.CoreSystem;
+using Synthesize.Weapons;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour, IDamageable<float>
+public class PlayerStats : MonoBehaviour, IDamageable
 {
+    public static PlayerStats playerStats;
     // These will all be modifiable by the player's active chord modifiers
     [HideInInspector]
     public Vector2 aimingDirection;
 
     private bool coreStatChange = false; // indicates that one of our core stats has changed and a refresh is required.
     [Header("Core")]
+    public Core Core;
     public StatProfileScriptableObject statProfile;
     private int health;
     public float maxHealthMultiplier;
@@ -18,13 +23,25 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     public float baseMoveSpeed;
     public float moveSpeedMultipler;
     public float moveSpeed;
+    public float standColliderHeight;
+    public float crouchColliderHeight;
+    public float crouchSpeedDampener;
+    public float accelerationTimeAirborne = .1f;
+    public float accelerationTimeGrounded = .05f;
+    public float decelerationTimeAirborne = 1f;
+    public float decelerationTimeGrounded = .5f;
+    public Vector2 currentVelocityInput;
 
     [Space(10)]
     [Header("Jump")]
     public float baseMaxJumpHeight;
     public float jumpHeightMultipler;
     public float minJumpHeight;
-    public  float maxJumpHeight;
+    public float maxJumpHeight;
+    public float gravity;
+    public float originalGravity;
+    public float maxJumpVelocity;
+    public float minJumpVelocity;
     public int numberOfJumps;
     [HideInInspector] public int numberOfJumpsLeft;
     public float timeToJumpApex;
@@ -36,12 +53,9 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
 
     [Header("Dash")]
     public int numberOfDashes;
-    [HideInInspector] public int numberOfDashesLeft;
     public float fullDashTime = 0.15f;
-    [HideInInspector] public float dashTimeLeft;
     public float dashSpeedMultiplier;
     public float dashChargeCooldownTime;
-    [HideInInspector] public float dashChargeCooldownTimeLeft;
 
     [Space(10)]
     [Header("Combat")]
@@ -49,25 +63,45 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     public float knockbackMultiplier;
     public float meleeDamageMultiplier;
     public float rangedDamageMultiplier;
+    [SerializeField]
+    private Weapon primaryWeapon;
+    [SerializeField]
+    private Weapon secondaryWeapon;
+    public int currentSelectedWeapon { get; set; }
+    public float stunTime;
+
+    //private Weapon secondaryWeapon;
 
     [Space(10)]
     [Header("Status")]
     public bool playerInvulnerable;
-    [HideInInspector]
     public bool isTeleporting;
-    [HideInInspector]
     public bool isAbleToAttack;
-    [HideInInspector]
     public bool isGrounded;
-    [HideInInspector]
-    public bool isRunning;
-    [HideInInspector]
+    //public bool isRunning;
     public bool isDashing;
-    [HideInInspector]
     public bool isDashingEnd;
     public bool isDropping;
     public bool isWallSliding;
+    public bool isAttacking;
 
+    public PlayerStateMachine StateMachine { get; private set; }
+    public PlayerIdleState IdleState { get; private set; }
+    public PlayerMoveState MoveState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
+    public PlayerInAirState InAirState { get; private set; }
+    public PlayerLandState LandState { get; private set; }
+    public PlayerCrouchIdleState CrouchIdleState { get; private set; }
+    public PlayerCrouchMoveState CrouchMoveState { get; private set; }
+    public PlayerWallSlideState WallSlideState { get; private set; }
+    public PlayerWallJumpState WallJumpState { get; private set; }
+    public PlayerDashState DashState { get; private set; }
+    public PlayerAttackState PrimaryAttackState { get; private set; }
+    public PlayerAttackState SecondaryAttackState { get; private set; }
+    public PlayerStunState PlayerStunState { get; private set; }
+
+
+    public BoxCollider2D collider;
     public List<GameObject> currentInteractableObjects;
     public Interactable currentInteractableObjectLocked;
     public GameObject objectTouchingLeft;
@@ -75,17 +109,23 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     public GameObject objectTouchingAbove;
     public GameObject objectTouchingBelow;
 
+    public Animator Anim;
+    public PlayerAbilitiesInputHandler abilitiesInputHandler;
+    public PlayerPhysicsInputHandler physicsInputHandler;
+
     public int currency;
     public List<int> keyItems;
 
     [SerializeField]
     public bool playerAlive;
-    public bool facingRight;
     private Vector3 oldPosition;
     public Vector2 currentSpeed;
+    private Vector2 workspace;
 
     // Events
     public GameEventScriptableObject playerDeathEvent;
+    public PlayerAbilitiesInputHandler playerAbilitiesInputHandler;
+    public PlayerPhysicsInputHandler playerPhysicsInputHandler;
 
     public void refreshCoreStats()
     {
@@ -97,24 +137,63 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
     //Set variable values here
     private void Awake()
     { 
+        Core = GetComponentInChildren<Core>();
         maxHealth = baseMaxHealth;
         aimingDirection.x = 1;
         aimingDirection.y = 0;
         health = maxHealth;
         minJumpHeight = maxJumpHeight / 4f;
+        currentVelocityInput = new Vector2(0, 0);
         playerInvulnerable = false;
         playerAlive = true;
         isAbleToAttack = true;
+        isAttacking = false;
+
+        updatePlayerPhysics();
+        originalGravity = gravity;
+
+        currentSelectedWeapon = 0;
+
+        primaryWeapon = transform.Find("PrimaryWeapon").GetComponent<Weapon>();
+        secondaryWeapon = transform.Find("SecondaryWeapon").GetComponent<Weapon>();
+        primaryWeapon.SetCore(Core);
+        secondaryWeapon.SetCore(Core);
+
+        playerAbilitiesInputHandler = GetComponent<PlayerAbilitiesInputHandler>();
+        playerPhysicsInputHandler = GetComponent<PlayerPhysicsInputHandler>();
+
+        collider = GetComponent<BoxCollider2D>();
+        SetColliderHeight(standColliderHeight);
+        Anim = GetComponent<Animator>();
+        physicsInputHandler = GetComponent<PlayerPhysicsInputHandler>();
+        abilitiesInputHandler = GetComponent<PlayerAbilitiesInputHandler>();
+
+        StateMachine = new PlayerStateMachine();
+
+        IdleState = new PlayerIdleState(this, StateMachine, "idle");
+        MoveState = new PlayerMoveState(this, StateMachine, "move");
+        JumpState = new PlayerJumpState(this, StateMachine, "inAir");
+        InAirState = new PlayerInAirState(this, StateMachine, "inAir");
+        LandState = new PlayerLandState(this, StateMachine, "land");
+        WallSlideState = new PlayerWallSlideState(this, StateMachine, "wallSlide");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, "inAir");
+        DashState = new PlayerDashState(this, StateMachine, "dash");
+        PrimaryAttackState = new PlayerAttackState(this, StateMachine, "attack", primaryWeapon, CombatInputs.primary);
+        SecondaryAttackState = new PlayerAttackState(this, StateMachine, "attack", secondaryWeapon, CombatInputs.secondary);
+        CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, "crouchIdle");
+        CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, "crouchMove");
+        PlayerStunState = new PlayerStunState(this, StateMachine, "stun");
     }
 
     // Use this for initialization
     void Start()
     {
         //refreshCoreStats();
-        numberOfDashesLeft = numberOfDashes;
+        StateMachine.Initialize(IdleState);
         oldPosition = transform.position;
         currentSpeed.x = 0;
         currentSpeed.y = 0;
+        DashState.ResetCanDash();
     }
 
     // Update is called once per frame
@@ -125,46 +204,45 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
             refreshCoreStats();
             coreStatChange = false;
         }
+        Core.LogicUpdate();
+        StateMachine.CurrentState.LogicUpdate();
     }
 
     void FixedUpdate()
     {
-        currentSpeed.x = Mathf.Abs(transform.position.x - oldPosition.x);
-        currentSpeed.y = Mathf.Abs(transform.position.y - oldPosition.y);
+        updatePlayerPhysics();
+        StateMachine.CurrentState.PhysicsUpdate();
+        currentSpeed.x = transform.position.x - oldPosition.x;
+        currentSpeed.y = transform.position.y - oldPosition.y;
         oldPosition = transform.position;
-        if (isDashing) 
-        {
-            dashTimeLeft -= Time.deltaTime;
-            if (dashTimeLeft <= 0) 
-            {
-                dashTimeLeft = 0;
-                isDashing = false;
-                isDashingEnd = true;
-            }
-        }
 
-        if (numberOfDashesLeft < numberOfDashes) 
+        //Dash charge logic needs to be kept here as it is on a timer and refills regardless of which state player is in
+        if (DashState.numberOfDashesLeft < numberOfDashes) 
         {
-            if (dashChargeCooldownTimeLeft <= 0)
+            if (DashState.dashRecoveryStartTime != 0 && (Time.time - DashState.dashRecoveryStartTime) > dashChargeCooldownTime) 
             {
-                dashChargeCooldownTimeLeft = dashChargeCooldownTime;
-            }
+                DashState.DashChargeRecovery();
 
-            dashChargeCooldownTimeLeft -= Time.deltaTime;
-            if (dashChargeCooldownTimeLeft <= 0) 
-            {
-                numberOfDashesLeft++;
+                //Reset the dashStartTime
+                if (DashState.numberOfDashesLeft < numberOfDashes)
+                {
+                    DashState.dashRecoveryStartTime = Time.time;
+                }
+                else 
+                {
+                    DashState.dashRecoveryStartTime = 0;
+                }
             }
         }
     }
 
-    public void Damage(float damageTaken)
+    public void Damage(DamageData damageData)
     {
         if (!playerInvulnerable)
         {
-            if (health - damageTaken >= 0)
+            if (health - damageData.Amount >= 0)
             {
-                health = (int)(health - damageTaken);
+                health = (int)(health - damageData.Amount);
             }else
             {
                 health = 0;
@@ -368,5 +446,37 @@ public class PlayerStats : MonoBehaviour, IDamageable<float>
         SetMaxHealth(maxHealthMultiplier * baseMaxHealth);
     }
 
+    public void SetColliderHeight(float height)
+    {
+        Vector2 center = collider.offset;
+        workspace.Set(collider.size.x, height);
+
+        center.y += (height - collider.size.y) / 2;
+
+        collider.size = workspace;
+        collider.offset = center;
+    }
+
+    void updatePlayerPhysics()
+    {
+        gravity = -(2 * GetMaxJumpHeight()) / Mathf.Pow(GetTimeToJumpApex(), 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * GetTimeToJumpApex();
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * GetMinJumpHeight());
+    }
+
+    public void SetVelocityX(float x)
+    {
+         currentVelocityInput.x = x;
+    }
+    public void SetVelocityY(float y)
+    {
+        currentVelocityInput.y = y;
+    }
+
+    public void SetVelocity(Vector2 vector)
+    {
+        currentVelocityInput.x = vector.x;
+        currentVelocityInput.y = vector.y;
+    }
 
 }

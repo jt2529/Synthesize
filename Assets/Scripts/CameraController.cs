@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Cinemachine;
+using Synthesize.CoreSystem;
 
 public class CameraController : MonoBehaviour
 {
@@ -8,17 +9,20 @@ public class CameraController : MonoBehaviour
     public float dampTime;
     private Vector3 velocity = Vector3.zero;
     public CinemachineVirtualCamera cam;
-    public Transform target;
+    public PlayerStats target;
     private MovementPhysics targetPhysics;
     public float lerpTime = 1f;
     float currentLerpTime;
 
     public float yOffset;
+    public float xOffset;
     public float orthographicOffset;
 
     private void Start()
     {
-        targetPhysics = target.GetComponent<MovementPhysics>();
+
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        targetPhysics = target.Core.GetCoreComponent<MovementPhysics>();
     }
 
     private void FixedUpdate()
@@ -30,20 +34,14 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentLerpTime += Time.deltaTime;
-        if (currentLerpTime > lerpTime)
+        if (targetPhysics.facingDirection > 0)
         {
-            currentLerpTime = lerpTime;
+            cam.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(xOffset, yOffset, 0);//new Vector3(target.transform.position.x, Mathf.Lerp(transform.position.y, yPos, perc) - yOffset, -10);
         }
-
-        float perc = currentLerpTime / lerpTime;
-        
-        float yPos = Mathf.Floor((Mathf.Round(target.transform.position.y * 2) / 2 + cam.m_Lens.OrthographicSize) / orthographicOffset) * orthographicOffset;
-
-        float xPos = target.transform.position.x;
-
-
-        transform.position = new Vector3(target.transform.position.x, Mathf.Lerp(transform.position.y, yPos, perc) - yOffset, -10);
+        else 
+        {
+            cam.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(xOffset * -1, yOffset, 0);//new Vector3(target.transform.position.x, Mathf.Lerp(transform.position.y, yPos, perc) - yOffset, -10);
+        }
 
     }
 }

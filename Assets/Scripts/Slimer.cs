@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Synthesize.CoreSystem;
 
 public class Slimer : MonoBehaviour {
 
@@ -57,7 +58,7 @@ public class Slimer : MonoBehaviour {
         }
 
         float targetVelocityX = 0;
-        if (!stats.isStunned) 
+        if (controller.canSetVelocity) 
         {
             targetVelocityX = stats.moveSpeed * direction;
         }

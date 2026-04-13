@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Synthesize.CoreSystem;
 
 public class PlayerWeapon : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerWeapon : MonoBehaviour
     public float stunTime;
     private Vector2 knockbackVector;
     private Vector2 directionalKnockbackVector;
+    private MovementPhysics physics;
+    private Core core;
 
     [SerializeField]
     private ContactFilter2D contactFilter;
@@ -22,6 +25,8 @@ public class PlayerWeapon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        core = GetComponentInChildren<Core>();
+        physics = core.GetCoreComponent<MovementPhysics>();
         enemyCollisionTracker = new List<int>();
         stats = gameObject.GetComponentInParent<PlayerStats>();
         contactFilter.useTriggers = false;
@@ -43,14 +48,9 @@ public class PlayerWeapon : MonoBehaviour
                 {
                     if (!enemyCollisionTracker.Contains(enemyCollision.GetInstanceID())) 
                     {
-                        directionalKnockbackVector = knockbackVector * stats.knockbackMultiplier;
-                        if (!stats.facingRight)
-                        {
-                            directionalKnockbackVector = directionalKnockbackVector * -1;
-                        }
-
+                        directionalKnockbackVector = knockbackVector * stats.knockbackMultiplier * physics.facingDirection;
                         int hitDamage = (int)(damage * stats.meleeDamageMultiplier);
-                        enemyCollision.GetComponent<EnemyStats>().ReceiveAttack(hitDamage, directionalKnockbackVector, stunTime);
+                        //enemyCollision.GetComponent<EnemyStats>().ReceiveAttack(hitDamage, directionalKnockbackVector, stunTime);
                         enemyCollisionTracker.Add(enemyCollision.GetInstanceID());
                     }
                     

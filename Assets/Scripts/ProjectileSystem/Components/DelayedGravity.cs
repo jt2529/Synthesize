@@ -1,0 +1,66 @@
+﻿using System;
+using Synthesize.Utilities;
+using UnityEngine;
+
+namespace Synthesize.ProjectileSystem.Components
+{
+    /// <summary>
+    /// DelayedGravity sets the projectiles initial gravity to zero and then sets it to some value after some distance has been travelled.
+    /// This gives projectiles a similar effect to the arrows in DeadCells that travel straight for some distance and then starts to drop.
+    /// </summary>
+    public class DelayedGravity : ProjectileComponent
+    {
+        [field: SerializeField] public float Distance { get; private set; } = 10f;
+
+        private DistanceNotifier distanceNotifier = new DistanceNotifier();
+
+        private float gravity;
+
+        // Used so other projectile components, such as DrawModifyDelayedGravity, can modify how far the projectile travels before being affected by gravity
+        [HideInInspector]
+        public float distanceMultiplier = 1;
+
+        // Once projectile has travelled Distance, set gravity to Gravity value
+        private void HandleNotify()
+        {
+            rb.gravityScale = gravity;
+        }
+        
+        // On Init, enable the distance notifier to trigger once distance has been travelled.
+        protected override void Init()
+        {
+            base.Init();
+            
+            rb.gravityScale = 0f;
+            distanceNotifier.Init(transform.position, Distance * distanceMultiplier);
+            distanceMultiplier = 1;
+        }
+
+        #region Plumbing
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            gravity = rb.gravityScale;
+            
+            distanceNotifier.OnNotify += HandleNotify;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            
+            distanceNotifier?.Tick(transform.position);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            
+            distanceNotifier.OnNotify -= HandleNotify;
+        }
+
+        #endregion
+    }
+}
